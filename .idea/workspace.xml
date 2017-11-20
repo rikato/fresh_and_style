@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5d05e61-0983-425d-89e5-d223474117c1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/footer.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/functions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/header.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/homepage_template.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/functions.php" afterPath="$PROJECT_DIR$/functions.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -50,10 +46,10 @@
       <file leaf-file-name="functions.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/functions.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+            <state relative-caret-position="400">
+              <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
               <folding>
-                <marker date="1511173727938" expanded="true" signature="193:236" ph="SELECT * FRO... option" />
+                <marker date="1511173876010" expanded="true" signature="193:236" ph="SELECT * FRO... option" />
               </folding>
             </state>
           </provider>
@@ -165,12 +161,12 @@
       <option name="presentableId" value="Default" />
       <updated>1511089661817</updated>
       <workItem from="1511089662993" duration="5384000" />
-      <workItem from="1511171286661" duration="1144000" />
+      <workItem from="1511171286661" duration="1267000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6528000" />
+    <option name="totallyTimeSpent" value="6651000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="976" height="1038" extended-state="0" />
@@ -246,7 +242,7 @@
         <state relative-caret-position="160">
           <caret line="8" column="23" lean-forward="false" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
           <folding>
-            <marker date="1511173727938" expanded="true" signature="193:236" ph="SELECT * FRO... option" />
+            <marker date="1511173876010" expanded="true" signature="193:236" ph="SELECT * FRO... option" />
           </folding>
         </state>
       </provider>
@@ -373,10 +369,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/functions.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        <state relative-caret-position="400">
+          <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
           <folding>
-            <marker date="1511173727938" expanded="true" signature="193:236" ph="SELECT * FRO... option" />
+            <marker date="1511173876010" expanded="true" signature="193:236" ph="SELECT * FRO... option" />
           </folding>
         </state>
       </provider>

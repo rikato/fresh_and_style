@@ -18,3 +18,4 @@ function getWebsiteInfo($option, $dbcon){
     }
 }
 
+print 'kaas';
