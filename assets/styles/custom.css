@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display');
+.d-flex-center{
+    justify-content: center;
+    align-items: center;
+}
+header {
+    height: 400px;
+    /*background: url(http://i.huffpost.com/gen/1501366/images/o-HAIRSTYLIST-facebook.jpg) no-repeat fixed center center/cover;*/
+    /*margin bottom height of navbar*/
+    background: #000;
+    margin-bottom: 56px;
+}
+
+header .container{
+    height: 100%;
+}
+
+header .header-holder{
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+}
+
+header .header-holder h1{
+    color: #fff;
+    font-size: 59px;
+    text-transform: uppercase;
+    text-shadow: 2px 1px 1px black;
+}
+
+header .header-holder span{
+    font-size: 25px;
+    color: red;
+    text-transform: uppercase;
+    letter-spacing: 20px;
+    text-shadow: 1px 1px 1px black;
+}
+header .header-holder button{
+    border: 1px solid #8a8888;
+    color: #8a8888;
+    border-radius: 0;
+    margin-top: 20px;
+    letter-spacing: 6px;
+    font-size: 13px;
+    font-weight: bold;
+}
+.gray{
+    background: #F5F5F5;
+}
+.white{
+    background-color: #fff;
+}
+/*sections*/
+.section{
+    padding-left: 5%;
+    padding-right: 5%;
+    min-height: 400px;
+    padding-top: 25px;
+}
+
+
+/*Tarieven sectie*/
+
+.tarieven table{
+    background: #fff;
+    margin-bottom: 1.25rem;
+    border: solid 1px #ddd;
+    table-layout: auto;
+    width: 100%;
+}
+.tarieven ul li{
+    list-style: none;
+}
+.tarieven table tr td{
+    padding: 10px;
+}
+/*Zebra coloring for table*/
+.tarieven table tr:nth-child(odd) {
+    background: #F9F9F9;
+}
+
+.tarieven ul li{
+    font-size: 25px;
+}

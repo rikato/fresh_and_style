@@ -23,18 +23,28 @@ include 'functions.php';
 </head>
 <body>
     <header>
-        <div class="header-holder">
-            <div class="container">
+        <div class="container d-flex d-flex-center">
+            <div class="header-holder">
                 <h1><?php getWebsiteInfo('title', $dbcon); ?></h1>
                 <span><?php getWebsiteInfo('description', $dbcon); ?></span>
+                <br>
+                <button type="button" class="btn btn-outline-primary">Maak een afspraak</button>
             </div>
         </div>
-        <nav>
-            <ul>
-                <li>
 
-                </li>
-            </ul>
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#"></a>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="#">Features</a>
+                    <a class="nav-item nav-link" href="#">Pricing</a>
+                    <a class="nav-item nav-link disabled" href="#">Disabled</a>
+                </div>
+            </div>
         </nav>
     </header>
-    <div class="container">
+
