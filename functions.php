@@ -51,5 +51,3 @@ function getTreatmentData ($dbcon) {
     }
 }
 
-
-
