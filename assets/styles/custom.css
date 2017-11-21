@@ -53,8 +53,9 @@ header .header-holder button{
 .section{
     padding-left: 5%;
     padding-right: 5%;
-    min-height: 400px;
     padding-top: 25px;
+    padding-bottom: 25px;
+    min-height: 400px;
 }
 
 
@@ -81,3 +82,39 @@ header .header-holder button{
 .tarieven ul li{
     font-size: 25px;
 }
+
+/*review sectie*/
+.review h3.review-title{
+    font-size: 25px;
+}
+
+.review .carousel-inner{
+    width: 75%;
+    margin: 0 auto;
+}
+.review a.carousel-control-prev{
+    opacity: 1;
+}
+
+.review .star-container{
+    text-align: center;
+    margin-top: 25px;
+}
+
+.review .star{
+    font-size: 30px;
+}
+
+.review .all-stars{
+    position: relative;
+    display: inline-block;
+}
+.review .rating-stars{
+    position: absolute;
+    top: 0;
+}
+.carousel-control i{
+    color: #000;
+    font-size: 35px;
+}
+
