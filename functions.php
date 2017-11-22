@@ -52,7 +52,7 @@ function getTreatmentData($dbcon) {
             while ($row = mysqli_fetch_assoc($resultTreatment)) {
                 echo '<tr><td>' . $row['name'] . '</td><td>€' . $row['price'] . '</td></tr>';
             }
-            echo '</table></div></div>';
+            echo '</table></div></div></div>';
         }
     }
 }

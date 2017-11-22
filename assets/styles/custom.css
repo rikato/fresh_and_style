@@ -1,14 +1,31 @@
 @import url('https://fonts.googleapis.com/css?family=Playfair+Display');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Source+Sans+Pro');
+*{
+    font-family: 'Open Sans', sans-serif;
+}
+h2{
+    margin-bottom: 1.5rem;
+    font-weight: 100;
+    font-size: 37px;
+}
+
 .d-flex-center{
     justify-content: center;
     align-items: center;
 }
 header {
-    height: 400px;
+    height: 50vh;
+    min-height: 450px;
     /*background: url(http://i.huffpost.com/gen/1501366/images/o-HAIRSTYLIST-facebook.jpg) no-repeat fixed center center/cover;*/
+    /*background: red url(http://www.freshandstyle.nl/wp-content/uploads/zaak-foto.jpg) no-repeat fixed center center/cover;*/
+    background: linear-gradient(rgba(232, 136, 136, 0.5), #000000), url(http://www.freshandstyle.nl/wp-content/gallery/fresh-style-hairfashion/dscn1497.jpg) no-repeat fixed center center/cover;
+
     /*margin bottom height of navbar*/
-    background: #000;
+    /*background: #000;*/
     margin-bottom: 56px;
+}
+header nav {
+    background: #fff;
 }
 
 header .container{
@@ -18,6 +35,9 @@ header .container{
 header .header-holder{
     font-family: 'Playfair Display', serif;
     text-align: center;
+}
+header .header-holder span{
+    font-family: 'Playfair Display', serif;
 }
 
 header .header-holder h1{
@@ -53,13 +73,18 @@ header .header-holder button{
 .section{
     padding-left: 5%;
     padding-right: 5%;
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding-top: 35px;
+    padding-bottom: 45px;
     min-height: 400px;
 }
 
 
 /*Tarieven sectie*/
+
+.tarieven{
+    /*background: linear-gradient(rgba(232, 136, 136, 0.5), #000000), url(http://www.freshandstyle.nl/wp-content/gallery/fresh-style-hairfashion/dscn1497.jpg) no-repeat fixed center center/cover;*/
+
+}
 
 .tarieven table{
     background: #fff;
@@ -67,6 +92,7 @@ header .header-holder button{
     border: solid 1px #ddd;
     table-layout: auto;
     width: 100%;
+    font-weight: 100;
 }
 .tarieven ul li{
     list-style: none;
@@ -83,14 +109,50 @@ header .header-holder button{
     font-size: 25px;
 }
 
+.tarieven .card-header h5 a{
+    font-weight: 100;
+    font-size: 25px;
+    color: #000;
+}
+.tarieven .card-header h5 a:hover{
+    border-bottom: 1px solid #0000003d;
+    text-decoration: none;
+}
+.tarieven .card{
+    border-radius: 0;
+    border: none;
+}
+.tarieven .card-body{
+    background: #f7f7f7;
+}
+.tarieven .card .collapse.show, .tarieven .card .collapsing{
+    box-shadow: 0 18px 25px rgba(0, 0, 0, 0.04);
+    z-index: 99;
+}
+.tarieven table{
+    margin: 0;
+}
+.tarieven .card-header{
+    border: none;
+    height: 65px;
+}
+.tarieven #accordion{
+    box-shadow: 0 0px 18px rgba(0, 0, 0, 0.21);
+}
 /*review sectie*/
 .review h3.review-title{
     font-size: 25px;
+    font-weight: 400;
+    font-size: 27px;
 }
 
 .review .carousel-inner{
-    width: 75%;
+    width: 90%;
     margin: 0 auto;
+}
+
+.carousel-control a{
+    width: 20px;
 }
 .review a.carousel-control-prev{
     opacity: 1;
@@ -115,7 +177,7 @@ header .header-holder button{
 }
 .carousel-control i{
     color: #000;
-    font-size: 35px;
+    font-size: 25px;
 }
 
 /*twitter sectie*/
@@ -125,10 +187,11 @@ header .header-holder button{
     padding-top: 0;
     padding-right: 0;
     height: 475px;
+    padding-left: 0;
 }
 .twitter h2{
-    text-align: center;
-    padding-top: 15px;
+    /*text-align: center;*/
+    padding-top: 20px;
 }
 .twitter .left{
     width: 50%;
@@ -143,13 +206,15 @@ header .header-holder button{
 .twitter .tweets{
 
     text-align: left;
-    max-width: 438px;
+    /*max-width: 438px;*/
+    max-width: 570px;
     width: 100%;
     float: right;
     overflow: auto;
+    height: 475px;
 }
 .twitter .twitter-cta{
-    width: 100%;
+    max-width: 570px;
     height: 100%;
 }
 .twitter .twitter-cta i{
@@ -176,6 +241,7 @@ header .header-holder button{
 }
 .twitter .tweet{
     margin-bottom: 15px;
+    padding-right: 25px;
 }
 .twitter .tweet .tweet-user{
     font-weight: 500;
@@ -193,7 +259,8 @@ header .header-holder button{
 
 
 .twitter .tweet .tweet-text{
-    font-size: 15px;
+    font-size: 16px;
+    padding: 6px 0;
 }
 
 .twitter .tweet .tweet-date{
@@ -202,7 +269,44 @@ header .header-holder button{
 
 
 /*kapsel sectie*/
+.haircut{
+
+}
 .image-grid .grid-item{
     display: inline-block;
     width: 20%;
+}
+.image-grid .gird-item img{
+    width: 100%;
+}
+
+
+/*footer*/
+
+footer ul li{
+    list-style: none;
+    width: 33.333%;
+    float: left;
+    padding: 10px;
+}
+
+footer{
+    padding-top: 35px;
+    text-align: center;
+    font-weight: 300;
+}
+footer h3{
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(187, 187, 187, 0.39);
+    font-weight: 100;
+}
+footer ul li p {
+    line-height: 40px;
+}
+/*fix 0 height of footer because of the floating elements inside it*/
+footer:after {
+    content:"";
+    clear:both;
+    display:block;
+    margin-bottom: 50px;
 }

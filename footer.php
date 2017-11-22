@@ -8,6 +8,37 @@
 ?>
 
 
+<footer id="footer" class="gray">
+    <div class="container">
+        <ul class="small-block-grid-1 medium-block-grid-3 appels footer-r">
+            <li>
+                <div class="holder">
+                    <h3>Adres</h3>
+                    <p><?php getWebsiteInfo('adres', $dbcon); ?></p>
+                    <p><?php getWebsiteInfo('postalcode', $dbcon); ?> <?php getWebsiteInfo('city', $dbcon); ?></p>
+                </div>
+            </li>
+            <li>
+                <div class="holder">
+                    <h3>Contact</h3>
+                    <p>Tel: <?php getWebsiteInfo('telephone', $dbcon); ?></p>
+                    <p><?php getWebsiteInfo('email', $dbcon); ?></p>
+                </div>
+            </li>
+            <li>
+                <div class="holder">
+                    <h3>Openingstijden</h3>
+                    <p>Maandag 13:00-18:00</p>
+                    <p>Dinsdag t/m vrijdag 09:00-18:00</p>
+                    <p>Donderdag koopavond tot 21:00</p>
+                    <p>Zaterdag 09:00-14:00</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</footer>
+
+
 <!--Scripts-->
 <!--Bootstrap-->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
