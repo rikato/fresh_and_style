@@ -5,8 +5,8 @@
  * Date: 19/11/2017
  * Time: 13:31
  */
-
-include 'header.php'?>
+include 'header.php'
+?>
 
 <section class="section about-us gray">
     <div class="container">
@@ -52,6 +52,18 @@ include 'header.php'?>
         </div>
     </div>
 </section>
+
+<section class="section Tweets gray">
+    <div class="container">
+        <div class="row">
+            <h2>Inleding</h2>
+            <p>
+
+            </p>
+        </div>
+    </div>
+</section>
+
 
 <?php include 'footer.php' ?>
 
