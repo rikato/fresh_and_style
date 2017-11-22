@@ -20,6 +20,8 @@ include 'header.php'
         </div>
     </div>
 </section>
+
+
 <section id="tarieven" class="section tarieven white">
     <div class="container">
         <h2>Tarieven Fresh & style</h2>
@@ -57,24 +59,30 @@ include 'header.php'
 
 <section class="section about-us white">
     <div class="container">
-        <h2>Kapsels</h2>
-        <?php instagramFeed($dbcon); ?>
-    </div>
-</section>
-
-
-<section class="section Tweets gray">
-    <div class="container">
-        <div class="row">
-            <h2>Inleding</h2>
-            <p>
-
-            </p>
+        <h2>Ons werk</h2>
+        <div class="image-grid">
+            <?php getHaircut($dbcon); ?>
         </div>
     </div>
 </section>
 
 
+<section class="section twitter">
+    <div class="left">
+        <div class="tweets">
+            <h2>Laatste tweets</h2>
+            <?php getTweets($tweets); ?>
+        </div>
+    </div>
+    <div class="right">
+        <div class="twitter-cta d-flex d-flex-center">
+            <a target="_blank" href="https://twitter.com/FreshAndStyle_">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+                <h3>volg Fresh & style!</h3>
+            </a>
+        </div>
+    </div>
+</section>
 
 <?php include 'footer.php' ?>
 

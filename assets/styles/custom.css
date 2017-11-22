@@ -118,3 +118,91 @@ header .header-holder button{
     font-size: 35px;
 }
 
+/*twitter sectie*/
+.twitter{
+    background: #75D0F9;
+    color: #fff;
+    padding-top: 0;
+    padding-right: 0;
+    height: 475px;
+}
+.twitter h2{
+    text-align: center;
+    padding-top: 15px;
+}
+.twitter .left{
+    width: 50%;
+    float: left;
+}
+.twitter .right{
+    width: 50%;
+    float: left;
+    background-color: #90D9FA;
+    height: 475px;
+}
+.twitter .tweets{
+
+    text-align: left;
+    max-width: 438px;
+    width: 100%;
+    float: right;
+    overflow: auto;
+}
+.twitter .twitter-cta{
+    width: 100%;
+    height: 100%;
+}
+.twitter .twitter-cta i{
+    font-size: 160px;
+    display: block;
+    transition: .2s;
+}
+.twitter .twitter-cta a{
+    color: #fff;
+    text-align: center;
+}
+.twitter .twitter-cta a:hover{
+    text-decoration: unset;
+    color: #fff;
+    transition: .2s;
+}
+.twitter .twitter-cta a:hover i{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    transition: .2s;
+}
+.twitter .twitter-cta h3{
+    display: block;
+}
+.twitter .tweet{
+    margin-bottom: 15px;
+}
+.twitter .tweet .tweet-user{
+    font-weight: 500;
+    color: #fff;
+}
+.twitter .tweet .tweet-user a{
+    color: #fff;
+    font-size: 18px;
+}
+.twitter .tweet .tweet-user span{
+    font-weight: 500;
+    font-size: 13px;
+    color: #ffffff9c;
+}
+
+
+.twitter .tweet .tweet-text{
+    font-size: 15px;
+}
+
+.twitter .tweet .tweet-date{
+    font-size: 11px;
+}
+
+
+/*kapsel sectie*/
+.image-grid .grid-item{
+    display: inline-block;
+    width: 20%;
+}

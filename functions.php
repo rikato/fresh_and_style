@@ -92,6 +92,15 @@ function getReviewData($dbcon) {
     }
 }
 
-function instagramFeed($dbcon){
-    echo 'dd';
+function getHaircut($dbcon){
+    $sqlData = ("SELECT * FROM haircut where active = 1 order by id limit 5");
+    $result = mysqli_query($dbcon, $sqlData);
+    $resultcheck = mysqli_num_rows($result);
+    if ($resultcheck > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo '<div class="grid-item">';
+            echo '<img src="' . $row['image'] . '" alt="">';
+            echo '</div>';
+        }
+    }
 }
