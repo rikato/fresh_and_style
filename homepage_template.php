@@ -53,6 +53,14 @@ include 'header.php'?>
     </div>
 </section>
 
+
+<section class="section about-us white">
+    <div class="container">
+        <h2>Kapsels</h2>
+        <?php instagramFeed($dbcon); ?>
+    </div>
+</section>
+
 <?php include 'footer.php' ?>
 
 

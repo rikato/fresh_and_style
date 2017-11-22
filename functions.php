@@ -88,3 +88,7 @@ function getReviewData($dbcon){
         }
     }
 }
+
+function instagramFeed($dbcon){
+    echo 'dd';
+}
