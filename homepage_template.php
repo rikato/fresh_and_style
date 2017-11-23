@@ -11,7 +11,7 @@ include 'header.php'
 <section class="section about-us gray">
     <div class="container">
         <div class="row">
-            <h2>Inleding</h2>
+            <h2>Welkom bij Fresh & Style</h2>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus aliquid, animi aperiam beatae cupiditate deleniti distinctio eos error est illum iste nostrum, quaerat qui ratione tempora voluptates! At, sunt!
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus aliquid, animi aperiam beatae cupiditate deleniti distinctio eos error est illum iste nostrum, quaerat qui ratione tempora voluptates! At, sunt!
@@ -20,6 +20,8 @@ include 'header.php'
         </div>
     </div>
 </section>
+
+
 <section id="tarieven" class="section tarieven white">
     <div class="container">
         <h2>Tarieven Fresh & style</h2>
@@ -29,8 +31,16 @@ include 'header.php'
     </div>
 </section>
 
+<section class="section haircut gray">
+    <div class="container">
+        <h2>Ons werk</h2>
+        <div class="image-grid">
+            <?php getHaircut($dbcon); ?>
+        </div>
+    </div>
+</section>
 
-<section id="review" class="section review gray ">
+<section id="review" class="section review white">
     <div class="container">
         <h2>Reviews</h2>
         <div class="d-flex d-flex-center">
@@ -53,28 +63,22 @@ include 'header.php'
     </div>
 </section>
 
-
-
-<section class="section about-us white">
-    <div class="container">
-        <h2>Kapsels</h2>
-        <?php instagramFeed($dbcon); ?>
+<section class="section twitter">
+    <div class="left">
+        <div class="tweets">
+            <h2>Laatste tweets</h2>
+            <?php getTweets($tweets); ?>
+        </div>
     </div>
-</section>
-
-
-<section class="section Tweets gray">
-    <div class="container">
-        <div class="row">
-            <h2>Inleding</h2>
-            <p>
-
-            </p>
+    <div class="right">
+        <div class="twitter-cta d-flex d-flex-center">
+            <a target="_blank" href="https://twitter.com/FreshAndStyle_">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+                <h3>Volg Fresh & style!</h3>
+            </a>
         </div>
     </div>
 </section>
-
-
 
 <?php include 'footer.php' ?>
 
