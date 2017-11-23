@@ -18,6 +18,9 @@ $content = $connection->get('acount/verify_credentials');
 //Load recent tweets
 $tweets = $connection->get('statuses/home_timeline', ["count" => 5, "exclude_replies" => TRUE]);
 
+//print_r($tweets);
+
 foreach ($tweets as $key => $object) {
-    echo $object->text;
+    print($object->text);
+    print("<br>");
 }
