@@ -72,7 +72,7 @@ include 'header.php'
     </div>
     <div class="right">
         <div class="twitter-cta d-flex d-flex-center">
-            <a target="_blank" href="https://twitter.com/FreshAndStyle_">
+            <a target="_blank" href="https://twitter.com/PVDS2011">
                 <i class="fa fa-twitter" aria-hidden="true"></i>
                 <h3>Volg Fresh & style!</h3>
             </a>

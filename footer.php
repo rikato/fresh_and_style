@@ -39,6 +39,83 @@
 </footer>
 
 
+
+<!--Popups-->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Maak een afspraak</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="appointment-input-name">Naam</label>
+                            <input type="text" class="form-control" id="appointment-input-name" placeholder="Naam">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="appointment-input-email">Email</label>
+                            <input type="email" class="form-control" id="appointment-input-email" placeholder="Email">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputState">Kapper</label>
+                            <select id="inputState" class="form-control">
+                                <option selected>Geen voorkeur</option>
+                                <option>Kapper 1</option>
+                                <option>Kapper 2</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label for="inputState">dag</label>
+                            <select id="inputState" class="form-control">
+
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="inputState">maand</label>
+                            <select id="inputState" class="form-control">
+
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="inputState">jaar</label>
+                            <select id="inputState" class="form-control">
+
+                            </select>
+                        </div>
+
+
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                            </label>
+                            <br>
+                            <label class="form-check-label">
+                                <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                            </label>
+                        </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                </form>
+            </div>
+<!--            <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>-->
+<!--            </div>-->
+        </div>
+    </div>
+</div>
+
+<!--end popups-->
+
+
+
 <!--Scripts-->
 <!--Bootstrap-->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

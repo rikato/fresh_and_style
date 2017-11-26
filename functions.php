@@ -22,7 +22,7 @@ function getWebsiteInfo($option, $dbcon) {
 
 //get the treatment data.
 function getTreatmentData($dbcon) {
-    $sqlData = ("select * from category");
+    $sqlData = ("select * from treatment_category");
     $result = mysqli_query($dbcon, $sqlData);
     $resultcheck = mysqli_num_rows($result);
     $i = 0;
@@ -76,10 +76,12 @@ function getReviewData($dbcon) {
             //loop trough the rating score and place the stars
             echo '<div class="star-container">';
             echo '<div class="all-stars">';
+            //place 5 empty stars
             for ($starLoop = 0; $starLoop < 5; $starLoop++) {
                 echo '<span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>';
             }
             echo '<div class="rating-stars">';
+            //place the amount of stars based on rating
             for ($starLoop = 0; $starLoop < $row['rating']; $starLoop++) {
                 echo '<span class="star"><i class="fa fa-star" aria-hidden="true"></i></span>';
             }
@@ -104,3 +106,60 @@ function getHaircut($dbcon){
         }
     }
 }
+
+
+function getProduct($dbcon){
+
+
+    if(isset($_POST['product-category-submit']) && $_POST['productCategory'] > 0){
+        $category = $_POST['productCategory'];
+        $sqlData = ("SELECT * FROM product where active = 1 and product_category = '$category' order by id");
+    }else{
+        $sqlData = ("SELECT * FROM product where active = 1 order by id");
+    }
+
+    $result = mysqli_query($dbcon, $sqlData);
+    $resultcheck = mysqli_num_rows($result);
+    // start counter at 1 because 0 % 3 is equal to 0
+    $i = 1;
+    $cutRow = 4;
+
+    if ($resultcheck > 0) {
+        for ($a = 0; $a < $resultcheck; $a++) {
+            $row = mysqli_fetch_assoc($result);
+            if($i % $cutRow  == 1){
+                echo '<div class="row">';
+            }
+            echo '<div class="col-12 col-md-3 col-sm-6 product">';
+            echo '<img class="product-image" src="'. $row['image'] . '" alt="">';
+            echo '<div class="product-information">';
+            echo '<h3>'.$row['title'].'</h3>';
+            echo '<div class="product-description"><p>'.$row['description'].'</p>';
+            echo '<div class="product-price"><p>€'.$row['price'].'</p>';
+
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+
+            if($i % $cutRow  == 0){
+                echo '</div>';
+            }
+           $i++;
+        }
+    }
+}
+
+function getProductCategory($dbcon){
+    $sqlData = ("SELECT * FROM product_category  order by id");
+    $result = mysqli_query($dbcon, $sqlData);
+    $resultcheck = mysqli_num_rows($result);
+    if ($resultcheck > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo '<option value="'. $row['id'] .'">'. $row['name'] .'</option>';
+        }
+    }
+}
+
+
+
