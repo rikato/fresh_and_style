@@ -112,6 +112,45 @@
     </div>
 </div>
 
+<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Schrijf een review</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="make-review" action="" method="post">
+                    Naam: <input type="text" name="review-name">
+                    <br>
+                    Titel: <input type="text" name="review-title">
+                    <br>
+                    Review: <textarea name="review-textarea" rows="4" cols="50">
+                    </textarea>
+                    <br>
+                    Je cijfer:
+                    <input name="star" type="radio" value="0">
+                    <input name="star" type="radio" value="1">
+                    <input name="star" type="radio" value="2">
+                    <input name="star" type="radio" value="3">
+                    <input name="star" type="radio" value="4">
+                    <input name="star" type="radio" value="5">
+
+                    <input type="submit" name="make-review-submit" value="Verzenden" id="make-review-submit">
+                </form>
+                <?php makeReview($dbcon); ?>
+            </div>
+            <!--            <div class="modal-footer">-->
+            <!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>-->
+            <!--            </div>-->
+        </div>
+    </div>
+</div>
+
+
+
 <!--end popups-->
 
 

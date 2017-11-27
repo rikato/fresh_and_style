@@ -109,8 +109,6 @@ function getHaircut($dbcon){
 
 
 function getProduct($dbcon){
-
-
     if(isset($_POST['product-category-submit']) && $_POST['productCategory'] > 0){
         $category = $_POST['productCategory'];
         $sqlData = ("SELECT * FROM product where active = 1 and product_category = '$category' order by id");
@@ -162,4 +160,18 @@ function getProductCategory($dbcon){
 }
 
 
+
+function makeReview($dbcon){
+    if(isset($_POST['make-review-submit'])){
+        if(empty($_POST['review-name']) || empty($_POST['review-textarea']) || empty($_POST['star']) || empty($_POST['review-title'])){
+            print 'alle velden zijn verplicht';
+        }else{
+            $sqlData = "INSERT INTO review (name, title, comment, rating, approved) VALUES ('". $_POST['review-name'] ."', '". $_POST['review-title'] ."', '". $_POST['review-textarea'] ."', '". $_POST['star'] ."', '0')";
+            if (mysqli_query($dbcon, $sqlData)) {
+                echo "Je review is verzonden!";
+            }
+        }
+    }
+
+}
 
