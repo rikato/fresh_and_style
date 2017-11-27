@@ -137,7 +137,7 @@
                     <input name="star" type="radio" value="3">
                     <input name="star" type="radio" value="4">
                     <input name="star" type="radio" value="5">
-
+                    <br>
                     <input type="submit" name="make-review-submit" value="Verzenden" id="make-review-submit">
                 </form>
                 <?php makeReview($dbcon); ?>

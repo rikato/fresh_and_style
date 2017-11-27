@@ -138,7 +138,6 @@ function getProduct($dbcon){
         }
         $i++;
     }
-
 }
 
 function getProductCategory($dbcon){
@@ -168,6 +167,8 @@ function makeReview($dbcon){
 
         }
     }
-
 }
 
+function errorDialog(){
+    echo 'test';
+}
