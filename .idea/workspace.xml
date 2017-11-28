@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5d05e61-0983-425d-89e5-d223474117c1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/login.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/login.php" afterPath="$PROJECT_DIR$/login.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,10 +19,10 @@
           <file leaf-file-name="login.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/login.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="167">
-                  <caret line="47" column="13" lean-forward="false" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
+                <state relative-caret-position="405">
+                  <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
                   <folding>
-                    <marker date="1511828533433" expanded="true" signature="438:489" ph="SELECT id,us... members" />
+                    <marker date="1511828662627" expanded="true" signature="438:489" ph="SELECT id,us... members" />
                   </folding>
                 </state>
               </provider>
@@ -46,7 +45,7 @@
           <file leaf-file-name="login.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/../login/login.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="56">
+                <state relative-caret-position="596">
                   <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="53" selection-end-column="55" />
                   <folding>
                     <marker date="1511828294075" expanded="true" signature="526:577" ph="SELECT id,us... members" />
@@ -242,12 +241,12 @@
       <workItem from="1511353273925" duration="27872000" />
       <workItem from="1511434561280" duration="1604000" />
       <workItem from="1511564469148" duration="2386000" />
-      <workItem from="1511707822119" duration="32743000" />
+      <workItem from="1511707822119" duration="32872000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="96599000" />
+    <option name="totallyTimeSpent" value="96728000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1911" y="-9" width="1938" height="1178" extended-state="6" />
@@ -710,7 +709,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../login/login.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
+        <state relative-caret-position="596">
           <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="53" selection-end-column="55" />
           <folding>
             <marker date="1511828294075" expanded="true" signature="526:577" ph="SELECT id,us... members" />
@@ -720,10 +719,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/login.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="47" column="13" lean-forward="false" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
+        <state relative-caret-position="405">
+          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding>
-            <marker date="1511828533433" expanded="true" signature="438:489" ph="SELECT id,us... members" />
+            <marker date="1511828662627" expanded="true" signature="438:489" ph="SELECT id,us... members" />
           </folding>
         </state>
       </provider>
