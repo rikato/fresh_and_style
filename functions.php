@@ -168,7 +168,3 @@ function makeReview($dbcon){
         }
     }
 }
-
-function errorDialog(){
-    echo 'test';
-}

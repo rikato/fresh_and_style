@@ -21,13 +21,13 @@ if (isset($_POST['Login'])){
         $error = 'Vul een wachtwoord in<br>';
 
     if($error == ''){
-        $records = $dbcon->prepare('SELECT id,user,pass FROM members WHERE user = :user');
+        $records = $dbcon->prepare('SELECT id,user,pass FROM user WHERE user = :user');
         $records->bindParam(':user', $user);
         $records->execute();
         $results = $records->fetch(PDO::FETCH_ASSOC);
         if(count($results) > 0 && password_verify($pass, $results['pass'])){
             $_SESSION['user'] = $results['user'];
-            header('location:admin.php');
+            header('location:admin/admin.php');
             exit;
         }else{
             $error .= 'Gebruikersnaam en wachtwoord niet gevonden';
