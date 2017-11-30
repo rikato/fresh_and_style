@@ -350,3 +350,15 @@ footer:after {
 .products form{
     margin-bottom: 25px;
 }
+
+.afspraak-container{
+    display:none;
+}
+.show{
+    display: block;
+}
+
+.custom-checkbox{
+    margin: 10px 0px;
+    padding-bottom: 10px;
+}

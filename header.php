@@ -32,7 +32,6 @@ include 'twitter.php';
                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
                         Maak een afspraak
                     </button>
-
                 </div>
             </div>
 

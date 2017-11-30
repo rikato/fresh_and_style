@@ -1,5 +1,4 @@
 <?php
-
 DEFINE('DB_USER', 'root');
 DEFINE('DB_PSWD', '');
 DEFINE('DB_HOST', 'localhost');
@@ -12,5 +11,4 @@ if(!$dbcon){
 }else{
 //    echo('connected');
 }
-
 ?>

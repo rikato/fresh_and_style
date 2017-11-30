@@ -1,12 +1,8 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: ikkuh
- * Date: 19/11/2017
- * Time: 12:28
- */
 include 'config.php';
+
+ob_start();
 
 //get basic information of the website.
 function getWebsiteInfo($option, $dbcon) {
@@ -92,11 +88,13 @@ function getHaircut($dbcon){
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([]);
     $data = $stmt->fetchAll();
+
    foreach ($data as $haircut){
        echo '<div class="grid-item">';
        echo '<img src="' . $haircut->image . '" alt="">';
        echo '</div>';
    }
+
 }
 
 function getProduct($dbcon){
@@ -137,6 +135,7 @@ function getProduct($dbcon){
             echo '</div>';
         }
         $i++;
+
     }
 }
 
@@ -149,6 +148,31 @@ function getProductCategory($dbcon){
         echo '<option value="'. $category->id .'">'. $category->name .'</option>';
     }
 }
+
+
+function addAppointment($dbcon){
+    if (isset($_POST["appointment-submit"])) {
+        if (isset($_POST["appointment-agree"])) {
+            $appointmentName = $_POST["appointment-name"];
+            $appointmentEmail = $_POST["appointment-email"];
+            $appointmentTelnr = $_POST["appointment-telnr"];
+            $appointmentKapper = $_POST["appointment-kapper"];
+            $appointmentDate = $_POST["appointment-date"];
+            $appointmentAddress = $_POST["appointment-address"];
+            $appointmentZip = $_POST["appointment-zip"];
+            $appointmentRede = $_POST["appointment-reason"];
+
+            $sql = "INSERT INTO appointment (name, email, telnumber, adres, postcode, kapper, rede, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $dbcon->prepare($sql);
+            $stmt->execute([$appointmentName, $appointmentEmail, $appointmentTelnr, $appointmentAddress, $appointmentZip, $appointmentKapper, $appointmentRede, $appointmentDate]);
+
+            header('location:homepage_template.php');
+        } else {
+            echo "Er is niet akoord gegeaan.";
+        }
+    }
+}
+
 
 function makeReview($dbcon){
     if(isset($_POST['make-review-submit'])){
@@ -261,3 +285,4 @@ function getAfspraakinfo ($dbcon, $page){
     }
     echo '</table>';
 }
+

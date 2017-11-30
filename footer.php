@@ -7,7 +7,6 @@
  */
 ?>
 
-
 <footer id="footer" class="gray">
     <div class="container">
         <ul class="small-block-grid-1 medium-block-grid-3 appels footer-r">
@@ -52,57 +51,74 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+
+                <?php
+                addAppointment($dbcon);
+                ?>
+                <form action="" method="post">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="appointment-input-name">Naam</label>
-                            <input type="text" class="form-control" id="appointment-input-name" placeholder="Naam">
+                            <input type="text" class="form-control" id="appointment-input-name" placeholder="Naam" name="appointment-name">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="appointment-input-email">Email</label>
-                            <input type="email" class="form-control" id="appointment-input-email" placeholder="Email">
+                            <input type="email" class="form-control" id="appointment-input-email" placeholder="Email" name="appointment-email">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="appointment-input-email">Telefoon nummer</label>
+                            <input type="tel" class="form-control" id="appointment-input-telnr" placeholder="Telefoon nummer" name="appointment-telnr">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputState">Kapper</label>
-                            <select id="inputState" class="form-control">
+                            <select id="inputState" class="form-control" name="appointment-kapper">
                                 <option selected>Geen voorkeur</option>
-                                <option>Kapper 1</option>
-                                <option>Kapper 2</option>
+                                <option>Elyas</option>
+                                <option>Aboed</option>
+                                <option>Talia</option>
                             </select>
                         </div>
 
-                        <div class="col">
-                            <label for="inputState">dag</label>
-                            <select id="inputState" class="form-control">
-
-                            </select>
-                        </div>
-                        <div class="col">
-                            <label for="inputState">maand</label>
-                            <select id="inputState" class="form-control">
-
-                            </select>
-                        </div>
-                        <div class="col">
-                            <label for="inputState">jaar</label>
-                            <select id="inputState" class="form-control">
-
-                            </select>
+                        <div class="col-md-12">
+                            <label for="inputState">Datum</label>
+                            <input type="date" format="DD-MM-YYYY" class="form-control" name="appointment-date">
                         </div>
 
-
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-                            </label>
-                            <br>
-                            <label class="form-check-label">
-                                <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                        <div class="col-md-8">
+                            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                                <input type="checkbox" class="custom-control-input" name="appointment-thuis" id="aanHuis">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Aan huis (Let op: extra kosten)</span>
                             </label>
                         </div>
 
+                        <div class="afspraak-container">
+                            <div class="form-row">
+                                <div class="form-group col-md-8">
+                                    <label for="appointment-input-email">Adres (straatnaam en huisnummer)</label>
+                                    <input type="text" class="form-control" id="appointment-input-address" placeholder="Adres" name="appointment-address">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="appointment-input-email">Postcode</label>
+                                    <input type="text" class="form-control" id="appointment-input-zip" placeholder="1234AB" name="appointment-zip">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="appointment-input-email">Reden</label>
+                                    <!--<input type="text" class="form-control" id="appointment-input-zip" placeholder="Voordat wij aan huis komen moet u een goede reden hebben waarom u niet naar de zaak kan komen." name="appointment-reason">-->
+                                    <textarea class="form-control" id="appointment-input-zip" placeholder="Voordat wij aan huis komen moet u een goede reden hebben waarom u niet naar de zaak kan komen." name="appointment-reason"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                                <input type="checkbox" class="custom-control-input" name="appointment-agree">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Akoord</span>
+                            </label>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Sign in</button>
+                    <button type="submit" class="btn btn-primary" name="appointment-submit">Verstuur</button>
                 </form>
             </div>
 <!--            <div class="modal-footer">-->
@@ -148,8 +164,6 @@
         </div>
     </div>
 </div>
-
-
 
 <!--end popups-->
 
