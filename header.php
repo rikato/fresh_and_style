@@ -29,7 +29,9 @@ include 'twitter.php';
                     <h1><?php getWebsiteInfo('title', $dbcon); ?></h1>
                     <span><?php getWebsiteInfo('description', $dbcon); ?></span>
                     <br>
-                    <button type="button" class="btn btn-outline-primary">Maak een afspraak</button>
+                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+                        Maak een afspraak
+                    </button>
                 </div>
             </div>
 
@@ -48,4 +50,3 @@ include 'twitter.php';
                 </div>
             </nav>
         </header>
-

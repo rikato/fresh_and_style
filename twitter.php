@@ -35,3 +35,4 @@ function getTweets ($tweets){
         echo '</div>';
     }
 }
+

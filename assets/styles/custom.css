@@ -310,3 +310,55 @@ footer:after {
     display:block;
     margin-bottom: 50px;
 }
+/*products*/
+
+.products .product img.product-image {
+    width: 100%;
+}
+.products .row{
+    margin-bottom: 30px;
+}
+
+.products .product .product-information h3{
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+}
+.products .product .product-information{
+    text-align: center;
+    /*position: absolute;*/
+    top: 0;
+    left: 0;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-left: 15px;
+    height: 100%;
+    width: 100%;
+}
+.products .product{
+    overflow: hidden;
+}
+.products .product .product-information p{
+    font-size: 12px;
+}
+.products .product .product-information .product-price p{
+    /*position: absolute;*/
+    width: 100%;
+    bottom: 0;
+    font-size: 20px;
+}
+.products form{
+    margin-bottom: 25px;
+}
+
+.afspraak-container{
+    display:none;
+}
+.show{
+    display: block;
+}
+
+.custom-checkbox{
+    margin: 10px 0px;
+    padding-bottom: 10px;
+}
