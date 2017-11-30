@@ -121,60 +121,6 @@
                     <button type="submit" class="btn btn-primary" name="appointment-submit">Verstuur</button>
                 </form>
             </div>
-
-                <form>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="appointment-input-name">Naam</label>
-                            <input type="text" class="form-control" id="appointment-input-name" placeholder="Naam">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="appointment-input-email">Email</label>
-                            <input type="email" class="form-control" id="appointment-input-email" placeholder="Email">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="inputState">Kapper</label>
-                            <select id="inputState" class="form-control">
-                                <option selected>Geen voorkeur</option>
-                                <option>Kapper 1</option>
-                                <option>Kapper 2</option>
-                            </select>
-                        </div>
-
-                        <div class="col">
-                            <label for="inputState">dag</label>
-                            <select id="inputState" class="form-control">
-
-                            </select>
-                        </div>
-                        <div class="col">
-                            <label for="inputState">maand</label>
-                            <select id="inputState" class="form-control">
-
-                            </select>
-                        </div>
-                        <div class="col">
-                            <label for="inputState">jaar</label>
-                            <select id="inputState" class="form-control">
-
-                            </select>
-                        </div>
-
-
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-                            </label>
-                            <br>
-                            <label class="form-check-label">
-                                <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-                            </label>
-                        </div>
-
-                    </div>
-                    <button type="submit" class="btn btn-primary">Sign in</button>
-                </form>
-            </div>
 <!--            <div class="modal-footer">-->
 <!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>-->
 <!--            </div>-->
