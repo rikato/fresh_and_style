@@ -149,7 +149,6 @@ function getProductCategory($dbcon){
     }
 }
 
-
 function addAppointment($dbcon){
     if (isset($_POST["appointment-submit"])) {
         if (isset($_POST["appointment-agree"])) {
@@ -168,11 +167,11 @@ function addAppointment($dbcon){
 
             header('location:homepage_template.php');
         } else {
+            header('location:homepage_template.php#exampleModal');
             echo "Er is niet akoord gegeaan.";
         }
     }
 }
-
 
 function makeReview($dbcon){
     if(isset($_POST['make-review-submit'])){
@@ -192,7 +191,6 @@ function makeReview($dbcon){
         }
     }
 }
-
 
 function getAfspraakinfo ($dbcon, $page){
     if(isset($page)){
