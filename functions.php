@@ -168,3 +168,96 @@ function makeReview($dbcon){
         }
     }
 }
+
+
+function getAfspraakinfo ($dbcon, $page){
+    if(isset($page)){
+        $rows = 25;
+
+        $rowstart = $rows * ($page - 1);
+        $rowend = $rows * $page;
+
+        $sql = 'SELECT * FROM appointment order by creationdate LIMIT ?, ?';
+        $stmt = $dbcon->prepare($sql);
+        $stmt -> execute([$rowstart, $rowend]);
+        $data = $stmt -> fetchall();
+
+    }else{
+        $sql = 'SELECT * FROM appointment order by creationdate LIMIT 25';
+        $stmt = $dbcon->prepare($sql);
+        $stmt -> execute([]);
+        $data = $stmt -> fetchall();
+    }
+
+    echo '<table class="table">';
+    echo '<tr>';
+    echo '<th>';
+    echo 'ID';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Naam';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'E-mail';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Telefoonnummer';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Kapper';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Afspraakdatum';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Begintijd';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Einddatum';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Aanmaakdatum';
+    echo '</th>';
+
+    echo '</tr>';
+    foreach ($data as $afspraak){
+        echo '<tr>';
+        echo '<td>';
+        echo '<a href="?id='.$afspraak->id.'">'.$afspraak->id.'</a>';
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->name;
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->email;
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->telnumber;
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->kapper;
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->date;
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->time;
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->endtime;
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->creationdate;
+        echo '</td>';
+        echo '</tr>';
+    }
+    echo '</table>';
+}
