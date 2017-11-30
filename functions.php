@@ -25,6 +25,7 @@ function getTreatmentData($dbcon) {
         //echo card wich contains the category title.
         //placing the current category id in the id so the collapse button will show correct data.
         echo '<div class="card"><div class="card-header" role="tab" id="heading' . $categoryId . '"> <h5 class="mb-0"> <a data-toggle="collapse" href="#collapse' . $categoryId . '" aria-expanded="true" aria-controls="collapseOne">' . $category->name . '</a> </h5> </div>';
+
         //if first loop place heading with show class so the first accordion item is open.
         //using the same category id as in the heading.
         if ($i == 0) {
@@ -33,6 +34,7 @@ function getTreatmentData($dbcon) {
             echo '<div id="collapse' . $categoryId . '" class="collapse" role="tabpanel" aria-labelledby="heading' . $categoryId . '" data-parent="#accordion"> <div class="card-body">';
         }
         $i++;
+
         $sql = 'SELECT * from treatment where category_id = ?';
         $stmt = $dbcon->prepare($sql);
         $stmt->execute([$categoryId]);
@@ -43,6 +45,7 @@ function getTreatmentData($dbcon) {
         }
         echo '</table></div></div></div>';
     }
+
 }
 
 function getReviewData($dbcon) {
@@ -85,11 +88,13 @@ function getHaircut($dbcon){
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([]);
     $data = $stmt->fetchAll();
-    foreach ($data as $haircut){
-        echo '<div class="grid-item">';
-        echo '<img src="' . $haircut->image . '" alt="">';
-        echo '</div>';
-    }
+
+   foreach ($data as $haircut){
+       echo '<div class="grid-item">';
+       echo '<img src="' . $haircut->image . '" alt="">';
+       echo '</div>';
+   }
+
 }
 
 function getProduct($dbcon){
@@ -109,6 +114,7 @@ function getProduct($dbcon){
     // start counter at 1 because 0 % 3 is equal to 0
     $i = 1;
     $cutRow = 4;
+
     foreach ($data as $product){
         if($i % $cutRow  == 1){
             echo '<div class="row">';
@@ -119,14 +125,17 @@ function getProduct($dbcon){
         echo '<h3>'.$product->title.'</h3>';
         echo '<div class="product-description"><p>'.$product->description.'</p>';
         echo '<div class="product-price"><p>€'.$product->price.'</p>';
+
         echo '</div>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
+
         if($i % $cutRow  == 0){
             echo '</div>';
         }
         $i++;
+
     }
 }
 
@@ -140,26 +149,6 @@ function getProductCategory($dbcon){
     }
 }
 
-function makeReview($dbcon){
-    if(isset($_POST['make-review-submit'])){
-        if(empty($_POST['review-name']) || empty($_POST['review-textarea']) || empty($_POST['star']) || empty($_POST['review-title'])){
-            print 'alle velden zijn verplicht';
-        }else{
-            $name = $_POST['review-name'];
-            $title = $_POST['review-title'];
-            $comment = $_POST['review-textarea'];
-            $rating = $_POST['star'];
-            $approved = 0;
-            $sql = 'INSERT INTO review (name, title, comment, rating, approved) VALUES (?, ?, ?, ?, ?)';
-            $stmt = $dbcon->prepare($sql);
-            $stmt->execute([$name, $title, $comment, $rating, $approved]);
-        }
-    }
-}
-
-function errorDialog(){
-    echo 'test';
-}
 
 function addAppointment($dbcon){
     if (isset($_POST["appointment-submit"])) {
@@ -183,3 +172,117 @@ function addAppointment($dbcon){
         }
     }
 }
+
+
+function makeReview($dbcon){
+    if(isset($_POST['make-review-submit'])){
+        if(empty($_POST['review-name']) || empty($_POST['review-textarea']) || empty($_POST['star']) || empty($_POST['review-title'])){
+            print 'alle velden zijn verplicht';
+        }else{
+            $name = $_POST['review-name'];
+            $title = $_POST['review-title'];
+            $comment = $_POST['review-textarea'];
+            $rating = $_POST['star'];
+            $approved = 0;
+
+            $sql = 'INSERT INTO review (name, title, comment, rating, approved) VALUES (?, ?, ?, ?, ?)';
+            $stmt = $dbcon->prepare($sql);
+            $stmt->execute([$name, $title, $comment, $rating, $approved]);
+
+        }
+    }
+}
+
+
+function getAfspraakinfo ($dbcon, $page){
+    if(isset($page)){
+        $rows = 25;
+
+        $rowstart = $rows * ($page - 1);
+        $rowend = $rows * $page;
+
+        $sql = 'SELECT * FROM appointment order by creationdate LIMIT ?, ?';
+        $stmt = $dbcon->prepare($sql);
+        $stmt -> execute([$rowstart, $rowend]);
+        $data = $stmt -> fetchall();
+
+    }else{
+        $sql = 'SELECT * FROM appointment order by creationdate LIMIT 25';
+        $stmt = $dbcon->prepare($sql);
+        $stmt -> execute([]);
+        $data = $stmt -> fetchall();
+    }
+
+    echo '<table class="table">';
+    echo '<tr>';
+    echo '<th>';
+    echo 'ID';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Naam';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'E-mail';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Telefoonnummer';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Kapper';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Afspraakdatum';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Begintijd';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Einddatum';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Aanmaakdatum';
+    echo '</th>';
+
+    echo '</tr>';
+    foreach ($data as $afspraak){
+        echo '<tr>';
+        echo '<td>';
+        echo '<a href="?id='.$afspraak->id.'">'.$afspraak->id.'</a>';
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->name;
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->email;
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->telnumber;
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->kapper;
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->date;
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->time;
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->endtime;
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->creationdate;
+        echo '</td>';
+        echo '</tr>';
+    }
+    echo '</table>';
+}
+

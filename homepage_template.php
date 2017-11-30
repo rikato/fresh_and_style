@@ -60,6 +60,9 @@ include 'header.php'
                 </div>
             </div>
         </div>
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#reviewModal">
+            Schrijf een review
+        </button>
     </div>
 </section>
 

@@ -51,6 +51,7 @@
                 </button>
             </div>
             <div class="modal-body">
+
                 <?php
                 addAppointment($dbcon);
                 ?>
@@ -120,6 +121,100 @@
                     <button type="submit" class="btn btn-primary" name="appointment-submit">Verstuur</button>
                 </form>
             </div>
+
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="appointment-input-name">Naam</label>
+                            <input type="text" class="form-control" id="appointment-input-name" placeholder="Naam">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="appointment-input-email">Email</label>
+                            <input type="email" class="form-control" id="appointment-input-email" placeholder="Email">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputState">Kapper</label>
+                            <select id="inputState" class="form-control">
+                                <option selected>Geen voorkeur</option>
+                                <option>Kapper 1</option>
+                                <option>Kapper 2</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label for="inputState">dag</label>
+                            <select id="inputState" class="form-control">
+
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="inputState">maand</label>
+                            <select id="inputState" class="form-control">
+
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="inputState">jaar</label>
+                            <select id="inputState" class="form-control">
+
+                            </select>
+                        </div>
+
+
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                            </label>
+                            <br>
+                            <label class="form-check-label">
+                                <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                            </label>
+                        </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                </form>
+            </div>
+<!--            <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>-->
+<!--            </div>-->
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Schrijf een review</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="make-review" action="" method="post">
+                    Naam: <input type="text" name="review-name">
+                    <br>
+                    Titel: <input type="text" name="review-title">
+                    <br>
+                    Review: <textarea name="review-textarea" rows="4" cols="50">
+                    </textarea>
+                    <br>
+                    Je cijfer:
+                    <input name="star" type="radio" value="0">
+                    <input name="star" type="radio" value="1">
+                    <input name="star" type="radio" value="2">
+                    <input name="star" type="radio" value="3">
+                    <input name="star" type="radio" value="4">
+                    <input name="star" type="radio" value="5">
+                    <br>
+                    <input type="submit" name="make-review-submit" value="Verzenden" id="make-review-submit">
+                </form>
+                <?php makeReview($dbcon); ?>
+            </div>
+            <!--            <div class="modal-footer">-->
+            <!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>-->
+            <!--            </div>-->
         </div>
     </div>
 </div>
