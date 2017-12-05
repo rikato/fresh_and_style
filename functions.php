@@ -167,8 +167,8 @@ function addAppointment($dbcon){
 
             header('location:homepage_template.php');
         } else {
-            header('location:homepage_template.php#exampleModal');
             echo "Er is niet akoord gegeaan.";
+            header('location:homepage_template.php#exampleModal');
         }
     }
 }
@@ -196,12 +196,12 @@ function getAfspraakinfo ($dbcon, $page){
     if(isset($page)){
         $rows = 25;
 
-        $rowstart = $rows * ($page - 1);
-        $rowend = $rows * $page;
-
-        $sql = 'SELECT * FROM appointment order by creationdate LIMIT ?, ?';
+        $rowStart = $rows * ($page - 1);
+        $rowEnd = $rows * $page;
+        echo $rowStart . '<br>' . $rowEnd;
+        $sql = "SELECT * FROM appointment order by creationdate LIMIT $rowStart, $rowEnd";
         $stmt = $dbcon->prepare($sql);
-        $stmt -> execute([$rowstart, $rowend]);
+        $stmt -> execute([]);
         $data = $stmt -> fetchall();
 
     }else{

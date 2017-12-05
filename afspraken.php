@@ -19,7 +19,7 @@ function paginate ($dbcon){
     echo '<ul>';
     for($i = 1; $i <= $pages; $i++){
         echo '<li>';
-        echo '<a href="afspraken.php/?page='.$i.'">'.$i.'</a>';
+        echo '<a href="?page='.$i.'">'.$i.'</a>';
         echo '</li>';
     }
     echo '</ul>';
@@ -30,7 +30,6 @@ function paginate ($dbcon){
         $stmt = $dbcon->prepare($sql);
         $stmt->execute([$afspraakId]);
         $data =  $stmt->fetchAll();
-        var_dump($data);
     }
     
     
