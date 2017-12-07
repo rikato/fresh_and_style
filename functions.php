@@ -161,9 +161,9 @@ function addAppointment($dbcon){
             $appointmentZip = $_POST["appointment-zip"];
             $appointmentRede = $_POST["appointment-reason"];
 
-            $sql = "INSERT INTO appointment (name, email, telnumber, adres, postcode, kapper, rede, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO appointment (name, email, telnumber, adres, postcode, kapper, rede, date, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $dbcon->prepare($sql);
-            $stmt->execute([$appointmentName, $appointmentEmail, $appointmentTelnr, $appointmentAddress, $appointmentZip, $appointmentKapper, $appointmentRede, $appointmentDate]);
+            $stmt->execute([$appointmentName, $appointmentEmail, $appointmentTelnr, $appointmentAddress, $appointmentZip, $appointmentKapper, $appointmentRede, $appointmentDate, 0]);
 
             header('location:homepage_template.php');
         } else {
@@ -189,139 +189,6 @@ function makeReview($dbcon){
             $stmt->execute([$name, $title, $comment, $rating, $approved]);
 
         }
-    }
-}
-
-function getAfspraakinfo ($dbcon, $page){
-    if(isset($page)){
-        $rows = 25;
-
-        $rowstart = $rows * ($page - 1);
-        $rowend = $rows * $page;
-
-        $sql = 'SELECT * FROM appointment order by creationdate LIMIT ?, ?';
-        $stmt = $dbcon->prepare($sql);
-        $stmt -> execute([$rowstart, $rowend]);
-        $data = $stmt -> fetchall();
-
-    }else{
-        $sql = 'SELECT * FROM appointment order by creationdate LIMIT 25';
-        $stmt = $dbcon->prepare($sql);
-        $stmt -> execute([]);
-        $data = $stmt -> fetchall();
-    }
-
-    echo '<table class="table">';
-    echo '<tr>';
-    echo '<th>';
-    echo 'ID';
-    echo '</th>';
-
-    echo '<th>';
-    echo 'Naam';
-    echo '</th>';
-
-    echo '<th>';
-    echo 'E-mail';
-    echo '</th>';
-
-    echo '<th>';
-    echo 'Telefoonnummer';
-    echo '</th>';
-
-    echo '<th>';
-    echo 'Kapper';
-    echo '</th>';
-
-    echo '<th>';
-    echo 'Afspraakdatum';
-    echo '</th>';
-
-    echo '<th>';
-    echo 'Begintijd';
-    echo '</th>';
-
-    echo '<th>';
-    echo 'Einddatum';
-    echo '</th>';
-
-    echo '<th>';
-    echo 'Aanmaakdatum';
-    echo '</th>';
-
-    echo '</tr>';
-    foreach ($data as $afspraak){
-        echo '<tr>';
-        echo '<td>';
-        echo '<a href="?id='.$afspraak->id.'">'.$afspraak->id.'</a>';
-        echo '</td>';
-        echo '<td>';
-        echo $afspraak->name;
-        echo '</td>';
-        echo '<td>';
-        echo $afspraak->email;
-        echo '</td>';
-        echo '<td>';
-        echo $afspraak->telnumber;
-        echo '</td>';
-        echo '<td>';
-        echo $afspraak->kapper;
-        echo '</td>';
-        echo '<td>';
-        echo $afspraak->date;
-        echo '</td>';
-        echo '<td>';
-        echo $afspraak->time;
-        echo '</td>';
-        echo '<td>';
-        echo $afspraak->endtime;
-        echo '</td>';
-        echo '<td>';
-        echo $afspraak->creationdate;
-        echo '</td>';
-        echo '</tr>';
-    }
-    echo '</table>';
-}
-
-function getFeed_instagram2(){
-    $access_token = "291877665.1677ed0.6d4bd68d72e54d81a3a4390e3eb48c60";
-    $photo_count = 3;
-
-    $json_link = "https://api.instagram.com/v1/users/self/media/recent/?";
-    $json_link .= "access_token={$access_token}&count={$photo_count}";
-
-    $json = file_get_contents($json_link);
-    $obj = json_decode($json, true, 512, JSON_BIGINT_AS_STRING);
-
-    //print_r($obj);
-
-    foreach ($obj['data'] as $post) {
-        $pic_text = $post['caption']['text'];
-        $pic_link = $post['link'];
-        $pic_like_count = $post['likes']['count'];
-        $pic_comment_count = $post['comments']['count'];
-        $pic_src = str_replace('http://', 'https://', $post['images']['low_resolution']['url']);
-        $pic_created_time = date('F j, Y', $post['caption']['created_time']);
-        $pic_created_time = date('F j, Y', strtotime($pic_created_time . '+1 days'));
-        if (strlen($pic_text) > 40) {
-            $pic_text = substr($pic_text, 0, 37) . '...';
-        }
-
-        echo "<div class='col-md-4 col-sm-4 col-xs-2 item_box'>";
-            echo "<a href='{$pic_link}' target='_blank'>";
-                echo "<img class='img-responsive photo-thumb' src='{$pic_src}' alt='{$pic_text}'>";
-            echo "</a>";
-            echo "<p>";
-                echo "<p>";
-                    echo "<div style='color:#888;'>";
-                        echo "<a href='{$pic_link}' target='_blank'>{$pic_created_time}</a>";
-                    echo "</div>";
-                echo "</p>";
-                echo "<p>{$pic_text}</p>";
-            echo "</p>";
-        echo "</div>";
-
     }
 }
 

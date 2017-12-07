@@ -372,3 +372,97 @@ section.haircut-slider .slider-item{
 }
 
 
+/*login*/
+
+.login-container{
+    max-width: 250px;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+.register-container{
+    max-width: 250px;
+    margin-top: 25px;
+}
+.login-container form{
+    padding-top: 25px;
+}
+
+/*admin*/
+
+body.admin nav.side-nav{
+    width: 175px;
+    float: left;
+    background: #23282d;
+    position: relative;
+    z-index: 999;
+    position: fixed;
+    left: 0;
+    padding-top: 32px;
+}
+body.admin nav.side-nav ul li{
+    width: 100%;
+}
+body.admin nav.side-nav ul li a{
+    color: #fff;
+    font-size: 14px;
+}
+body.admin .menu-back{
+    width: 175px;
+    height: 100%;
+    background: #23282d;
+    position: fixed;
+    left: 0;
+}
+
+body.admin nav.side-nav ul li a i {
+    color: #949494;
+    font-size: 20px;
+    padding-right: 10px;
+}
+body.admin .container{
+    float: left;
+}
+
+body.admin .admin-bar{
+    background: #23282d;
+    color: #fff;
+    height: 32px;
+    line-height: 32px;
+    font-size: 13px;
+    padding: 0 1rem;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+}
+body.admin .welcome-user{
+    float: right;
+}
+/*body.admin{*/
+    /*margin-top: 32px;*/
+    /*margin-left: 175px;*/
+/*}*/
+
+body.admin .container{
+    margin-top: 32px;
+    padding: 25px 25px 0 200px;
+    max-width: 100%;
+}
+
+body.admin tbody tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+body.admin table{
+    border: 2px solid #d8d8d8;
+}
+
+body.admin table a.table-action{
+    padding-right: 22px;
+}
+span.red{
+    color: red;
+}span.green{
+    color: green;
+}
