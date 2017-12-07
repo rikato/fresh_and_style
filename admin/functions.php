@@ -49,7 +49,7 @@ function getAfspraakinfo ($dbcon, $page, $approved){
     echo '</th>';
 
     echo '<th>';
-    echo 'Telefoonnummer';
+    echo 'Telefoon';
     echo '</th>';
 
     echo '<th>';
@@ -57,7 +57,7 @@ function getAfspraakinfo ($dbcon, $page, $approved){
     echo '</th>';
 
     echo '<th>';
-    echo 'Afspraakdatum';
+    echo 'Datum';
     echo '</th>';
 
 //    echo '<th>';
@@ -69,7 +69,7 @@ function getAfspraakinfo ($dbcon, $page, $approved){
 //    echo '</th>';
 
     echo '<th>';
-    echo 'Aanmaakdatum';
+    echo 'Gemaakt';
     echo '</th>';
 
 
@@ -178,6 +178,14 @@ function approveAppointment ($dbcon, $appointment) {
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([$appointment]);
     header('location: ?approved='.$_GET['approved'].'');
+}
+
+function getRole ($dbcon, $user){
+    $sql = 'SELECT * FROM role WHERE id = ?';
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$user]);
+    $data = $stmt->fetch();
+    echo $data->name;
 }
 
 ?>

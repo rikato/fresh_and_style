@@ -457,6 +457,7 @@ body.admin tbody tr:nth-child(odd) {
 
 body.admin table{
     border: 2px solid #d8d8d8;
+    font-size: 14px;
 }
 
 body.admin table a.table-action{
