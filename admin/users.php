@@ -33,10 +33,6 @@ echo 'Registratiedatum';
 echo '</th>';
 
 echo '<th>';
-echo 'Telefoonnummer';
-echo '</th>';
-
-echo '<th>';
 echo 'Naam';
 echo '</th>';
 
