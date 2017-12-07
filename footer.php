@@ -27,10 +27,10 @@
             <li>
                 <div class="holder">
                     <h3>Openingstijden</h3>
-                    <p>Maandag 13:00-18:00</p>
-                    <p>Dinsdag t/m vrijdag 09:00-18:00</p>
-                    <p>Donderdag koopavond tot 21:00</p>
-                    <p>Zaterdag 09:00-14:00</p>
+                    <p>Maandag: Gesloten</p>
+                    <p>Dinsdag t/m donderdag: 09:00-18:00</p>
+                    <p>Vrijdag: 09:00-21:00</p>
+                    <p>Zaterdag: 09:00-17:00</p>
                 </div>
             </li>
         </ul>
@@ -95,17 +95,17 @@
                         <div class="afspraak-container">
                             <div class="form-row">
                                 <div class="form-group col-md-8">
-                                    <label for="appointment-input-email">Adres (straatnaam en huisnummer)</label>
+                                    <label for="appointment-input-address">Adres (straatnaam en huisnummer)</label>
                                     <input type="text" class="form-control" id="appointment-input-address" placeholder="Adres" name="appointment-address">
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label for="appointment-input-email">Postcode</label>
+                                    <label for="appointment-input-zip">Postcode</label>
                                     <input type="text" class="form-control" id="appointment-input-zip" placeholder="1234AB" name="appointment-zip">
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label for="appointment-input-email">Reden</label>
+                                    <label for="appointment-input-reason">Reden</label>
                                     <!--<input type="text" class="form-control" id="appointment-input-zip" placeholder="Voordat wij aan huis komen moet u een goede reden hebben waarom u niet naar de zaak kan komen." name="appointment-reason">-->
-                                    <textarea class="form-control" id="appointment-input-zip" placeholder="Voordat wij aan huis komen moet u een goede reden hebben waarom u niet naar de zaak kan komen." name="appointment-reason"></textarea>
+                                    <textarea class="form-control" id="appointment-input-reason" placeholder="Voordat wij aan huis komen moet u een goede reden hebben waarom u niet naar de zaak kan komen." name="appointment-reason"></textarea>
                                 </div>
                             </div>
                         </div>

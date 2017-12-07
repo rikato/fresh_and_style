@@ -362,3 +362,13 @@ footer:after {
     margin: 10px 0px;
     padding-bottom: 10px;
 }
+.haircut-slider .carousel{
+    padding: 0 30px;
+}
+
+
+section.haircut-slider .slider-item{
+    float: left;
+}
+
+

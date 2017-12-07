@@ -31,11 +31,36 @@ include 'header.php'
     </div>
 </section>
 
-<section class="section haircut gray">
+<!--<section class="section haircut gray">
     <div class="container">
         <h2>Ons werk</h2>
-        <div class="image-grid">
-            <?php getHaircut($dbcon); ?>
+        <div class="row">
+            <?php //getFeed_instagram2(); ?>
+        </div>
+    </div>
+</section>-->
+
+<section class="haircut-slider section gray">
+    <div class="container">
+        <h2>Ons werk.</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="carousel slide multi-item-carousel" id="theCarousel" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <?php getFeed_instagram();  ?>
+                    </div>
+                    <div class="carousel-control">
+                        <a class="carousel-control-prev" href="#theCarousel" role="button" data-slide="prev">
+                            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#theCarousel" role="button" data-slide="next">
+                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
