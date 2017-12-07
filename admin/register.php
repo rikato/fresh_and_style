@@ -12,8 +12,8 @@
             $error = "";
             $name = $_POST['name'];
             $email = $_POST['email'];
-            $username = $_POST['user'];
-            $password = $_POST['pass'];
+            $user = $_POST['user'];
+            $pass = $_POST['pass'];
 
             $stmt = $dbcon->prepare("SELECT user FROM user WHERE user = :name");
             $stmt->bindParam(':name', $user);
@@ -28,23 +28,23 @@
             if($stmt->rowCount() > 0){
                 $error = 'Het opgegeven emailadres is al geregistreerd<br>';
             }
-            
+
             if($pass == ""){
                 $error = "Vul een wachtwoord in";
             }
-            
+
             if($user == ""){
                 $error = "Vul een gebruikersnaam in";
             }
-                
+
             if($email == ""){
                 $error = "Vul een emailadres in";
             }
-            
+
             if($name == ""){
                 $error = "Vul een naam in";
             }
-            
+
             if($error == ''){
                 $form = $_POST;
                 $name = $form['name'];
@@ -57,16 +57,21 @@
             
                 $sql = "INSERT INTO user (role_id, name, user, pass, email) VALUES (:role_id, :name, :user, :pass, :email)";
                 $query = $dbcon->prepare($sql);
-                $query->execute(array(':role_id'=>$role_id, ':name'=>$name, ':user'=>$user, ':pass'=>$hash, ':email'=>$email));
+                $result = $query->execute(array(':role_id'=>$role_id, ':name'=>$name, ':user'=>$user, ':pass'=>$hash, ':email'=>$email));
             }
         }
     }
-
-    if(isset($error)){
-        print $error;
-    }
 ?>
 <h1>Gebruiker registreren</h1>
+<?php
+if(isset($error)){
+    print "<span class='red'>$error</span>";
+}
+
+if(isset($result)){
+    print "<span class='green'>Gebruiker is toegevoegd.</span>";
+}
+?>
 <div class="register-container">
     <form method="POST" action="">
         <div class="form-row">

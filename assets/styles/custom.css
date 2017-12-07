@@ -453,3 +453,8 @@ body.admin table{
 body.admin table a.table-action{
     padding-right: 22px;
 }
+span.red{
+    color: red;
+}span.green{
+    color: green;
+}

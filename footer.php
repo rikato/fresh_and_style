@@ -72,7 +72,7 @@
                         <div class="form-group col-md-6">
                             <label for="inputState">Kapper</label>
                             <select id="inputState" class="form-control" name="appointment-kapper">
-                                <option selected>Geen voorkeur</option>
+                                <option selected value="1">Geen voorkeur</option>
                                 <option>Elyas</option>
                                 <option>Aboed</option>
                                 <option>Talia</option>

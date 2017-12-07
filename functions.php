@@ -161,9 +161,9 @@ function addAppointment($dbcon){
             $appointmentZip = $_POST["appointment-zip"];
             $appointmentRede = $_POST["appointment-reason"];
 
-            $sql = "INSERT INTO appointment (name, email, telnumber, adres, postcode, kapper, rede, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO appointment (name, email, telnumber, adres, postcode, kapper, rede, date, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $dbcon->prepare($sql);
-            $stmt->execute([$appointmentName, $appointmentEmail, $appointmentTelnr, $appointmentAddress, $appointmentZip, $appointmentKapper, $appointmentRede, $appointmentDate]);
+            $stmt->execute([$appointmentName, $appointmentEmail, $appointmentTelnr, $appointmentAddress, $appointmentZip, $appointmentKapper, $appointmentRede, $appointmentDate, 0]);
 
             header('location:homepage_template.php');
         } else {

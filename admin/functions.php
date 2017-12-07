@@ -128,7 +128,11 @@ function getEmployee ($dbcon, $employee) {
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([$employee]);
     $data =  $stmt->fetch();
-    echo $data->name;
+    if($employee > 0){
+        echo $data->name;
+    }else{
+        echo "Geen voorkeur";
+    }
 }
 
 function paginate ($dbcon){
