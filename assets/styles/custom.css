@@ -403,7 +403,7 @@ body.admin nav.side-nav ul li{
     width: 100%;
 }
 body.admin nav.side-nav ul li a{
-    color: #fff;
+    color: #eee;
     font-size: 14px;
 }
 body.admin .menu-back{
@@ -415,8 +415,9 @@ body.admin .menu-back{
 }
 
 body.admin nav.side-nav ul li a i {
-    color: #949494;
-    font-size: 20px;
+    color: rgba(240,245,250,.6);
+    /*font-size: 20px;*/
+    font-size: 16px;
     padding-right: 10px;
 }
 body.admin .container{
