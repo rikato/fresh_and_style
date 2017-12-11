@@ -73,9 +73,9 @@
                             <label for="inputState">Kapper</label>
                             <select id="inputState" class="form-control" name="appointment-kapper">
                                 <option selected value="1">Geen voorkeur</option>
-                                <option>Elyas</option>
-                                <option>Aboed</option>
-                                <option>Talia</option>
+                                <option value="2">Elyas</option>
+                                <option value="3">Aboed</option>
+                                <option value="4">Talia</option>
                             </select>
                         </div>
 

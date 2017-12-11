@@ -7,7 +7,6 @@
  */
 include 'header.php'
 ?>
-
 <section class="section about-us gray">
     <div class="container">
         <div class="row">

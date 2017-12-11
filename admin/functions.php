@@ -8,6 +8,26 @@
 
 include '../config.php';
 
+
+
+//get basic information of the website.
+function getWebsiteInfoTest($dbcon) {
+    $sql = 'SELECT * FROM option';
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([]);
+    $data = $stmt->fetchall();
+    var_dump($data);
+}
+
+//get basic information of the website.
+function getWebsiteInfo($option, $dbcon) {
+    $sql = 'SELECT * FROM option WHERE name = ?';
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$option]);
+    $data = $stmt->fetch();
+    echo $data->value;
+}
+
 function getAfspraakinfo ($dbcon, $page, $approved){
     if(isset($page)){
         $rows = 25;

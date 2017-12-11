@@ -50,7 +50,7 @@ include 'functions.php';
             <a class="nav-link" href="users.php"><i class="fa fa-users" aria-hidden="true"></i> Gebruikers</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
+            <a class="nav-link" href="settings.php"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
         </li>
     </ul>
 </nav>

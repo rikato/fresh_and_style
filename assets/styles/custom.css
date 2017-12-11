@@ -468,3 +468,10 @@ span.red{
 }span.green{
     color: green;
 }
+
+
+/*settings*/
+
+body.admin .form-container{
+    max-width: 250px;
+}

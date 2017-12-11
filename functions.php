@@ -13,6 +13,7 @@ function getWebsiteInfo($option, $dbcon) {
     echo $data->value;
 }
 
+
 //get the treatment data.
 function getTreatmentData($dbcon) {
     $sql = 'SELECT * from treatment_category';
@@ -165,7 +166,7 @@ function addAppointment($dbcon){
             $stmt = $dbcon->prepare($sql);
             $stmt->execute([$appointmentName, $appointmentEmail, $appointmentTelnr, $appointmentAddress, $appointmentZip, $appointmentKapper, $appointmentRede, $appointmentDate, 0]);
 
-            header('location:homepage_template.php');
+//            header('location:homepage_template.php');
         } else {
             echo "Er is niet akoord gegeaan.";
             header('location:homepage_template.php#exampleModal');
