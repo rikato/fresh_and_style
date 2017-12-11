@@ -29,7 +29,7 @@ echo 'E-mail';
 echo '</th>';
 
 echo '<th>';
-echo 'Registratiedatum';
+echo 'Rol';
 echo '</th>';
 
 echo '<th>';
@@ -46,7 +46,7 @@ foreach ($data as $user){
     echo $user->email;
     echo '</td>';
     echo '<td>';
-    echo $user->registered;
+    getRole($dbcon, $user->role_id);
     echo '</td>';
     echo '<td>';
     echo $user->name;

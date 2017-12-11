@@ -35,17 +35,19 @@
 				header('location: admin.php');
 				exit;
 			}else{
-				$error = 'Gebruikersnaam of wachtwoord niet gevonden';
+				$error = 'Gebruikersnaam of wachtwoord niet gevonden.';
             }
         }
-    }
-    if(isset($error)){
-        print $error;
     }
 ?>
  <div class="login-container">
 
      <img width="250" src="../media/cropped-fresh-Style.jpg" alt="">
+     <?php
+     if(isset($error)){
+         print "<span class='red'>$error</span>";
+     }
+     ?>
      <form method="POST" action="">
          <div class="form-row">
              <div class="form-group col-md-12">
