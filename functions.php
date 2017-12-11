@@ -2,6 +2,7 @@
 
 include 'config.php';
 
+//Turn on output buffering so header will work
 ob_start();
 
 //get basic information of the website.
@@ -281,4 +282,28 @@ function getEmployee_option ($dbcon) {
             echo '<option value = "'.$employee->id.'">'.$employee->name.'</option>';
         }
     }
+}
+
+function getMessages($dbcon){
+    $sql = 'SELECT * FROM message order by creationdate DESC';
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([]);
+    $data = $stmt->fetchAll();
+    foreach ($data as $message){
+        $creationDateMysql = strtotime($message->creationdate);
+        $creationDate = date("Y/m/d H:i", $creationDateMysql) ;
+        echo '<div class="message-container">';
+        echo '<h2><a href="?id='.$message->id.'">'.$message->title.'</a></h2>';
+        echo '<span>'.$creationDate.'</span></div>';
+    }
+}
+
+function getMessage1($dbcon){
+    $id = $_GET["id"];
+    $sql = 'SELECT * FROM message where id = ?';
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$id]);
+    $data = $stmt->fetch();
+    echo '<h1>'.$data->title.'</h1>';
+    echo $data->message;
 }

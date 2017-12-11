@@ -45,6 +45,9 @@ header .header-holder h1{
     font-size: 59px;
     text-transform: uppercase;
     text-shadow: 2px 1px 1px black;
+
+    margin: 0;
+    padding: 0;
 }
 
 header .header-holder span{
@@ -476,4 +479,17 @@ span.red{
 
 body.admin .form-container{
     max-width: 250px;
+}
+
+h1{
+    margin-bottom: 25px;
+    padding-top: 25px;
+}
+
+.message-container{
+    margin-bottom: 25px;
+}
+
+.message h2{
+    font-size: 32px;
 }
