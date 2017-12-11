@@ -78,7 +78,6 @@ header .header-holder button{
     min-height: 400px;
 }
 
-
 /*Tarieven sectie*/
 
 .tarieven{
@@ -466,3 +465,8 @@ span.red{
 }span.green{
     color: green;
 }
+
+ a.anchor-button{
+     -webkit-appearance: inherit;
+     border-radius: .25rem;
+ }

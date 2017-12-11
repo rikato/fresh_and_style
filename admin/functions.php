@@ -135,6 +135,21 @@ function getEmployee ($dbcon, $employee) {
     }
 }
 
+function getEmployee_option ($dbcon) {
+    $sql = 'SELECT * FROM employee';
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([]);
+    $data =  $stmt->fetchAll();
+    foreach($data as $employee){
+        if (isset($_POST["kapper"]) && $_POST["kapper"] == $employee->id){
+            echo '<option selected value = "'.$employee->id.'">'.$employee->name.'</option>';
+        }else{
+            echo '<option value = "'.$employee->id.'">'.$employee->name.'</option>';
+        }
+    }
+}
+
+
 function paginate ($dbcon){
 
     if($_GET['approved'] == 1) {
@@ -178,6 +193,247 @@ function approveAppointment ($dbcon, $appointment) {
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([$appointment]);
     header('location: ?approved='.$_GET['approved'].'');
+}
+
+function getMessages($dbcon, $page){
+    if(isset($page)){
+        $rows = 4;
+        $rowstart = $rows * ($page - 1);
+
+        $sql = "SELECT id, title, creationdate FROM message LIMIT $rowstart, $rows";
+        $stmt = $dbcon->prepare($sql);
+        $stmt -> execute();
+        $data = $stmt -> fetchall();
+
+    }else{
+        $sql = "SELECT id, title, creationdate FROM message LIMIT 4";
+        $stmt = $dbcon->prepare($sql);
+        $stmt -> execute([]);
+        $data = $stmt -> fetchall();
+    }
+
+    if(isset($_GET['page'])){
+        echo "<table class='table'>";
+        echo "<tr>";
+
+        echo "<th>";
+        echo "ID";
+        echo "</th>";
+
+        echo "<th>";
+        echo "Title";
+        echo "</th>";
+
+        echo "<th>";
+        echo "Date";
+        echo "</th>";
+
+        echo '</tr>';
+        foreach ($data as $message){
+            echo '<tr>';
+
+            echo '<td>';
+            echo '<a href="?id='.$message->id.'&page='.$_GET["page"].'">'.$message->id.'</a>';
+            echo '</td>';
+
+            echo "<td>";
+            echo $message->title;
+            echo "</td>";
+
+            echo "<td>";
+            echo $message->creationdate;
+            echo "</td>";
+
+            echo '</tr>';
+        }
+    } else {
+            echo "<table class='table'>";
+            echo "<tr>";
+
+            echo "<th>";
+            echo "ID";
+            echo "</th>";
+
+            echo "<th>";
+            echo "Title";
+            echo "</th>";
+
+            echo "<th>";
+            echo "Date";
+            echo "</th>";
+
+            echo '</tr>';
+            foreach ($data as $message){
+                echo '<tr>';
+
+                echo '<td>';
+                echo '<a href="?id='.$message->id.'">'.$message->id.'</a>';
+                echo '</td>';
+
+                echo "<td>";
+                echo $message->title;
+                echo "</td>";
+
+                echo "<td>";
+                echo $message->creationdate;
+                echo "</td>";
+
+                echo '</tr>';
+        }
+
+
+    }
+    echo '</table>';
+}
+
+function getMessageInfo ($dbcon, $id, $option) {
+    $sql = "SELECT $option FROM message WHERE id = ?";
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$id]);
+    $data = $stmt->fetch();
+    echo $data->$option;
+}
+
+function updateMessage($dbcon){
+    if (isset($_POST["sendMessage_edited"])) {
+        $messageTitle = $_POST["messageTitle"];
+        $messageText = $_POST["messageText"];
+
+        $sql = "UPDATE message SET title=?, message=? WHERE id=?";
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute([$messageTitle, $messageText, $_GET['id']]);
+        header('location:alterMessage.php');
+    }
+}
+
+function paginateMessage ($dbcon){
+    $sql = 'SELECT COUNT(*) as numberofrows FROM message';
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([]);
+    $data =  $stmt->fetch();
+    $numberofrows = $data->numberofrows;
+
+    $rows = 4;
+    $pages = ceil($numberofrows / $rows);
+
+
+    for($i = 1; $i <= $pages; $i++){
+        echo '<li class="page-item"><a class="page-link" href="?page='.$i.'">'.$i.'</a></li>';
+    }
+
+}
+
+function maakAfspraak1() {
+
+// *************** $functionName ***************
+    $functionNaam = "";
+    if (isset($_POST["naam"])) {
+        if (empty($_POST["naam"])) {
+            $functionNaam = "";
+        } else {
+            $functionNaam = $_POST["naam"];
+        }
+    }
+
+// *************** $functionDate ***************
+    $functionDate = "";
+    if (isset($_POST["datum"])) {
+        if (empty($_POST["datum"])) {
+            $functionDate = "";
+        } else {
+            $functionDate = $_POST["datum"];
+        }
+    }
+
+// *************** $StartTime ***************
+    $StartTime = "";
+    if (isset($_POST["BeginTijd"])) {
+        if (empty($_POST["BeginTijd"])) {
+            $StartTime = "";
+        } else {
+            $StartTime = $_POST["BeginTijd"];
+        }
+    }
+
+// *************** $EndTime ***************
+    $EndTime = "";
+    if (isset($_POST["EindTijd"])) {
+        if (empty($_POST["EindTijd"])) {
+            $EndTime = "";
+        } else {
+            $EndTime = $_POST["EindTijd"];
+        }
+    }
+
+// *************** $functionMail ***************
+    $functionMail = "";
+    if (isset($_POST["mail"])) {
+        if (empty($_POST["mail"])) {
+            $functionMail = "";
+        } else {
+            $functionMail = $_POST["mail"];
+        }
+    }
+
+
+// *************** $functionTelephone ***************
+    $functionTelephone = "";
+    if (isset($_POST["telefoon"])) {
+        if (empty($_POST["telefoon"])) {
+            $functionTelephone = "";
+        } else {
+            $functionTelephone = $_POST["telefoon"];
+        }
+    }
+
+// *************** $functionBarber ***************
+    $functionBarber = "";
+    if (isset($_POST["kapper"])) {
+        $functionBarber = $_POST["kapper"];
+    }
+
+    print("Afspraak (bij klant thuis) gemaakt voor " . $functionNaam . " op " . $functionDate . " van " . $StartTime . " tot " . $EndTime . " uur, bij kapper/kapster: " . $functionBarber . ".");
+    if (isset($_POST["mail"])) {
+        if (!empty($_POST["mail"])) {
+            print(" Mail klant: ");
+            print($_POST["mail"]);
+        } else {
+            if (!empty($_POST["telefoon"]) || !empty($_POST["mail"])) {
+                print("Mail niet opgegeven.");
+            }
+        }
+    }
+    if (isset($_POST["telefoon"])) {
+        if (!empty($_POST["telefoon"])) {
+            print(" Telefoonnummer klant: ");
+            print($_POST["telefoon"]);
+        } else {
+            if (!empty($_POST["telefoon"]) || !empty($_POST["mail"])) {
+                print("Telefoonnummer niet opgegeven.");
+            }
+        }
+    }
+}
+
+function addAppointment_normal($dbcon) {
+    if (isset($_POST['addAppointment_normal'])) {
+        if (isset($_POST['naam']) && isset($_POST['datum']) && isset($_POST["BeginTijd"]) && isset($_POST["EindTijd"]) && isset($_POST['kapper'])) {
+            if (isset($_POST["mail"]) || isset($_POST["telefoon"])) {
+                $name = $_POST["naam"];
+                $date = $_POST["datum"];
+                $begin = $_POST["BeginTijd"];
+                $eind = $_POST["EindTijd"];
+                $mail = $_POST["mail"];
+                $telefoonnummer = $_POST["telefoon"];
+                $kapper = $_POST['kapper'];
+
+                $sql = "INSERT INTO appointment (name, date, startTime, endTime, email, telnumber, kapper, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $dbcon->prepare($sql);
+                $stmt->execute([$name, $date, $begin, $eind, $mail, $telefoonnummer, $kapper, 0]);
+
+            }
+        }
+    }
 }
 
 ?>

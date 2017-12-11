@@ -83,6 +83,27 @@ function getReviewData($dbcon) {
     }
 }
 
+function getMessage($dbcon) {
+    $sql = 'SELECT * FROM message';
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([]);
+    $data = $stmt->fetchAll();
+
+    $counter = 0;
+    foreach($data as $message) {
+        if ($counter == 0) {
+            echo '<div class="carousel-item active">';
+        } else {
+            echo '<div class="carousel-item">';
+        }
+        echo '<h3>'.$message->title.'</h3>';
+        echo '<div>'. $message->message;
+        echo '</div>';
+        echo '</div>';
+        $counter++;
+    }
+}
+
 function getHaircut($dbcon){
     $sql = 'SELECT * FROM haircut where active = 1 order by id limit 5';
     $stmt = $dbcon->prepare($sql);
@@ -152,23 +173,26 @@ function getProductCategory($dbcon){
 function addAppointment($dbcon){
     if (isset($_POST["appointment-submit"])) {
         if (isset($_POST["appointment-agree"])) {
-            $appointmentName = $_POST["appointment-name"];
-            $appointmentEmail = $_POST["appointment-email"];
-            $appointmentTelnr = $_POST["appointment-telnr"];
-            $appointmentKapper = $_POST["appointment-kapper"];
-            $appointmentDate = $_POST["appointment-date"];
-            $appointmentAddress = $_POST["appointment-address"];
-            $appointmentZip = $_POST["appointment-zip"];
-            $appointmentRede = $_POST["appointment-reason"];
+            if (isset($_POST['appointment-name'])) {
 
-            $sql = "INSERT INTO appointment (name, email, telnumber, adres, postcode, kapper, rede, date, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = $dbcon->prepare($sql);
-            $stmt->execute([$appointmentName, $appointmentEmail, $appointmentTelnr, $appointmentAddress, $appointmentZip, $appointmentKapper, $appointmentRede, $appointmentDate, 0]);
+                $appointmentName = $_POST["appointment-name"];
+                $appointmentEmail = $_POST["appointment-email"];
+                $appointmentTelnr = $_POST["appointment-telnr"];
+                $appointmentKapper = $_POST["appointment-kapper"];
+                $appointmentDate = $_POST["appointment-date"];
+                $appointmentAddress = $_POST["appointment-address"];
+                $appointmentZip = $_POST["appointment-zip"];
+                $appointmentRede = $_POST["appointment-reason"];
 
-            header('location:homepage_template.php');
+                $sql = "INSERT INTO appointment (name, email, telnumber, adres, postcode, kapper, rede, date, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $dbcon->prepare($sql);
+                $stmt->execute([$appointmentName, $appointmentEmail, $appointmentTelnr, $appointmentAddress, $appointmentZip, $appointmentKapper, $appointmentRede, $appointmentDate, 0]);
+
+                header('location:homepage_template.php');
+            }
         } else {
             echo "Er is niet akoord gegeaan.";
-            header('location:homepage_template.php#exampleModal');
+            header('location:homepage_template.php#maakAfspraak');
         }
     }
 }
@@ -243,57 +267,16 @@ function getFeed_instagram(){
     }
 }
 
-function getMessages($dbcon){
-    if(isset($page)){
-        $rows = 25;
-
-        $rowstart = $rows * ($page - 1);
-        $rowend = $rows * $page;
-
-        $sql = "SELECT * FROM bericht LIMIT ?, ?";
-        $stmt = $dbcon->prepare($sql);
-        $stmt -> execute([$rowstart, $rowend]);
-        $data = $stmt -> fetchall();
-
-    }else{
-        $sql = "SELECT * FROM bericht LIMIT 25";
-        $stmt = $dbcon->prepare($sql);
-        $stmt -> execute([]);
-        $data = $stmt -> fetchall();
+function getEmployee_option ($dbcon) {
+    $sql = 'SELECT * FROM employee';
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([]);
+    $data =  $stmt->fetchAll();
+    foreach($data as $employee){
+        if (isset($_POST["kapper"]) && $_POST["kapper"] == $employee->id){
+            echo '<option selected value = "'.$employee->id.'">'.$employee->name.'</option>';
+        }else{
+            echo '<option value = "'.$employee->id.'">'.$employee->name.'</option>';
+        }
     }
-
-    echo "<table class='table'>";
-    echo "<tr>";
-
-    echo "<th>";
-    echo "ID";
-    echo "</th>";
-
-    echo "<th>";
-    echo "Title";
-    echo "</th>";
-
-    echo "<th>";
-    echo "Date";
-    echo "</th>";
-
-    echo '</tr>';
-    foreach ($data as $message){
-        echo '<tr>';
-
-        echo '<td>';
-        echo '<a href="?id='.$message->id.'">'.$message->id.'</a>';
-        echo '</td>';
-
-        echo "<td>";
-        echo $message->title;
-        echo "</td>";
-
-        echo "<td>";
-        echo $message->creationdate;
-        echo "</td>";
-
-        echo '</tr>';
-    }
-    echo '</table>';
 }

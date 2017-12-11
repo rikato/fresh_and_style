@@ -32,7 +32,7 @@ include 'functions.php';
             <a class="nav-link active" href="admin.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fa fa-thumb-tack" aria-hidden="true"></i> Berichten</a>
+            <a class="nav-link" href="message.php"><i class="fa fa-thumb-tack" aria-hidden="true"></i> Berichten</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#"><i class="fa fa-file-image-o" aria-hidden="true"></i> Media</a>
@@ -41,7 +41,7 @@ include 'functions.php';
             <a class="nav-link" href="#"><i class="fa fa-file" aria-hidden="true"></i> Pagina's</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="appointments.php?approved=0"><i class="fa fa-scissors" aria-hidden="true"></i> Afspraken</a>
+            <a class="nav-link" href="addAppointment.php"><i class="fa fa-scissors" aria-hidden="true"></i> Afspraken</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#"><i class="fa fa-comment" aria-hidden="true"></i> Reviews</a>

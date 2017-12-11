@@ -8,6 +8,7 @@
 include 'header.php'
 ?>
 
+
 <section class="section about-us gray">
     <div class="container">
         <div class="row">
@@ -21,8 +22,32 @@ include 'header.php'
     </div>
 </section>
 
+<section class="section review white" id="bericht">
+    <div class="container" >
+        <h2>Berichten</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <?php getMessage($dbcon);?>
+                    </div>
+                    <div class="carousel-control">
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-<section id="tarieven" class="section tarieven white">
+<section id="tarieven" class="section tarieven gray">
     <div class="container">
         <h2>Tarieven Fresh & style</h2>
         <div id="accordion" role="tablist">
@@ -40,7 +65,7 @@ include 'header.php'
     </div>
 </section>-->
 
-<section class="haircut-slider section gray">
+<section class="haircut-slider section white">
     <div class="container">
         <h2>Ons werk.</h2>
         <div class="row">
@@ -65,7 +90,7 @@ include 'header.php'
     </div>
 </section>
 
-<section id="review" class="section review white">
+<section id="review" class="section review gray">
     <div class="container">
         <h2>Reviews</h2>
         <div class="d-flex d-flex-center">

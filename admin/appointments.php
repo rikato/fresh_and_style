@@ -2,6 +2,9 @@
 
 <ul class="nav nav-tabs">
     <li class="nav-item">
+        <a class="nav-link" href="addAppointment.php">Maak een afspraak</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="?approved=0">Gemaakte afspraken</a>
     </li>
     <li class="nav-item">
