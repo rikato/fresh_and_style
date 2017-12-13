@@ -8,17 +8,6 @@
 
 include '../config.php';
 
-
-
-//get basic information of the website.
-function getWebsiteInfoTest($dbcon) {
-    $sql = 'SELECT * FROM option';
-    $stmt = $dbcon->prepare($sql);
-    $stmt->execute([]);
-    $data = $stmt->fetchall();
-    var_dump($data);
-}
-
 //get basic information of the website.
 function getWebsiteInfo($option, $dbcon) {
     $sql = 'SELECT * FROM option WHERE name = ?';
@@ -29,8 +18,9 @@ function getWebsiteInfo($option, $dbcon) {
 }
 
 function getAfspraakinfo ($dbcon, $page, $approved){
+    $rows = 25;
     if(isset($page)){
-        $rows = 25;
+
         $rowStart = $rows * ($page - 1);
         if($approved == 1){
             $sql = "SELECT * FROM appointment where approved = 1 order by date LIMIT $rowStart, $rows";
@@ -42,9 +32,9 @@ function getAfspraakinfo ($dbcon, $page, $approved){
         $data = $stmt -> fetchall();
     }else{
         if($approved == 1){
-            $sql = 'SELECT * FROM appointment where approved = 1 order by date LIMIT 25';
+            $sql = "SELECT * FROM appointment where approved = 1 order by date LIMIT $rows";
         }else{
-            $sql = 'SELECT * FROM appointment where approved = 0 order by creationdate LIMIT 25';
+            $sql = "SELECT * FROM appointment where approved = 0 order by creationdate LIMIT $rows";
         }
         $stmt = $dbcon->prepare($sql);
         $stmt -> execute([]);
@@ -169,7 +159,6 @@ function getEmployee_option ($dbcon) {
     }
 }
 
-
 function paginate ($dbcon){
 
     if($_GET['approved'] == 1) {
@@ -223,95 +212,78 @@ function getRole ($dbcon, $user){
     echo $data->name;
 }
 
+function deleteMessage ($dbcon, $message) {
+    $sql = "DELETE FROM message WHERE id = ?";
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$message]);
+    header('location: message.php');
+}
 
 function getMessages($dbcon, $page){
+    $rows = 10;
     if(isset($page)){
-        $rows = 4;
         $rowstart = $rows * ($page - 1);
 
-        $sql = "SELECT id, title, creationdate FROM message LIMIT $rowstart, $rows";
+        $sql = "SELECT * FROM message order by creationdate DESC LIMIT $rowstart, $rows";
         $stmt = $dbcon->prepare($sql);
         $stmt -> execute();
         $data = $stmt -> fetchall();
 
     }else{
-        $sql = "SELECT id, title, creationdate FROM message LIMIT 4";
+        $sql = "SELECT * FROM message order by creationdate DESC LIMIT $rows";
         $stmt = $dbcon->prepare($sql);
         $stmt -> execute([]);
         $data = $stmt -> fetchall();
     }
 
-    if(isset($_GET['page'])){
-        echo "<table class='table'>";
-        echo "<tr>";
+    echo "<table class='table'>";
+    echo "<tr>";
 
-        echo "<th>";
-        echo "ID";
-        echo "</th>";
+    echo "<th>";
+    echo "Title";
+    echo "</th>";
 
-        echo "<th>";
-        echo "Title";
-        echo "</th>";
+    echo "<th>";
+    echo "Date";
+    echo "</th>";
 
-        echo "<th>";
-        echo "Date";
-        echo "</th>";
+    echo '<th>';
+    echo 'Zichtbaarheid';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Acties';
+    echo '</th>';
+
+    echo '</tr>';
+
+    foreach ($data as $message){
+        echo '<tr>';
+
+        echo "<td>";
+        echo $message->title;
+        echo "</td>";
+
+        echo "<td>";
+        echo $message->creationdate;
+        echo "</td>";
+
+        echo "<td>";
+        if($message->visible == 1){
+            echo '<span class="green">Openbaar</span>';
+        }else{
+            echo '<span class="red">Verborgen</span>';
+        }
+        echo "</td>";
+
+        echo '<td>';
+        echo '<a class="table-action" href="altermessage.php?id='.$message->id.'"><i class="fa fa-pencil" aria-hidden="true"></i></a>';
+        echo '<a class="table-action" onclick="return confirm(\'Bericht verwijderen?\')" href="?deleteMessage='.$message->id.'"><i class="fa fa-trash" aria-hidden="true"></i></a>';
+        echo '</td>';
 
         echo '</tr>';
-        foreach ($data as $message){
-            echo '<tr>';
-
-            echo '<td>';
-            echo '<a href="?id='.$message->id.'&page='.$_GET["page"].'">'.$message->id.'</a>';
-            echo '</td>';
-
-            echo "<td>";
-            echo $message->title;
-            echo "</td>";
-
-            echo "<td>";
-            echo $message->creationdate;
-            echo "</td>";
-
-            echo '</tr>';
-        }
-    } else {
-            echo "<table class='table'>";
-            echo "<tr>";
-
-            echo "<th>";
-            echo "ID";
-            echo "</th>";
-
-            echo "<th>";
-            echo "Title";
-            echo "</th>";
-
-            echo "<th>";
-            echo "Date";
-            echo "</th>";
-
-            echo '</tr>';
-            foreach ($data as $message){
-                echo '<tr>';
-
-                echo '<td>';
-                echo '<a href="?id='.$message->id.'">'.$message->id.'</a>';
-                echo '</td>';
-
-                echo "<td>";
-                echo $message->title;
-                echo "</td>";
-
-                echo "<td>";
-                echo $message->creationdate;
-                echo "</td>";
-
-                echo '</tr>';
-        }
-
-
     }
+
     echo '</table>';
 }
 
@@ -326,7 +298,7 @@ function getMessageInfo ($dbcon, $id, $option) {
 function updateMessage($dbcon){
     if (isset($_POST["sendMessage_edited"]) && isset($_POST["messageTitle"]) && isset($_POST["messageText"])) {
         $messageTitle = $_POST["messageTitle"];
-        $messageText = $_POST["messageText"];
+        $messageText = $_POST["wysiwyg-value"];
 
         $sql = "UPDATE message SET title=?, message=? WHERE id=?";
         $stmt = $dbcon->prepare($sql);
@@ -342,7 +314,7 @@ function paginateMessage ($dbcon){
     $data =  $stmt->fetch();
     $numberofrows = $data->numberofrows;
 
-    $rows = 4;
+    $rows = 10;
     $pages = ceil($numberofrows / $rows);
 
 
@@ -599,4 +571,5 @@ function addAppointment_home($dbcon) {
         }
     }
 }
+
 ?>
