@@ -32,6 +32,7 @@
 			$results = $stmt->fetch(PDO::FETCH_ASSOC);
 			if(count($results) > 0 && password_verify($pass, $results['pass'])){
 				$_SESSION['user'] = $results['user'];
+				$_SESSION['id'] = $results['id'];
 				header('location: admin.php');
 				exit;
 			}else{

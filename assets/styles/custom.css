@@ -493,3 +493,11 @@ h1{
 .message h2{
     font-size: 32px;
 }
+
+input.file-select{
+    color: transparent;
+}
+
+body.admin h1{
+    padding-top: 0;
+}

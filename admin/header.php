@@ -36,7 +36,7 @@ include 'functions.php';
             <a class="nav-link" href="message.php"><i class="fa fa-thumb-tack" aria-hidden="true"></i> Berichten</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fa fa-file-image-o" aria-hidden="true"></i> Media</a>
+            <a class="nav-link" href="media.php"><i class="fa fa-file-image-o" aria-hidden="true"></i> Media</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#"><i class="fa fa-file" aria-hidden="true"></i> Pagina's</a>

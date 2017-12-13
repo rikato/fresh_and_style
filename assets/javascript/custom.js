@@ -37,7 +37,7 @@ $(document).ready( function() {
        $('input.wysiwyg-value').attr('value', $("#txtEditor").Editor("getText"));
     })
 
-    var getText = $(".wysiwyg-value-current").attr("value");
+    var getText = $(".wysiwyg-value-current").attr("data-value");
     $("#txtEditor").Editor("setText", getText)
 
 });
