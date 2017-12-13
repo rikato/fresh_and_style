@@ -119,45 +119,97 @@ function getHaircut($dbcon){
 
 }
 
-function getProduct($dbcon){
-    if(isset($_POST['product-category-submit']) && $_POST['productCategory'] > 0){
-        $category = $_POST['productCategory'];
-        $sql = 'SELECT * FROM product where active = 1 and product_category = ? order by id';
-        $stmt = $dbcon->prepare($sql);
-        $stmt->execute([$category]);
-        $data = $stmt->fetchAll();
+function getProduct($dbcon ,$page){
+    if(isset($page)){
+        if (isset($_GET['productCategory']) && $_GET['productCategory'] > 0) {
+            $rows = 8;
+            $rowstart = $rows * ($page - 1);
+
+            $category = $_GET['productCategory'];
+            $sql = "SELECT * FROM product where active = 1 and product_category = ? order by id LIMIT $rowstart ,$rows";
+            $stmt = $dbcon->prepare($sql);
+            $stmt->execute([$category]);
+            $data = $stmt->fetchAll();
+        } else {
+            $rows = 8;
+            $rowstart = $rows * ($page - 1);
+            $sql = "SELECT * FROM product where active = 1 order by id LIMIT $rowstart ,$rows";
+            $stmt = $dbcon->prepare($sql);
+            $stmt->execute();
+            $data = $stmt->fetchAll();
+        }
     }else{
-        $sql = 'SELECT * FROM product where active = 1 order by id';
-        $stmt = $dbcon->prepare($sql);
-        $stmt->execute([]);
-        $data = $stmt->fetchAll();
+        if (isset($_GET['productCategory']) && $_GET['productCategory']> 0) {
+            $category = $_GET['productCategory'];
+            $sql = 'SELECT * FROM product where active = 1 and product_category = ? order by id LIMIT 8';
+            $stmt = $dbcon->prepare($sql);
+            $stmt->execute([$category]);
+            $data = $stmt->fetchAll();
+        } else {
+            $sql = 'SELECT * FROM product where active = 1 order by id LIMIT 8';
+            $stmt = $dbcon->prepare($sql);
+            $stmt->execute([$_GET['productCategory']]);
+            $data = $stmt->fetchAll();
+        }
     }
 
     // start counter at 1 because 0 % 3 is equal to 0
     $i = 1;
     $cutRow = 4;
 
-    foreach ($data as $product){
-        if($i % $cutRow  == 1){
+
+    foreach ($data as $product) {
+        if ($i % $cutRow == 1) {
             echo '<div class="row">';
         }
         echo '<div class="col-12 col-md-3 col-sm-6 product">';
-        echo '<img class="product-image" src="'. $product->image . '" alt="">';
+        echo '<img class="product-image" src="' . $product->image . '" alt="">';
         echo '<div class="product-information">';
-        echo '<h3>'.$product->title.'</h3>';
-        echo '<div class="product-description"><p>'.$product->description.'</p>';
-        echo '<div class="product-price"><p>€'.$product->price.'</p>';
+        echo '<h3>' . $product->title . '</h3>';
+        echo '<div class="product-description"><p>' . $product->description . '</p>';
+        echo '<div class="product-price"><p>€' . $product->price . '</p>';
 
         echo '</div>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
 
-        if($i % $cutRow  == 0){
+        if ($i % $cutRow == 0) {
             echo '</div>';
         }
         $i++;
 
+    }
+}
+
+function paginateProduct ($dbcon){
+    if (isset($_GET['productCategory']) && $_GET['productCategory'] > 0) {
+        $var = $_GET['productCategory'];
+
+        $sql = 'SELECT COUNT(*) as numberofrows FROM product where active = 1 and product_category = ?';
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute([$var]);
+        $data = $stmt->fetch();
+    } else {
+        $sql = 'SELECT COUNT(*) as numberofrows FROM product where active = 1';
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute();
+        $data = $stmt->fetch();
+    }
+
+    $numberofrows = $data->numberofrows;
+
+    $rows = 8;
+    $pages = ceil($numberofrows / $rows);
+
+    if (isset($_GET['productCategory']) && $_GET['productCategory'] > 0) {
+        for ($i = 1; $i <= $pages; $i++) {
+            echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '&productCategory=' . $_GET['productCategory'] . '">' . $i . '</a></li>';
+        }
+    } else {
+        for ($i = 1; $i <= $pages; $i++) {
+            echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+        }
     }
 }
 
@@ -167,33 +219,34 @@ function getProductCategory($dbcon){
     $stmt->execute([]);
     $data = $stmt->fetchAll();
     foreach ($data as $category){
-        echo '<option value="'. $category->id .'">'. $category->name .'</option>';
+        if (isset($_GET['productCategory']) && $_GET['productCategory'] == $category->id) {
+            echo '<option selected value="'. $category->id .'">'. $category->name .'</option>';
+        } else {
+            echo '<option value="'. $category->id .'">'. $category->name .'</option>';
+        }
     }
 }
 
 function addAppointment($dbcon){
     if (isset($_POST["appointment-submit"])) {
-        if (isset($_POST["appointment-agree"])) {
-            if (isset($_POST['appointment-name'])) {
+        if (isset($_POST["appointment-agree"]) && (isset($_POST['appointment-name']) && $_POST['appointment-name'] != "") && (isset($_POST['appointment-email']) && $_POST['appointment-email'] != "") && (isset($_POST['appointment-date']) && $_POST['appointment-date'] != "")) {
+            $appointmentName = $_POST["appointment-name"];
+            $appointmentEmail = $_POST["appointment-email"];
+            $appointmentTelnr = $_POST["appointment-telnr"];
+            $appointmentKapper = $_POST["appointment-kapper"];
+            $appointmentDate = $_POST["appointment-date"];
+            $appointmentAddress = $_POST["appointment-address"];
+            $appointmentZip = $_POST["appointment-zip"];
+            $appointmentRede = $_POST["appointment-reason"];
 
-                $appointmentName = $_POST["appointment-name"];
-                $appointmentEmail = $_POST["appointment-email"];
-                $appointmentTelnr = $_POST["appointment-telnr"];
-                $appointmentKapper = $_POST["appointment-kapper"];
-                $appointmentDate = $_POST["appointment-date"];
-                $appointmentAddress = $_POST["appointment-address"];
-                $appointmentZip = $_POST["appointment-zip"];
-                $appointmentRede = $_POST["appointment-reason"];
+            $sql = "INSERT INTO appointment (name, email, telnumber, adres, postcode, kapper, rede, date, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $dbcon->prepare($sql);
+            $stmt->execute([$appointmentName, $appointmentEmail, $appointmentTelnr, $appointmentAddress, $appointmentZip, $appointmentKapper, $appointmentRede, $appointmentDate, 0]);
 
-                $sql = "INSERT INTO appointment (name, email, telnumber, adres, postcode, kapper, rede, date, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                $stmt = $dbcon->prepare($sql);
-                $stmt->execute([$appointmentName, $appointmentEmail, $appointmentTelnr, $appointmentAddress, $appointmentZip, $appointmentKapper, $appointmentRede, $appointmentDate, 0]);
+            header('location:homepage_template.php');
 
-                header('location:homepage_template.php');
-            }
 
         } else {
-            echo "Er is niet akoord gegeaan.";
             header('location:homepage_template.php#maakAfspraak');
         }
     }

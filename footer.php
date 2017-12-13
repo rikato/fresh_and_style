@@ -59,7 +59,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="appointment-input-name">Naam*</label>
-                            <input type="text" class="form-control" id="appointment-input-name" placeholder="Naam" name="appointment-name" value="<?php if(isset($_POST['appointment-submit']) && !isset($_POST['appointment-agree'])) {echo $_POST['appointment-name'];}?>">
+                            <input type="text" class="form-control" id="appointment-input-name" placeholder="Naam" name="appointment-name">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="appointment-input-email">Email*</label>

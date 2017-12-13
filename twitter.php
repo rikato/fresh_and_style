@@ -13,8 +13,6 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 
 //Establish API connection
 $connection = new TwitterOAuth($consumer_key, $consumer_secret, $acces_token, $acces_token_secret);
-
-//$content = $connection->get('acount/verify_credentials');
 $content = $connection->get('account/verify_credentials');
 
 //Load recent tweets

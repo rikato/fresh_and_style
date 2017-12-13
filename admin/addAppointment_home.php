@@ -30,7 +30,8 @@ include 'header.php'; ?>
 
     <div id="afspraak2">
         <div class="model-header">
-            <form method="post" action="Afspraak5.php" class="form">
+            <?php addAppointment_home($dbcon);?>
+            <form method="post" action="addAppointment_home.php" class="form">
 
 
                 <b>Afspraak bij klant thuis</b><br>
@@ -115,9 +116,7 @@ include 'header.php'; ?>
                     <?php $kapper = ""; ?>
                     <select id="inputState" class="form-control" name = "kapper" value = "kapper" id = "kapper">
                         <option value = "GeenVoorkeur">Geen voorkeur</option>
-                        <option value = "Aboed">Aboed</option>
-                        <option value = "Elyas">Elyas</option>
-                        <option value = "Talia">Talia</option>
+                        <<?php getEmployee_option($dbcon);?>
                     </select><br >
                     <?php
                     if (isset($_POST["kapper"])) {
@@ -239,7 +238,7 @@ include 'header.php'; ?>
                             ?>">
                             <br>
                             <div id="verzendknop">
-                                <input type="submit" value="verzenden" class="btn btn-primary">
+                                <input type="submit" value="verzenden" class="btn btn-primary" name="addAppointment_home">
                             </div>
                             <br>
             </form>
@@ -381,33 +380,6 @@ include 'header.php'; ?>
                 }
             }
         }
-        ?>
-        <br>
-
-
-        <?php
-        /* function afspraak(){
-          $name = $_POST["naam"];
-          $date = $_POST["datum"];
-          $begin = $_POST["BeginTijd"];
-          $eind = $_POST["EindTijd"];
-          $mail = $_POST["mail"];
-          $telefoonnummer = $_POST["telefoon"];
-         *
-         * if (isset($_POST["naam"])) {
-          if ($_POST["naam"] != NULL) {
-          if (isset($_POST["datum"])) {
-          if ($_POST["datum"] != NULL) {
-          if (isset($_POST["BeginTijd"])) {
-          if ($_POST["BeginTijd"] != NULL) {
-          if (isset($_POST["EindTijd"])) {
-          if ($_POST["EindTijd"] != NULL) {
-          if ($_POST["telefoon"] != NULL || $_POST["mail"] != NULL) {
-         *
-         * $afspraak = "$name, $date, $begin, #eind, $mail, $telefoonnummer";}}}}}}}}}
-
-          $afspraakSql = $dbcon->prepare("INSERT INTO appointment VALUES (name, date, begin, eind, mail, telefoonnummer");
-          } */
         ?>
     </div>
 

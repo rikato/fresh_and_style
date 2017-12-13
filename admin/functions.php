@@ -324,7 +324,7 @@ function getMessageInfo ($dbcon, $id, $option) {
 }
 
 function updateMessage($dbcon){
-    if (isset($_POST["sendMessage_edited"])) {
+    if (isset($_POST["sendMessage_edited"]) && isset($_POST["messageTitle"]) && isset($_POST["messageText"])) {
         $messageTitle = $_POST["messageTitle"];
         $messageText = $_POST["messageText"];
 
@@ -444,6 +444,118 @@ function maakAfspraak1() {
     }
 }
 
+function maakAfspraak2() {
+
+    // *************** $functionName ***************
+    $functionNaam = "";
+    if (isset($_POST["naam"])) {
+        if (empty($_POST["naam"])) {
+            $functionNaam = "";
+        } else {
+            $functionNaam = $_POST["naam"];
+        }
+    }
+
+    // *************** $functionDate ***************
+    $functionDate = "";
+    if (isset($_POST["datum"])) {
+        if (empty($_POST["datum"])) {
+            $functionDate = "";
+        } else {
+            $functionDate = $_POST["datum"];
+        }
+    }
+
+    // *************** $StartTime ***************
+    $StartTime = "";
+    if (isset($_POST["BeginTijd"])) {
+        if (empty($_POST["BeginTijd"])) {
+            $StartTime = "";
+        } else {
+            $StartTime = $_POST["BeginTijd"];
+        }
+    }
+
+    // *************** $EndTime ***************
+    $EndTime = "";
+    if (isset($_POST["EindTijd"])) {
+        if (empty($_POST["EindTijd"])) {
+            $EndTime = "";
+        } else {
+            $EndTime = $_POST["EindTijd"];
+        }
+    }
+
+    // *************** $functionMail ***************
+    $functionMail = "";
+    if (isset($_POST["mail"])) {
+        if (empty($_POST["mail"])) {
+            $functionMail = "";
+        } else {
+            $functionMail = $_POST["mail"];
+        }
+    }
+
+
+    // *************** $functionTelephone ***************
+    $functionTelephone = "";
+    if (isset($_POST["telefoon"])) {
+        if (empty($_POST["telefoon"])) {
+            $functionTelephone = "";
+        } else {
+            $functionTelephone = $_POST["telefoon"];
+        }
+    }
+
+    // *************** $functionPostcode ***************
+    $functionPostcode = "";
+    if (isset($_POST["postcode"])) {
+        if (empty($_POST["postcode"])) {
+            $functionPostcode = "";
+        } else {
+            $functionPostcode = $_POST["postcode"];
+        }
+    }
+
+    // *************** $functionAdres ***************
+    $functionAdres = "";
+    if (isset($_POST["adres"])) {
+        if (empty($_POST["adres"])) {
+            $functionAdres = "";
+        } else {
+            $functionAdres = $_POST["adres"];
+        }
+    }
+
+    // *************** $functionBarber ***************
+    $functionBarber = "";
+    if (isset($_POST["kapper"])) {
+        $functionBarber = $_POST["kapper"];
+    }
+
+    print("Afspraak (bij klant thuis) gemaakt voor " . $functionNaam . " op " . $functionDate . " van " . $StartTime . " tot " . $EndTime . " uur, bij kapper/kapster: " . $functionBarber . ".");
+    if (isset($_POST["mail"])) {
+        if (!empty($_POST["mail"])) {
+            print(" Mail klant: ");
+            print($_POST["mail"]);
+        } else {
+            if (!empty($_POST["telefoon"]) || !empty($_POST["mail"])) {
+                print("Mail niet opgegeven.");
+            }
+        }
+    }
+    if (isset($_POST["telefoon"])) {
+        if (!empty($_POST["telefoon"])) {
+            print(" Telefoonnummer klant: ");
+            print($_POST["telefoon"]);
+        } else {
+            if (!empty($_POST["telefoon"]) || !empty($_POST["mail"])) {
+                print("Telefoonnummer niet opgegeven.");
+            }
+        }
+    }
+}
+
 function addAppointment_normal($dbcon) {
     if (isset($_POST['addAppointment_normal'])) {
         if (isset($_POST['naam']) && isset($_POST['datum']) && isset($_POST["BeginTijd"]) && isset($_POST["EindTijd"]) && isset($_POST['kapper'])) {
@@ -459,6 +571,29 @@ function addAppointment_normal($dbcon) {
                 $sql = "INSERT INTO appointment (name, date, startTime, endTime, email, telnumber, kapper, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $dbcon->prepare($sql);
                 $stmt->execute([$name, $date, $begin, $eind, $mail, $telefoonnummer, $kapper, 0]);
+
+            }
+        }
+    }
+}
+
+function addAppointment_home($dbcon) {
+    if (isset($_POST['addAppointment_home'])) {
+        if (isset($_POST['naam']) && isset($_POST['datum']) && isset($_POST["BeginTijd"]) && isset($_POST["EindTijd"]) && isset($_POST['kapper']) && isset($_POST['postcode']) && isset($_POST['adres'])) {
+            if (isset($_POST["mail"]) || isset($_POST["telefoon"])) {
+                $name = $_POST["naam"];
+                $date = $_POST["datum"];
+                $begin = $_POST["BeginTijd"];
+                $eind = $_POST["EindTijd"];
+                $mail = $_POST["mail"];
+                $telefoonnummer = $_POST["telefoon"];
+                $kapper = $_POST['kapper'];
+                $postcode = $_POST['postcode'];
+                $adres = $_POST['adres'];
+
+                $sql = "INSERT INTO appointment (name, date, startTime, endTime, email, telnumber, kapper, postcode, adres, rede, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $dbcon->prepare($sql);
+                $stmt->execute([$name, $date, $begin, $eind, $mail, $telefoonnummer, $kapper, $postcode, $adres, "Opgegeven door admin/kapper", 0]);
 
             }
         }
