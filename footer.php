@@ -16,6 +16,7 @@
                     <h3>Adres</h3>
                     <p><?php getWebsiteInfo('adres', $dbcon); ?></p>
                     <p><?php getWebsiteInfo('postalcode', $dbcon); ?> <?php getWebsiteInfo('city', $dbcon); ?></p>
+                    <p><a class="get-location btn btn-primary" href="">Route beschrijving</a></p>
                 </div>
             </li>
             <li>
