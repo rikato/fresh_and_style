@@ -5,7 +5,6 @@
  * Date: 19/11/2017
  * Time: 12:10
  */
-echo 'test1';
 include 'functions.php';
 include 'twitter.php';
 ?>
