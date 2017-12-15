@@ -22,7 +22,7 @@ include 'header.php';
 
     <div class="form-group">
         <div class="form-group">
-            <input type="file" name="photo" id="fileSelect" class="file-select">
+            <input required type="file" name="photo" id="fileSelect" class="file-select">
         </div>
     </div>
 

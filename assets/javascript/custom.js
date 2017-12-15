@@ -1,6 +1,16 @@
 $(document).ready( function() {
+    var appointmentOpen = false;
     $("#aanHuis").on("click", function (){
-        $(".afspraak-container").toggleClass("show");
+        if(appointmentOpen === false){
+            $(".afspraak-container").addClass("show");
+            $(".afspraak-container input").prop("required", true);
+            appointmentOpen = true;
+        }else{
+            $(".afspraak-container").removeClass("show");
+            $(".afspraak-container input").prop("required", false);
+            appointmentOpen = false;
+        }
+
     });
     if(window.location.hash) {
         var hash = window.location.hash;
@@ -10,7 +20,6 @@ $(document).ready( function() {
     // Instantiate the Bootstrap carousel
     $('.multi-item-carousel').carousel({
         interval: 6000
-
     });
 
     // for every slide in carousel, copy the next slide's item in the slide.
@@ -41,7 +50,7 @@ $(document).ready( function() {
         }
     }
     function showPosition(position) {
-        window.location = "https://www.google.com/maps/dir/?api=1&origin="+position.coords.latitude+","+position.coords.longitude+"&destination=52.697959,6,6.190004";
+        window.location = "https://www.google.com/maps/dir/?api=1&origin="+position.coords.latitude+","+position.coords.longitude+"&destination=52.697959,6.190004";
     }
 
     $("a.get-location").on("click", function(e) {
