@@ -889,9 +889,7 @@ function paginateTreatmentCategory($dbcon) {
     $pages = ceil($numberofrows / $rows);
 
 
-    if ($pages == 1) {
-        //This is left empty so if there is only on page needed the page button does't show
-    } else {
+    if ($pages > 1) {
         //Echos a button with according page number for each page
         for ($i = 1; $i <= $pages; $i++) {
             echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
