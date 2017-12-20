@@ -44,7 +44,7 @@ include 'twitter.php';
                     <div class="navbar-nav">
                         <a class="nav-item nav-link active" href="homepage_template.php">Home <span class="sr-only">(current)</span></a>
                         <a class="nav-item nav-link" href="products_template.php">Producten</a>
-                        <a class="nav-item nav-link" href="">Berichten</a>
+                        <a class="nav-item nav-link" href="blog.php">Berichten</a>
                     </div>
                 </div>
             </nav>

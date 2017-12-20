@@ -60,11 +60,11 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="appointment-input-name">Naam*</label>
-                            <input type="text" class="form-control" id="appointment-input-name" placeholder="Naam" name="appointment-name">
+                            <input type="text" class="form-control" id="appointment-input-name" placeholder="Naam" name="appointment-name" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="appointment-input-email">Email*</label>
-                            <input type="email" class="form-control" id="appointment-input-email" placeholder="Email" name="appointment-email">
+                            <input type="email" class="form-control" id="appointment-input-email" placeholder="Email" name="appointment-email" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="appointment-input-telnr">Telefoon nummer</label>
@@ -80,12 +80,12 @@
 
                         <div class="col-md-12">
                             <label for="appointment-input-date">Datum*</label>
-                            <input type="date" format="DD-MM-YYYY" class="form-control" id="appointment-input-date" name="appointment-date">
+                            <input type="date" format="DD-MM-YYYY" class="form-control" id="appointment-input-date" name="appointment-date" required>
                         </div>
 
                         <div class="col-md-8">
                             <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                                <input type="checkbox" class="custom-control-input" name="appointment-thuis" id="aanHuis">
+                                <input type="checkbox" class="custom-control-input" name="appointment-home" id="aanHuis">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">Aan huis (Let op: extra kosten)</span>
                             </label>
@@ -111,7 +111,7 @@
 
                         <div class="col-md-4">
                             <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                                <input type="checkbox" class="custom-control-input" name="appointment-agree">
+                                <input type="checkbox" class="custom-control-input" name="appointment-agree" required>
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">Akoord*</span>
                             </label>
