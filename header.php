@@ -26,8 +26,8 @@ include 'twitter.php';
         <header>
             <div class="container d-flex d-flex-center">
                 <div class="header-holder">
-                    <h1><?php getWebsiteInfo('title', $dbcon); ?></h1>
-                    <span><?php getWebsiteInfo('description', $dbcon); ?></span>
+                    <h1><?php echo getWebsiteInfo('title', $dbcon); ?></h1>
+                    <span><?php echo getWebsiteInfo('description', $dbcon); ?></span>
                     <br>
                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#maakAfspraak">
                         Maak een afspraak

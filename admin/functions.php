@@ -17,6 +17,14 @@ function getWebsiteInfo($option, $dbcon) {
     echo $data->value;
 }
 
+function getSocialInfo($platform, $option, $dbcon) {
+    $sql = 'SELECT * FROM ? WHERE name = ?';
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$platform, $option]);
+    $data = $stmt->fetch();
+    echo $data->value;
+}
+
 function getAfspraakinfo ($dbcon, $page, $approved){
     $rows = 25;
     if(isset($page)){

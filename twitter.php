@@ -1,10 +1,11 @@
 <?php
-
 // API keys
-$consumer_key = 'zNprlHSbbh7yGs0UvoZDppX2m';
-$consumer_secret = '0gd42L8GaXdgxRIzSdxCMTLTIT64Zc7LpFJvkKmNDu633hEZ23';
-$acces_token = '424120069-oAqxTnfGXAvieNIgORAOrQ7UN5R3TAebvaI0E0hA';
-$acces_token_secret = '9FS0prkXdo5E03xjH16d1sXEH1nwGETJ9DHwEGOK2q1B1';
+
+$consumer_key = getWebsiteInfo('twitterConsumerKey', $dbcon);
+$consumer_secret = getWebsiteInfo('twitterConsumerSecret', $dbcon);
+$access_token = getWebsiteInfo('twitterAccesToken', $dbcon);
+$access_token_secret = getWebsiteInfo('twitterAccesTokenSecret', $dbcon);
+
 
 // Includes API libraries
 require 'twitterapi/autoload.php';
@@ -12,7 +13,7 @@ require 'twitterapi/autoload.php';
 use Abraham\TwitterOAuth\TwitterOAuth;
 
 //Establish API connection
-$connection = new TwitterOAuth($consumer_key, $consumer_secret, $acces_token, $acces_token_secret);
+$connection = new TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
 $content = $connection->get('account/verify_credentials');
 
 //Load recent tweets

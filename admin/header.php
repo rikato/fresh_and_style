@@ -48,6 +48,9 @@ include 'functions.php';
             <a class="nav-link" href="#"><i class="fa fa-comment" aria-hidden="true"></i> Reviews</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="socialmedia.php"><i class="fa fa-instagram" aria-hidden="true"></i> Socialmedia</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="users.php"><i class="fa fa-users" aria-hidden="true"></i> Gebruikers</a>
         </li>
         <li class="nav-item">

@@ -5,7 +5,7 @@
  * Date: 19/11/2017
  * Time: 13:31
  */
-include 'header.php'
+include 'header.php';
 ?>
 
 
@@ -49,7 +49,7 @@ include 'header.php'
             <div class="col-md-12">
                 <div class="carousel slide multi-item-carousel" id="theCarousel" data-ride="carousel">
                     <div class="carousel-inner">
-                        <?php getFeed_instagram();  ?>
+                        <?php getFeed_instagram($dbcon);  ?>
                     </div>
                     <div class="carousel-control">
                         <a class="carousel-control-prev" href="#theCarousel" role="button" data-slide="prev">
@@ -110,7 +110,7 @@ include 'header.php'
     </div>
 </section>
 
-<?php include 'footer.php' ?>
+<?php include 'footer.php';?>
 
 
 
