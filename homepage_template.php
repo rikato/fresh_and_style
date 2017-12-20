@@ -5,7 +5,7 @@
  * Date: 19/11/2017
  * Time: 13:31
  */
-include 'header.php'
+include 'header.php';
 ?>
 
 
@@ -51,9 +51,7 @@ include 'header.php'
                 <div class="carousel slide multi-item-carousel" id="theCarousel" data-ride="carousel">
                     <div class="carousel-inner">
                         <!--Function to get the latest set amount of pictures with prepared style and html for the slider-->
-                        <?php
-                            getFeed_instagram();
-                        ?>
+                        <?php getFeed_instagram($dbcon); ?>
                     </div>
                     <!--Buttons to control the slider-->
                     <div class="carousel-control">
@@ -120,4 +118,5 @@ include 'header.php'
     </div>
 </section>
 
-<?php include 'footer.php' ?>
+<?php include 'footer.php';?>
+

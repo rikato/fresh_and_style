@@ -6,14 +6,14 @@ include 'config.php';
 ob_start();
 
 //get basic information of the website.
+//You can call this function and give it the name of the row you want and it will output the data from that row you can echo this data on any page.
 function getWebsiteInfo($option, $dbcon) {
     $sql = 'SELECT * FROM option WHERE name = ?';
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([$option]);
     $data = $stmt->fetch();
-    echo $data->value;
+    return $data->value;
 }
-
 
 //get the treatment data.
 function getTreatmentData($dbcon) {
@@ -50,6 +50,7 @@ function getTreatmentData($dbcon) {
 
 }
 
+//get the review data
 function getReviewData($dbcon) {
     $sql = 'SELECT * FROM review where approved = 1';
     $stmt = $dbcon->prepare($sql);
@@ -85,14 +86,16 @@ function getReviewData($dbcon) {
     }
 }
 
+//get the message data and place inside a div which will be placed inside a carousel
 function getMessage($dbcon) {
     $sql = 'SELECT * FROM message';
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([]);
     $data = $stmt->fetchAll();
-
+    //counter so we can make sure the first item gets the class active so the slicer will be showing the item first.
     $counter = 0;
     foreach($data as $message) {
+        //if the the loop is at the first iteration add add class active
         if ($counter == 0) {
             echo '<div class="carousel-item active">';
         } else {
@@ -106,22 +109,14 @@ function getMessage($dbcon) {
     }
 }
 
-function getHaircut($dbcon){
-    $sql = 'SELECT * FROM haircut where active = 1 order by id limit 5';
-    $stmt = $dbcon->prepare($sql);
-    $stmt->execute([]);
-    $data = $stmt->fetchAll();
-
-   foreach ($data as $haircut){
-       echo '<div class="grid-item">';
-       echo '<img src="' . $haircut->image . '" alt="">';
-       echo '</div>';
-   }
-
-}
-
+//get the products
 function getProduct($dbcon ,$page){
+
     //If the user goes to the next page the next set of items is loaded
+
+    //if the product category is set we will only show the product with the corresponding category.
+    //if product category is not set show the first 8 products
+
     if(isset($page)){
         //If a category is selected only loads items from that category
         if (isset($_GET['productCategory']) && $_GET['productCategory'] > 0) {
@@ -192,6 +187,8 @@ function getProduct($dbcon ,$page){
     }
 }
 
+//adding paginate to the product page
+//this function gets the amount of rows from the products table and counts them based on this number we make a sum, number of rows / the amount of items
 function paginateProduct ($dbcon){
     //Gets the all the product data from the database
     //If the user has selected a category gets products from only that category
@@ -233,6 +230,8 @@ function paginateProduct ($dbcon){
     }
 }
 
+//get the product category
+//places the options inside a select box with all the product categories
 function getProductCategory($dbcon){
     //Gets all the categories from the database
     $sql = 'SELECT * FROM product_category  order by id';
@@ -299,12 +298,13 @@ function makeReview($dbcon){
     }
 }
 
-//Function to load the last instagram photo's
-function getFeed_instagram(){
-    //Key the API needs to function
-    $access_token = "291877665.1677ed0.6d4bd68d72e54d81a3a4390e3eb48c60";
 
-    //Sets the desired amount of pictures to be loaded
+//Function to load the last instagram photo's
+
+function getFeed_instagram($dbcon){
+    //get the acess token from the database trought the getWebsiteInfo function.
+    $access_token = getWebsiteInfo('instagramAccesToken', $dbcon);
+
     $photo_count = 6;
 
     //Link to the api
@@ -315,7 +315,9 @@ function getFeed_instagram(){
     $json = file_get_contents($json_link);
     $obj = json_decode($json, true, 512, JSON_BIGINT_AS_STRING);
 
+
     //Counter to assure there is only one active carousel item
+
     $i = 0;
 
     //Takes the photos and data out of array and makes them ready to be put in the carousel
@@ -335,23 +337,23 @@ function getFeed_instagram(){
         }
 
         if ($i == 0) {
-            echo "<div class='carousel-item item active'>";
+            echo "<div class='carousel-item col-4 item active'>";
         } else {
-            echo "<div class='carousel-item item'>";
+            echo "<div class='carousel-item col-4 item'>";
         }
 
-        echo "<div class='col-4 slider-item'>";
+        echo "<div class='col-12 slider-item'>";
             echo "<a href='{$pic_link}' target='_blank'>";
                 echo "<img class='img-responsive photo-thumb' src='{$pic_src}' alt='{$pic_text}'>";
             echo "</a>";
-            echo "<p>";
-                echo "<p>";
-                    echo "<div style='color:#888;'>";
-                        echo "<a href='{$pic_link}' target='_blank'>{$pic_created_time}</a>";
-                    echo "</div>";
-                echo "</p>";
-                echo "<p>{$pic_text}</p>";
-            echo "</p>";
+            //echo "<p>";
+                //echo "<p>";
+                    //echo "<div style='color:#888;'>";
+                        //echo "<a href='{$pic_link}' target='_blank'>{$pic_created_time}</a>";
+                    //echo "</div>";
+                //echo "</p>";
+               // echo "<p>{$pic_text}</p>";
+            //echo "</p>";
         echo "</div>";
         echo "</div>";
 

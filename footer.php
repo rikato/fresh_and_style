@@ -14,16 +14,16 @@
             <li>
                 <div class="holder">
                     <h3>Adres</h3>
-                    <p><?php getWebsiteInfo('adres', $dbcon); ?></p>
-                    <p><?php getWebsiteInfo('postalcode', $dbcon); ?> <?php getWebsiteInfo('city', $dbcon); ?></p>
+                    <p><?php echo getWebsiteInfo('adres', $dbcon); ?></p>
+                    <p><?php echo getWebsiteInfo('postalcode', $dbcon); ?> <?php echo getWebsiteInfo('city', $dbcon); ?></p>
                     <p><a class="get-location btn btn-primary" href="">Routebeschrijving</a></p>
                 </div>
             </li>
             <li>
                 <div class="holder">
                     <h3>Contact</h3>
-                    <p>Tel: <?php getWebsiteInfo('telephone', $dbcon); ?></p>
-                    <p><?php getWebsiteInfo('email', $dbcon); ?></p>
+                    <p>Tel: <?php echo getWebsiteInfo('telephone', $dbcon); ?></p>
+                    <p><?php echo getWebsiteInfo('email', $dbcon); ?></p>
                 </div>
             </li>
             <li>
