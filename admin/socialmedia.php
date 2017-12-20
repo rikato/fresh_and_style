@@ -11,12 +11,13 @@ include 'header.php';
 <h1>Social media</h1>
 
 <h2>Instagram</h2>
+
 <div class="form-container form-social-container">
     <form method="POST" action="">
         <div class="form-row">
             <div class="form-group col-md-12">
-                <label for="instagram-acces-token">Access token:</label>
-                <input required id="instagram-access-token" class="form-control" type="text" name="instagram-acces-token" value="<?php getWebsiteInfo('instagramAccesToken', $dbcon ); ?>">
+                <label for="instagram-access-token">Access token:</label>
+                <input required id="instagram-access-token" class="form-control" type="text" name="instagram-access-token" value="<?php getWebsiteInfo('instagramAccesToken', $dbcon ); ?>">
             </div>
             <div class="form-group col-md-12">
                 <label for="instagram-photo-count">Aantal foto's:</label>
@@ -41,12 +42,12 @@ include 'header.php';
                 <input required id="twitter-consumer-secret"  class="form-control" type="text" name="twitter-consumer-secret" value="<?php getWebsiteInfo('twitterConsumerSecret', $dbcon ); ?>">
             </div>
             <div class="form-group col-md-12">
-                <label for="twitter-acces-token">Access token:</label>
-                <input required id="twitter-access-token"  class="form-control" type="text" name="twitter-acces-token" value="<?php getWebsiteInfo('twitterAccesToken', $dbcon ); ?>">
+                <label for="twitter-access-token">Access token:</label>
+                <input required id="twitter-access-token"  class="form-control" type="text" name="twitter-access-token" value="<?php getWebsiteInfo('twitterAccesToken', $dbcon ); ?>">
             </div>
             <div class="form-group col-md-12">
-                <label for="twitter-acces-token-secret">Access token secret:</label>
-                <input required id="twitter-access-token-secret"  class="form-control" type="text" name="twitter-acces-token-secret" value="<?php getWebsiteInfo('twitterAccesTokenSecret', $dbcon ); ?>">
+                <label for="twitter-access-token-secret">Access token secret:</label>
+                <input required id="twitter-access-token-secret"  class="form-control" type="text" name="twitter-access-token-secret" value="<?php getWebsiteInfo('twitterAccesTokenSecret', $dbcon ); ?>">
             </div>
         </div>
 

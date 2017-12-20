@@ -298,9 +298,7 @@ function makeReview($dbcon){
     }
 }
 
-
 //Function to load the last instagram photo's
-
 function getFeed_instagram($dbcon){
     //get the acess token from the database trought the getWebsiteInfo function.
     $access_token = getWebsiteInfo('instagramAccesToken', $dbcon);

@@ -2,8 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7be9c19b-dc1a-4452-b8c4-e4bdec1aecb8" name="Default" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/twitter.php" afterPath="$PROJECT_DIR$/twitter.php" />
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/functions.php" afterPath="$PROJECT_DIR$/admin/functions.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/socialmedia.php" afterPath="$PROJECT_DIR$/admin/socialmedia.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/styles/custom.css" afterPath="$PROJECT_DIR$/assets/styles/custom.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/functions.php" afterPath="$PROJECT_DIR$/functions.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/twitter.php" afterPath="$PROJECT_DIR$/twitter.php" />
+>>>>>>> e355aa3da68c96eedea351220b66e998120b92a2
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,10 +22,225 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="functions.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/functions.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="328">
+              <caret line="740" column="0" lean-forward="false" selection-start-line="740" selection-start-column="0" selection-end-line="740" selection-end-column="0" />
+              <folding>
+                <element signature="n#getWebsiteInfo#0;n#!!top" expanded="false" />
+                <element signature="n#getSocialInfo#0;n#!!top" expanded="false" />
+                <element signature="n#getAfspraakinfo#0;n#!!top" expanded="false" />
+                <element signature="e#670#1474#0#PHP" expanded="false" />
+                <element signature="e#738#998#0#PHP" expanded="false" />
+                <element signature="e#871#998#0#PHP" expanded="false" />
+                <element signature="e#1110#1474#0#PHP" expanded="false" />
+                <element signature="e#1124#1362#0#PHP" expanded="false" />
+                <element signature="e#1246#1362#0#PHP" expanded="false" />
+                <element signature="e#1906#1924#0#PHP" expanded="false" />
+                <element signature="e#2171#3775#0#PHP" expanded="false" />
+                <element signature="e#2405#2427#0#PHP" expanded="false" />
+                <element signature="e#3007#3029#0#PHP" expanded="false" />
+                <element signature="e#3278#3507#0#PHP" expanded="false" />
+                <element signature="n#getEmployee#0;n#!!top" expanded="false" />
+                <element signature="e#3994#4085#0#PHP" expanded="false" />
+                <element signature="e#4044#4085#0#PHP" expanded="false" />
+                <element signature="n#getEmployee_option#0;n#!!top" expanded="false" />
+                <element signature="e#4418#4797#0#PHP" expanded="false" />
+                <element signature="e#4521#4791#0#PHP" expanded="false" />
+                <element signature="e#4691#4791#0#PHP" expanded="false" />
+                <element signature="n#paginate#0;n#!!top" expanded="false" />
+                <element signature="e#4834#5051#0#PHP" expanded="false" />
+                <element signature="e#4954#5051#0#PHP" expanded="false" />
+                <element signature="e#5246#5410#0#PHP" expanded="false" />
+                <element signature="n#getUser#0;n#!!top" expanded="false" />
+                <element signature="n#deleteAppointment#0;n#!!top" expanded="false" />
+                <element signature="n#approveAppointment#0;n#!!top" expanded="false" />
+                <element signature="n#getRole#0;n#!!top" expanded="false" />
+                <element signature="n#deleteMessage#0;n#!!top" expanded="false" />
+                <element signature="n#getMessages#0;n#!!top" expanded="false" />
+                <element signature="e#6688#7233#0#PHP" expanded="false" />
+                <element signature="e#7039#7233#0#PHP" expanded="false" />
+                <element signature="e#7635#8615#0#PHP" expanded="false" />
+                <element signature="e#7981#8144#0#PHP" expanded="false" />
+                <element signature="e#8074#8144#0#PHP" expanded="false" />
+                <element signature="n#getMessageInfo#0;n#!!top" expanded="false" />
+                <element signature="n#updateMessage#0;n#!!top" expanded="false" />
+                <element signature="e#8975#9466#0#PHP" expanded="false" />
+                <element signature="n#paginateMessage#0;n#!!top" expanded="false" />
+                <element signature="e#9955#10088#0#PHP" expanded="false" />
+                <element signature="n#maakAfspraak1#0;n#!!top" expanded="false" />
+                <element signature="e#10198#10372#0#PHP" expanded="false" />
+                <element signature="e#10235#10366#0#PHP" expanded="false" />
+                <element signature="e#10306#10366#0#PHP" expanded="false" />
+                <element signature="e#10451#10628#0#PHP" expanded="false" />
+                <element signature="e#10489#10622#0#PHP" expanded="false" />
+                <element signature="e#10561#10622#0#PHP" expanded="false" />
+                <element signature="e#10701#10884#0#PHP" expanded="false" />
+                <element signature="e#10743#10878#0#PHP" expanded="false" />
+                <element signature="e#10816#10878#0#PHP" expanded="false" />
+                <element signature="e#10953#11129#0#PHP" expanded="false" />
+                <element signature="e#10994#11123#0#PHP" expanded="false" />
+                <element signature="e#11064#11123#0#PHP" expanded="false" />
+                <element signature="e#11208#11382#0#PHP" expanded="false" />
+                <element signature="e#11245#11376#0#PHP" expanded="false" />
+                <element signature="e#11316#11376#0#PHP" expanded="false" />
+                <element signature="e#11472#11668#0#PHP" expanded="false" />
+                <element signature="e#11513#11662#0#PHP" expanded="false" />
+                <element signature="e#11593#11662#0#PHP" expanded="false" />
+                <element signature="e#11751#11831#0#PHP" expanded="false" />
+                <element signature="e#12032#12335#0#PHP" expanded="false" />
+                <element signature="e#12069#12329#0#PHP" expanded="false" />
+                <element signature="e#12180#12329#0#PHP" expanded="false" />
+                <element signature="e#12199#12319#0#PHP" expanded="false" />
+                <element signature="e#12340#12675#0#PHP" expanded="false" />
+                <element signature="e#12381#12669#0#PHP" expanded="false" />
+                <element signature="e#12510#12669#0#PHP" expanded="false" />
+                <element signature="e#12529#12659#0#PHP" expanded="false" />
+                <element signature="n#maakAfspraak2#0;n#!!top" expanded="false" />
+                <element signature="e#12788#12962#0#PHP" expanded="false" />
+                <element signature="e#12825#12956#0#PHP" expanded="false" />
+                <element signature="e#12896#12956#0#PHP" expanded="false" />
+                <element signature="e#13045#13222#0#PHP" expanded="false" />
+                <element signature="e#13083#13216#0#PHP" expanded="false" />
+                <element signature="e#13155#13216#0#PHP" expanded="false" />
+                <element signature="e#13299#13482#0#PHP" expanded="false" />
+                <element signature="e#13341#13476#0#PHP" expanded="false" />
+                <element signature="e#13414#13476#0#PHP" expanded="false" />
+                <element signature="e#13555#13731#0#PHP" expanded="false" />
+                <element signature="e#13596#13725#0#PHP" expanded="false" />
+                <element signature="e#13666#13725#0#PHP" expanded="false" />
+                <element signature="e#13814#13988#0#PHP" expanded="false" />
+                <element signature="e#13851#13982#0#PHP" expanded="false" />
+                <element signature="e#13922#13982#0#PHP" expanded="false" />
+                <element signature="e#14082#14278#0#PHP" expanded="false" />
+                <element signature="e#14123#14272#0#PHP" expanded="false" />
+                <element signature="e#14203#14272#0#PHP" expanded="false" />
+                <element signature="e#14369#14563#0#PHP" expanded="false" />
+                <element signature="e#14410#14557#0#PHP" expanded="false" />
+                <element signature="e#14489#14557#0#PHP" expanded="false" />
+                <element signature="e#14648#14827#0#PHP" expanded="false" />
+                <element signature="e#14686#14821#0#PHP" expanded="false" />
+                <element signature="e#14759#14821#0#PHP" expanded="false" />
+                <element signature="e#14914#14994#0#PHP" expanded="false" />
+                <element signature="e#15195#15498#0#PHP" expanded="false" />
+                <element signature="e#15232#15492#0#PHP" expanded="false" />
+                <element signature="e#15343#15492#0#PHP" expanded="false" />
+                <element signature="e#15362#15482#0#PHP" expanded="false" />
+                <element signature="e#15503#15838#0#PHP" expanded="false" />
+                <element signature="e#15544#15832#0#PHP" expanded="false" />
+                <element signature="e#15673#15832#0#PHP" expanded="false" />
+                <element signature="e#15692#15822#0#PHP" expanded="false" />
+                <element signature="n#addAppointment_normal#0;n#!!top" expanded="false" />
+                <element signature="e#15887#16789#0#PHP" expanded="false" />
+                <element signature="e#15941#16783#0#PHP" expanded="false" />
+                <element signature="e#16094#16773#0#PHP" expanded="false" />
+                <element signature="n#addAppointment_home#0;n#!!top" expanded="false" />
+                <element signature="e#16836#17963#0#PHP" expanded="false" />
+                <element signature="e#16888#17957#0#PHP" expanded="false" />
+                <element signature="e#17096#17947#0#PHP" expanded="false" />
+                <element signature="n#paginateTreatment#0;n#!!top" expanded="false" />
+                <element signature="e#18144#18633#0#PHP" expanded="false" />
+                <element signature="e#18459#18633#0#PHP" expanded="false" />
+                <element signature="e#18825#19613#0#PHP" expanded="false" />
+                <element signature="e#18942#19613#0#PHP" expanded="false" />
+                <element signature="e#19109#19607#0#PHP" expanded="false" />
+                <element signature="e#19196#19408#0#PHP" expanded="false" />
+                <element signature="e#19419#19607#0#PHP" expanded="false" />
+                <element signature="e#19438#19597#0#PHP" expanded="false" />
+                <element signature="n#getTreatment#0;n#!!top" expanded="false" />
+                <element signature="e#19759#21313#0#PHP" expanded="false" />
+                <element signature="e#19857#20691#0#PHP" expanded="false" />
+                <element signature="e#20351#20691#0#PHP" expanded="false" />
+                <element signature="e#20697#21313#0#PHP" expanded="false" />
+                <element signature="e#20783#21307#0#PHP" expanded="false" />
+                <element signature="e#21121#21307#0#PHP" expanded="false" />
+                <element signature="e#21713#22837#0#PHP" expanded="false" />
+                <element signature="n#getTreatmentCategory_selector#0;n#!!top" expanded="false" />
+                <element signature="e#23164#23571#0#PHP" expanded="false" />
+                <element signature="e#23268#23565#0#PHP" expanded="false" />
+                <element signature="e#23462#23565#0#PHP" expanded="false" />
+                <element signature="n#deleteTreatment#0;n#!!top" expanded="false" />
+                <element signature="n#updateTreatment#0;n#!!top" expanded="false" />
+                <element signature="e#23843#25314#0#PHP" expanded="false" />
+                <element signature="e#23956#24626#0#PHP" expanded="false" />
+                <element signature="e#24633#25314#0#PHP" expanded="false" />
+                <element signature="e#24648#25308#0#PHP" expanded="false" />
+                <element signature="n#getTreatmentInfo#0;n#!!top" expanded="false" />
+                <element signature="n#getTreatmentCategory_select#0;n#!!top" expanded="false" />
+                <element signature="e#25840#26189#0#PHP" expanded="false" />
+                <element signature="e#25926#26183#0#PHP" expanded="false" />
+                <element signature="e#26076#26183#0#PHP" expanded="false" />
+                <element signature="n#getTreatmentCategory#0;n#!!top" expanded="false" />
+                <element signature="e#26353#26874#0#PHP" expanded="false" />
+                <element signature="e#26699#26874#0#PHP" expanded="false" />
+                <element signature="e#27161#27779#0#PHP" expanded="false" />
+                <element signature="n#paginateTreatmentCategory#0;n#!!top" expanded="false" />
+                <element signature="e#28252#28501#0#PHP" expanded="false" />
+                <element signature="e#28344#28495#0#PHP" expanded="false" />
+                <element signature="n#deleteTreatmentCategory#0;n#!!top" expanded="false" />
+                <element signature="e#28773#29134#0#PHP" expanded="false" />
+                <element signature="e#29029#29134#0#PHP" expanded="false" />
+                <element signature="n#updateTreatmentCategory#0;n#!!top" expanded="false" />
+                <element signature="e#29184#30263#0#PHP" expanded="false" />
+                <element signature="e#29297#29772#0#PHP" expanded="false" />
+                <element signature="e#29779#30263#0#PHP" expanded="false" />
+                <element signature="e#29794#30257#0#PHP" expanded="false" />
+                <element signature="n#getTreatmentCategoryInfo#0;n#!!top" expanded="false" />
+                <marker date="1513763814880" expanded="false" signature="210:245" ph="SELECT * FRO... option" />
+                <marker date="1513763814880" expanded="false" signature="433:463" ph="SELECT * FRO... ?" />
+                <marker date="1513763814880" expanded="false" signature="778:854" ph="SELECT * FRO... appointment" />
+                <marker date="1513763814880" expanded="false" signature="897:981" ph="SELECT * FRO... appointment" />
+                <marker date="1513763814880" expanded="false" signature="1164:1229" ph="SELECT * FRO... appointment" />
+                <marker date="1513763814880" expanded="false" signature="1272:1345" ph="SELECT * FRO... appointment" />
+                <marker date="1513763814880" expanded="false" signature="2247:2266" ph="..." />
+                <marker date="1513763814880" expanded="false" signature="3855:3890" ph="SELECT * FRO... employee" />
+                <marker date="1513763814880" expanded="false" signature="4187:4209" ph="SELECT * FRO... employee" />
+                <marker date="1513763814880" expanded="false" signature="4879:4946" ph="SELECT COUNT... appointment" />
+                <marker date="1513763814880" expanded="false" signature="4976:5043" ph="SELECT COUNT... appointment" />
+                <marker date="1513763814880" expanded="false" signature="5486:5519" ph="SELECT * FRO... user" />
+                <marker date="1513763814880" expanded="false" signature="5703:5739" ph="DELETE FROM " />
+                <marker date="1513763814880" expanded="false" signature="5938:5986" ph="UPDATE appoi... " />
+                <marker date="1513763814880" expanded="false" signature="6166:6197" ph="SELECT * FRO... role" />
+                <marker date="1513763814880" expanded="false" signature="6408:6440" ph="DELETE FROM " />
+                <marker date="1513763814880" expanded="false" signature="6855:6921" ph="SELECT * FRO... message" />
+                <marker date="1513763814880" expanded="false" signature="7061:7116" ph="SELECT * FRO... message" />
+                <marker date="1513763814880" expanded="false" signature="8702:8742" ph="SELECT ${$op... message" />
+                <marker date="1513763814880" expanded="false" signature="9196:9244" ph="UPDATE messa... " />
+                <marker date="1513763814880" expanded="false" signature="9571:9615" ph="SELECT COUNT... message" />
+                <marker date="1513763814880" expanded="false" signature="16486:16610" ph="INSERT INTO appointment... " />
+                <marker date="1513763814880" expanded="false" signature="17578:17734" ph="INSERT INTO appointment... " />
+                <marker date="1513763814880" expanded="false" signature="18279:18347" ph="SELECT COUNT... treatment" />
+                <marker date="1513763814880" expanded="false" signature="18482:18528" ph="SELECT COUNT... treatment" />
+                <marker date="1513763814880" expanded="false" signature="20147:20210" ph="SELECT * FRO... treatment" />
+                <marker date="1513763814880" expanded="false" signature="20521:20562" ph="SELECT * FRO... treatment" />
+                <marker date="1513763814880" expanded="false" signature="20928:20980" ph="SELECT * FRO... treatment" />
+                <marker date="1513763814880" expanded="false" signature="21148:21178" ph="SELECT * FRO... treatment" />
+                <marker date="1513763814880" expanded="false" signature="22015:22109" ph="SELECT name treatment_category" />
+                <marker date="1513763814880" expanded="false" signature="22063:22108" ph="SELECT categ... treatment" />
+                <marker date="1513763814880" expanded="false" signature="22971:23016" ph="SELECT * FRO... treatment_category" />
+                <marker date="1513763814880" expanded="false" signature="23664:23698" ph="DELETE FROM " />
+                <marker date="1513763814880" expanded="false" signature="24301:24363" ph="UPDATE treat... " />
+                <marker date="1513763814880" expanded="false" signature="24993:25058" ph="INSERT INTO treatment... " />
+                <marker date="1513763814880" expanded="false" signature="25381:25423" ph="SELECT ${$op... treatment" />
+                <marker date="1513763814880" expanded="false" signature="25650:25694" ph="SELECT * FRO... treatment_category" />
+                <marker date="1513763814880" expanded="false" signature="26534:26584" ph="SELECT * FRO... treatment_category" />
+                <marker date="1513763814880" expanded="false" signature="26722:26761" ph="SELECT * FRO... treatment_category" />
+                <marker date="1513763814880" expanded="false" signature="27918:27973" ph="SELECT COUNT... treatment_category" />
+                <marker date="1513763814880" expanded="false" signature="28565:28633" ph="SELECT COUNT... treatment" />
+                <marker date="1513763814880" expanded="false" signature="28856:28899" ph="DELETE FROM " />
+                <marker date="1513763814880" expanded="false" signature="29483:29530" ph="UPDATE treat... " />
+                <marker date="1513763814880" expanded="false" signature="29980:30028" ph="INSERT INTO treatment_category... " />
+                <marker date="1513763814880" expanded="false" signature="30338:30389" ph="SELECT ${$op... treatment_category" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="message.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/message.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
+            <state relative-caret-position="400">
               <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="48" />
               <folding />
             </state>
@@ -28,7 +251,7 @@
         <entry file="file://$PROJECT_DIR$/admin/treatment.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="323">
-              <caret line="32" column="75" lean-forward="false" selection-start-line="32" selection-start-column="75" selection-end-line="32" selection-end-column="75" />
+              <caret line="32" column="75" lean-forward="true" selection-start-line="32" selection-start-column="62" selection-end-line="32" selection-end-column="75" />
               <folding />
             </state>
           </provider>
@@ -37,34 +260,86 @@
       <file leaf-file-name="functions.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/functions.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-637">
-              <caret line="340" column="16" lean-forward="false" selection-start-line="340" selection-start-column="16" selection-end-line="340" selection-end-column="16" />
+            <state relative-caret-position="740">
+              <caret line="360" column="0" lean-forward="true" selection-start-line="360" selection-start-column="0" selection-end-line="360" selection-end-column="0" />
               <folding>
-                <marker date="1513762765961" expanded="true" signature="333:368" ph="SELECT * FRO... option" />
-                <marker date="1513762765961" expanded="true" signature="567:599" ph="SELECT * fro... treatment_category" />
-                <marker date="1513762765961" expanded="true" signature="1806:1851" ph="SELECT * fro... treatment" />
-                <marker date="1513762765961" expanded="true" signature="2258:2297" ph="SELECT * FRO... review" />
-                <marker date="1513762765961" expanded="true" signature="3646:3667" ph="SELECT * FRO... message" />
-                <marker date="1513762765961" expanded="true" signature="5029:5122" ph="SELECT * FRO... product" />
-                <marker date="1513762765961" expanded="true" signature="5462:5530" ph="SELECT * FRO... product" />
-                <marker date="1513762765961" expanded="true" signature="5891:5974" ph="SELECT * FRO... product" />
-                <marker date="1513762765961" expanded="true" signature="6137:6195" ph="SELECT * FRO... product" />
-                <marker date="1513762765961" expanded="true" signature="7688:7774" ph="SELECT COUNT... product" />
-                <marker date="1513762765961" expanded="true" signature="7909:7970" ph="SELECT COUNT... product" />
-                <marker date="1513762765961" expanded="true" signature="9243:9286" ph="SELECT * FRO... product_category" />
-                <marker date="1513762765961" expanded="true" signature="10892:11022" ph="INSERT INTO appointment... " />
-                <marker date="1513762765961" expanded="true" signature="11986:12068" ph="INSERT INTO review... " />
-                <marker date="1513762765961" expanded="true" signature="13810:14972" ph="..." />
-                <marker date="1513762765961" expanded="true" signature="13866:14504" ph="..." />
-                <marker date="1513762765961" expanded="true" signature="13926:14481" ph="..." />
-                <marker date="1513762765961" expanded="true" signature="13985:14110" ph="..." />
-                <marker date="1513762765961" expanded="true" signature="14136:14163" ph="..." />
-                <marker date="1513762765961" expanded="true" signature="14166:14197" ph="..." />
-                <marker date="1513762765961" expanded="true" signature="14210:14221" ph="..." />
-                <marker date="1513762765961" expanded="true" signature="14222:14355" ph="..." />
-                <marker date="1513762765961" expanded="true" signature="14630:14652" ph="SELECT * FRO... employee" />
-                <marker date="1513762765961" expanded="true" signature="15284:15332" ph="SELECT * FRO... message" />
-                <marker date="1513762765961" expanded="true" signature="15841:15875" ph="SELECT * FRO... message" />
+                <element signature="n#getWebsiteInfo#0;n#!!top" expanded="false" />
+                <element signature="n#getTreatmentData#0;n#!!top" expanded="false" />
+                <element signature="e#707#2186#0#PHP" expanded="false" />
+                <element signature="e#1356#1774#0#PHP" expanded="false" />
+                <element signature="e#1572#1774#0#PHP" expanded="false" />
+                <element signature="e#1999#2137#0#PHP" expanded="false" />
+                <element signature="n#getReviewData#0;n#!!top" expanded="false" />
+                <element signature="e#2406#3515#0#PHP" expanded="false" />
+                <element signature="e#2517#2661#0#PHP" expanded="false" />
+                <element signature="e#2597#2661#0#PHP" expanded="false" />
+                <element signature="e#2981#3134#0#PHP" expanded="false" />
+                <element signature="e#3238#3403#0#PHP" expanded="false" />
+                <element signature="n#getMessage#0;n#!!top" expanded="false" />
+                <element signature="e#3899#4317#0#PHP" expanded="false" />
+                <element signature="e#4009#4159#0#PHP" expanded="false" />
+                <element signature="e#4095#4159#0#PHP" expanded="false" />
+                <element signature="n#getProduct#0;n#!!top" expanded="false" />
+                <element signature="e#4618#6351#0#PHP" expanded="false" />
+                <element signature="e#4716#5659#0#PHP" expanded="false" />
+                <element signature="e#5263#5659#0#PHP" expanded="false" />
+                <element signature="e#5665#6351#0#PHP" expanded="false" />
+                <element signature="e#5751#6345#0#PHP" expanded="false" />
+                <element signature="e#6110#6345#0#PHP" expanded="false" />
+                <element signature="e#6492#7191#0#PHP" expanded="false" />
+                <element signature="e#6530#6602#0#PHP" expanded="false" />
+                <element signature="e#7109#7170#0#PHP" expanded="false" />
+                <element signature="n#paginateProduct#0;n#!!top" expanded="false" />
+                <element signature="e#7559#8075#0#PHP" expanded="false" />
+                <element signature="e#7886#8075#0#PHP" expanded="false" />
+                <element signature="e#8262#9042#0#PHP" expanded="false" />
+                <element signature="e#8379#9042#0#PHP" expanded="false" />
+                <element signature="e#8546#9036#0#PHP" expanded="false" />
+                <element signature="e#8629#8837#0#PHP" expanded="false" />
+                <element signature="e#8848#9036#0#PHP" expanded="false" />
+                <element signature="e#8867#9026#0#PHP" expanded="false" />
+                <element signature="n#getProductCategory#0;n#!!top" expanded="false" />
+                <element signature="e#9434#9837#0#PHP" expanded="false" />
+                <element signature="e#9538#9831#0#PHP" expanded="false" />
+                <element signature="e#9728#9831#0#PHP" expanded="false" />
+                <element signature="n#addAppointment#0;n#!!top" expanded="false" />
+                <element signature="e#9923#11485#0#PHP" expanded="false" />
+                <element signature="e#10054#11479#0#PHP" expanded="false" />
+                <element signature="e#11396#11479#0#PHP" expanded="false" />
+                <element signature="n#makeReview#0;n#!!top" expanded="false" />
+                <element signature="e#11522#12205#0#PHP" expanded="false" />
+                <element signature="e#11571#12199#0#PHP" expanded="false" />
+                <element signature="e#11756#12199#0#PHP" expanded="false" />
+                <element signature="n#getFeed_instagram#0;n#!!top" expanded="false" />
+                <element signature="e#12960#14526#0#PHP" expanded="false" />
+                <element signature="e#13604#13701#0#PHP" expanded="false" />
+                <element signature="e#13711#13877#0#PHP" expanded="false" />
+                <element signature="e#13802#13877#0#PHP" expanded="false" />
+                <element signature="e#14124#14137#0#PHP" expanded="false" />
+                <element signature="n#getEmployee_option#0;n#!!top" expanded="false" />
+                <element signature="e#14857#15236#0#PHP" expanded="false" />
+                <element signature="e#14960#15230#0#PHP" expanded="false" />
+                <element signature="e#15130#15230#0#PHP" expanded="false" />
+                <element signature="n#getMessages#0;n#!!top" expanded="false" />
+                <element signature="e#15427#15770#0#PHP" expanded="false" />
+                <element signature="n#getMessage1#0;n#!!top" expanded="false" />
+                <marker date="1513764117743" expanded="false" signature="333:368" ph="SELECT * FRO... option" />
+                <marker date="1513764117743" expanded="false" signature="567:599" ph="SELECT * fro... treatment_category" />
+                <marker date="1513764117743" expanded="false" signature="1806:1851" ph="SELECT * fro... treatment" />
+                <marker date="1513764117743" expanded="false" signature="2258:2297" ph="SELECT * FRO... review" />
+                <marker date="1513764117743" expanded="false" signature="3646:3667" ph="SELECT * FRO... message" />
+                <marker date="1513764117743" expanded="false" signature="5029:5122" ph="SELECT * FRO... product" />
+                <marker date="1513764117743" expanded="false" signature="5462:5530" ph="SELECT * FRO... product" />
+                <marker date="1513764117743" expanded="false" signature="5891:5974" ph="SELECT * FRO... product" />
+                <marker date="1513764117743" expanded="false" signature="6137:6195" ph="SELECT * FRO... product" />
+                <marker date="1513764117743" expanded="false" signature="7688:7774" ph="SELECT COUNT... product" />
+                <marker date="1513764117743" expanded="false" signature="7909:7970" ph="SELECT COUNT... product" />
+                <marker date="1513764117743" expanded="false" signature="9243:9286" ph="SELECT * FRO... product_category" />
+                <marker date="1513764117743" expanded="true" signature="10892:11022" ph="INSERT INTO appointment... " />
+                <marker date="1513764117743" expanded="false" signature="11986:12068" ph="INSERT INTO review... " />
+                <marker date="1513764117743" expanded="false" signature="14628:14650" ph="SELECT * FRO... employee" />
+                <marker date="1513764117743" expanded="false" signature="15282:15330" ph="SELECT * FRO... message" />
+                <marker date="1513764117743" expanded="false" signature="15839:15873" ph="SELECT * FRO... message" />
               </folding>
             </state>
           </provider>
@@ -73,28 +348,75 @@
       <file leaf-file-name="homepage_template.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/homepage_template.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
+            <state relative-caret-position="2380">
               <caret line="119" column="0" lean-forward="true" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="twitter.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/twitter.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="380">
+              <caret line="19" column="16" lean-forward="false" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+              <folding>
+                <marker date="1513764812361" expanded="true" signature="1057:1454" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="header.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/header.php">
+=======
       <file leaf-file-name="custom.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/styles/custom.css">
+>>>>>>> e355aa3da68c96eedea351220b66e998120b92a2
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="507" column="1" lean-forward="false" selection-start-line="507" selection-start-column="1" selection-end-line="507" selection-end-column="1" />
+            <state relative-caret-position="690">
+              <caret line="506" column="1" lean-forward="false" selection-start-line="506" selection-start-column="1" selection-end-line="506" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+      <file leaf-file-name="twitter.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/twitter.php">
+=======
+      <file leaf-file-name="socialmedia.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/socialmedia.php">
+>>>>>>> e355aa3da68c96eedea351220b66e998120b92a2
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="73" column="51" lean-forward="false" selection-start-line="73" selection-start-column="51" selection-end-line="73" selection-end-column="51" />
+              <folding>
+                <marker date="1513763653977" expanded="true" signature="2844:2906" ph="UPDATE optio... " />
+                <marker date="1513763653977" expanded="true" signature="2908:2970" ph="UPDATE optio... " />
+                <marker date="1513763653977" expanded="true" signature="3418:3479" ph="UPDATE optio... " />
+                <marker date="1513763653977" expanded="true" signature="3481:3545" ph="UPDATE optio... " />
+                <marker date="1513763653977" expanded="true" signature="3546:3606" ph="UPDATE optio... " />
+                <marker date="1513763653977" expanded="true" signature="3607:3673" ph="UPDATE optio... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="treatmentEdit.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/treatmentEdit.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
       <file leaf-file-name="custom.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/javascript/custom.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-176">
+            <state relative-caret-position="560">
               <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+>>>>>>> e355aa3da68c96eedea351220b66e998120b92a2
               <folding />
             </state>
           </provider>
@@ -105,36 +427,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="317">
               <caret line="26" column="25" lean-forward="false" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="twitter.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/twitter.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="treatmentEdit.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/treatmentEdit.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="treatmentCategoryEdit.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/treatmentCategoryEdit.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -176,12 +468,16 @@
         <option value="$PROJECT_DIR$/admin/treatmentCategory.php" />
         <option value="$PROJECT_DIR$/admin/treatmentCategoryEdit.php" />
         <option value="$PROJECT_DIR$/products_template.php" />
-        <option value="$PROJECT_DIR$/admin/functions.php" />
         <option value="$PROJECT_DIR$/admin/treatment.php" />
-        <option value="$PROJECT_DIR$/assets/styles/custom.css" />
         <option value="$PROJECT_DIR$/assets/javascript/custom.js" />
-        <option value="$PROJECT_DIR$/functions.php" />
         <option value="$PROJECT_DIR$/homepage_template.php" />
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/assets/styles/custom.css" />
+        <option value="$PROJECT_DIR$/admin/socialmedia.php" />
+        <option value="$PROJECT_DIR$/admin/functions.php" />
+        <option value="$PROJECT_DIR$/functions.php" />
+>>>>>>> e355aa3da68c96eedea351220b66e998120b92a2
         <option value="$PROJECT_DIR$/twitter.php" />
       </list>
     </option>
@@ -202,11 +498,10 @@
     <servers />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-2" />
-    <option name="y" value="-18" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="width" value="976" />
+    <option name="height" value="1038" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -252,6 +547,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -285,7 +581,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -335,33 +630,42 @@
       <workItem from="1513523379785" duration="7110000" />
       <workItem from="1513589344728" duration="9343000" />
       <workItem from="1513698505580" duration="12821000" />
+<<<<<<< HEAD
       <workItem from="1513755662420" duration="5710000" />
+=======
+      <workItem from="1513755662420" duration="4939000" />
+      <workItem from="1513762974949" duration="1908000" />
+>>>>>>> e355aa3da68c96eedea351220b66e998120b92a2
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="83559000" />
+=======
+    <option name="totallyTimeSpent" value="84696000" />
+>>>>>>> e355aa3da68c96eedea351220b66e998120b92a2
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="0" width="976" height="1038" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14479166" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47390395" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32979852" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -379,13 +683,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/admin/footer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -648,64 +945,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/functions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="908" column="30" lean-forward="false" selection-start-line="908" selection-start-column="30" selection-end-line="908" selection-end-column="30" />
-          <folding>
-            <element signature="n#maakAfspraak1#0;n#!!top" expanded="false" />
-            <element signature="n#maakAfspraak2#0;n#!!top" expanded="false" />
-            <marker date="1513762511340" expanded="true" signature="210:245" ph="SELECT * FRO... option" />
-            <marker date="1513762511340" expanded="true" signature="778:854" ph="SELECT * FRO... appointment" />
-            <marker date="1513762511340" expanded="true" signature="897:981" ph="SELECT * FRO... appointment" />
-            <marker date="1513762511340" expanded="true" signature="1164:1229" ph="SELECT * FRO... appointment" />
-            <marker date="1513762511340" expanded="true" signature="1272:1345" ph="SELECT * FRO... appointment" />
-            <marker date="1513762511340" expanded="true" signature="2247:2266" ph="..." />
-            <marker date="1513762511340" expanded="true" signature="3855:3890" ph="SELECT * FRO... employee" />
-            <marker date="1513762511340" expanded="true" signature="4187:4209" ph="SELECT * FRO... employee" />
-            <marker date="1513762511340" expanded="true" signature="4879:4946" ph="SELECT COUNT... appointment" />
-            <marker date="1513762511340" expanded="true" signature="4976:5043" ph="SELECT COUNT... appointment" />
-            <marker date="1513762511340" expanded="true" signature="5486:5519" ph="SELECT * FRO... user" />
-            <marker date="1513762511340" expanded="true" signature="5703:5739" ph="DELETE FROM appointment... " />
-            <marker date="1513762511340" expanded="true" signature="5938:5986" ph="UPDATE appointment... " />
-            <marker date="1513762511340" expanded="true" signature="6166:6197" ph="SELECT * FRO... role" />
-            <marker date="1513762511340" expanded="true" signature="6408:6440" ph="DELETE FROM message... " />
-            <marker date="1513762511340" expanded="true" signature="6855:6921" ph="SELECT * FRO... message" />
-            <marker date="1513762511340" expanded="true" signature="7061:7116" ph="SELECT * FRO... message" />
-            <marker date="1513762511340" expanded="true" signature="8702:8742" ph="SELECT ${$op... message" />
-            <marker date="1513762511340" expanded="true" signature="9196:9244" ph="UPDATE message... " />
-            <marker date="1513762511340" expanded="true" signature="9571:9615" ph="SELECT COUNT... message" />
-            <marker date="1513762511340" expanded="true" signature="16486:16610" ph="INSERT INTO appointment... " />
-            <marker date="1513762511340" expanded="true" signature="17578:17734" ph="INSERT INTO appointment... " />
-            <marker date="1513762511340" expanded="true" signature="18279:18347" ph="SELECT COUNT... treatment" />
-            <marker date="1513762511340" expanded="true" signature="18482:18528" ph="SELECT COUNT... treatment" />
-            <marker date="1513762511340" expanded="true" signature="20147:20210" ph="SELECT * FRO... treatment" />
-            <marker date="1513762511340" expanded="true" signature="20521:20562" ph="SELECT * FRO... treatment" />
-            <marker date="1513762511340" expanded="true" signature="20928:20980" ph="SELECT * FRO... treatment" />
-            <marker date="1513762511340" expanded="true" signature="21148:21178" ph="SELECT * FRO... treatment" />
-            <marker date="1513762511340" expanded="true" signature="22015:22109" ph="SELECT name treatment_category" />
-            <marker date="1513762511340" expanded="true" signature="22063:22108" ph="SELECT categ... treatment" />
-            <marker date="1513762511340" expanded="true" signature="22971:23016" ph="SELECT * FRO... treatment_category" />
-            <marker date="1513762511340" expanded="true" signature="23664:23698" ph="DELETE FROM treatment... " />
-            <marker date="1513762511340" expanded="true" signature="24301:24363" ph="UPDATE treatment... " />
-            <marker date="1513762511340" expanded="true" signature="24993:25058" ph="INSERT INTO treatment... " />
-            <marker date="1513762511340" expanded="true" signature="25381:25423" ph="SELECT ${$op... treatment" />
-            <marker date="1513762511340" expanded="true" signature="25650:25694" ph="SELECT * FRO... treatment_category" />
-            <marker date="1513762511340" expanded="true" signature="26534:26584" ph="SELECT * FRO... treatment_category" />
-            <marker date="1513762511340" expanded="true" signature="26722:26761" ph="SELECT * FRO... treatment_category" />
-            <marker date="1513762511340" expanded="true" signature="27918:27973" ph="SELECT COUNT... treatment_category" />
-            <marker date="1513762511340" expanded="true" signature="28671:28739" ph="SELECT ${$op... treatment_category" />
-            <marker date="1513762511340" expanded="true" signature="28962:29005" ph="DELETE FROM treatment_category... " />
-            <marker date="1513762511340" expanded="true" signature="29589:29636" ph="UPDATE treatment_category... " />
-            <marker date="1513762511340" expanded="true" signature="30086:30134" ph="INSERT INTO treatment_category... " />
-            <marker date="1513762511340" expanded="true" signature="30444:30495" ph="SELECT ${$op... treatment_category" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/treatmentCategory.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
+        <state relative-caret-position="720">
           <caret line="41" column="74" lean-forward="false" selection-start-line="41" selection-start-column="74" selection-end-line="41" selection-end-column="74" />
           <folding />
         </state>
@@ -729,73 +971,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/message.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
+        <state relative-caret-position="400">
           <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/treatment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="32" column="75" lean-forward="false" selection-start-line="32" selection-start-column="75" selection-end-line="32" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/functions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-637">
-          <caret line="340" column="16" lean-forward="false" selection-start-line="340" selection-start-column="16" selection-end-line="340" selection-end-column="16" />
-          <folding>
-            <marker date="1513762765961" expanded="true" signature="333:368" ph="SELECT * FRO... option" />
-            <marker date="1513762765961" expanded="true" signature="567:599" ph="SELECT * fro... treatment_category" />
-            <marker date="1513762765961" expanded="true" signature="1806:1851" ph="SELECT * fro... treatment" />
-            <marker date="1513762765961" expanded="true" signature="2258:2297" ph="SELECT * FRO... review" />
-            <marker date="1513762765961" expanded="true" signature="3646:3667" ph="SELECT * FRO... message" />
-            <marker date="1513762765961" expanded="true" signature="5029:5122" ph="SELECT * FRO... product" />
-            <marker date="1513762765961" expanded="true" signature="5462:5530" ph="SELECT * FRO... product" />
-            <marker date="1513762765961" expanded="true" signature="5891:5974" ph="SELECT * FRO... product" />
-            <marker date="1513762765961" expanded="true" signature="6137:6195" ph="SELECT * FRO... product" />
-            <marker date="1513762765961" expanded="true" signature="7688:7774" ph="SELECT COUNT... product" />
-            <marker date="1513762765961" expanded="true" signature="7909:7970" ph="SELECT COUNT... product" />
-            <marker date="1513762765961" expanded="true" signature="9243:9286" ph="SELECT * FRO... product_category" />
-            <marker date="1513762765961" expanded="true" signature="10892:11022" ph="INSERT INTO appointment... " />
-            <marker date="1513762765961" expanded="true" signature="11986:12068" ph="INSERT INTO review... " />
-            <marker date="1513762765961" expanded="true" signature="13810:14972" ph="..." />
-            <marker date="1513762765961" expanded="true" signature="13866:14504" ph="..." />
-            <marker date="1513762765961" expanded="true" signature="13926:14481" ph="..." />
-            <marker date="1513762765961" expanded="true" signature="13985:14110" ph="..." />
-            <marker date="1513762765961" expanded="true" signature="14136:14163" ph="..." />
-            <marker date="1513762765961" expanded="true" signature="14166:14197" ph="..." />
-            <marker date="1513762765961" expanded="true" signature="14210:14221" ph="..." />
-            <marker date="1513762765961" expanded="true" signature="14222:14355" ph="..." />
-            <marker date="1513762765961" expanded="true" signature="14630:14652" ph="SELECT * FRO... employee" />
-            <marker date="1513762765961" expanded="true" signature="15284:15332" ph="SELECT * FRO... message" />
-            <marker date="1513762765961" expanded="true" signature="15841:15875" ph="SELECT * FRO... message" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/homepage_template.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
+        <state relative-caret-position="2380">
           <caret line="119" column="0" lean-forward="true" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/styles/custom.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="507" column="1" lean-forward="false" selection-start-line="507" selection-start-column="1" selection-end-line="507" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/javascript/custom.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-176">
+        <state relative-caret-position="560">
           <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding />
         </state>
@@ -806,6 +998,346 @@
         <state relative-caret-position="317">
           <caret line="26" column="25" lean-forward="false" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="25" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/treatment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="32" column="75" lean-forward="true" selection-start-line="32" selection-start-column="62" selection-end-line="32" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/styles/custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="506" column="1" lean-forward="false" selection-start-line="506" selection-start-column="1" selection-end-line="506" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/socialmedia.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="73" column="51" lean-forward="false" selection-start-line="73" selection-start-column="51" selection-end-line="73" selection-end-column="51" />
+          <folding>
+            <marker date="1513763653977" expanded="true" signature="2844:2906" ph="UPDATE optio... " />
+            <marker date="1513763653977" expanded="true" signature="2908:2970" ph="UPDATE optio... " />
+            <marker date="1513763653977" expanded="true" signature="3418:3479" ph="UPDATE optio... " />
+            <marker date="1513763653977" expanded="true" signature="3481:3545" ph="UPDATE optio... " />
+            <marker date="1513763653977" expanded="true" signature="3546:3606" ph="UPDATE optio... " />
+            <marker date="1513763653977" expanded="true" signature="3607:3673" ph="UPDATE optio... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="740">
+          <caret line="360" column="0" lean-forward="true" selection-start-line="360" selection-start-column="0" selection-end-line="360" selection-end-column="0" />
+          <folding>
+            <element signature="n#getWebsiteInfo#0;n#!!top" expanded="false" />
+            <element signature="n#getTreatmentData#0;n#!!top" expanded="false" />
+            <element signature="e#707#2186#0#PHP" expanded="false" />
+            <element signature="e#1356#1774#0#PHP" expanded="false" />
+            <element signature="e#1572#1774#0#PHP" expanded="false" />
+            <element signature="e#1999#2137#0#PHP" expanded="false" />
+            <element signature="n#getReviewData#0;n#!!top" expanded="false" />
+            <element signature="e#2406#3515#0#PHP" expanded="false" />
+            <element signature="e#2517#2661#0#PHP" expanded="false" />
+            <element signature="e#2597#2661#0#PHP" expanded="false" />
+            <element signature="e#2981#3134#0#PHP" expanded="false" />
+            <element signature="e#3238#3403#0#PHP" expanded="false" />
+            <element signature="n#getMessage#0;n#!!top" expanded="false" />
+            <element signature="e#3899#4317#0#PHP" expanded="false" />
+            <element signature="e#4009#4159#0#PHP" expanded="false" />
+            <element signature="e#4095#4159#0#PHP" expanded="false" />
+            <element signature="n#getProduct#0;n#!!top" expanded="false" />
+            <element signature="e#4618#6351#0#PHP" expanded="false" />
+            <element signature="e#4716#5659#0#PHP" expanded="false" />
+            <element signature="e#5263#5659#0#PHP" expanded="false" />
+            <element signature="e#5665#6351#0#PHP" expanded="false" />
+            <element signature="e#5751#6345#0#PHP" expanded="false" />
+            <element signature="e#6110#6345#0#PHP" expanded="false" />
+            <element signature="e#6492#7191#0#PHP" expanded="false" />
+            <element signature="e#6530#6602#0#PHP" expanded="false" />
+            <element signature="e#7109#7170#0#PHP" expanded="false" />
+            <element signature="n#paginateProduct#0;n#!!top" expanded="false" />
+            <element signature="e#7559#8075#0#PHP" expanded="false" />
+            <element signature="e#7886#8075#0#PHP" expanded="false" />
+            <element signature="e#8262#9042#0#PHP" expanded="false" />
+            <element signature="e#8379#9042#0#PHP" expanded="false" />
+            <element signature="e#8546#9036#0#PHP" expanded="false" />
+            <element signature="e#8629#8837#0#PHP" expanded="false" />
+            <element signature="e#8848#9036#0#PHP" expanded="false" />
+            <element signature="e#8867#9026#0#PHP" expanded="false" />
+            <element signature="n#getProductCategory#0;n#!!top" expanded="false" />
+            <element signature="e#9434#9837#0#PHP" expanded="false" />
+            <element signature="e#9538#9831#0#PHP" expanded="false" />
+            <element signature="e#9728#9831#0#PHP" expanded="false" />
+            <element signature="n#addAppointment#0;n#!!top" expanded="false" />
+            <element signature="e#9923#11485#0#PHP" expanded="false" />
+            <element signature="e#10054#11479#0#PHP" expanded="false" />
+            <element signature="e#11396#11479#0#PHP" expanded="false" />
+            <element signature="n#makeReview#0;n#!!top" expanded="false" />
+            <element signature="e#11522#12205#0#PHP" expanded="false" />
+            <element signature="e#11571#12199#0#PHP" expanded="false" />
+            <element signature="e#11756#12199#0#PHP" expanded="false" />
+            <element signature="n#getFeed_instagram#0;n#!!top" expanded="false" />
+            <element signature="e#12960#14526#0#PHP" expanded="false" />
+            <element signature="e#13604#13701#0#PHP" expanded="false" />
+            <element signature="e#13711#13877#0#PHP" expanded="false" />
+            <element signature="e#13802#13877#0#PHP" expanded="false" />
+            <element signature="e#14124#14137#0#PHP" expanded="false" />
+            <element signature="n#getEmployee_option#0;n#!!top" expanded="false" />
+            <element signature="e#14857#15236#0#PHP" expanded="false" />
+            <element signature="e#14960#15230#0#PHP" expanded="false" />
+            <element signature="e#15130#15230#0#PHP" expanded="false" />
+            <element signature="n#getMessages#0;n#!!top" expanded="false" />
+            <element signature="e#15427#15770#0#PHP" expanded="false" />
+            <element signature="n#getMessage1#0;n#!!top" expanded="false" />
+            <marker date="1513764117743" expanded="false" signature="333:368" ph="SELECT * FRO... option" />
+            <marker date="1513764117743" expanded="false" signature="567:599" ph="SELECT * fro... treatment_category" />
+            <marker date="1513764117743" expanded="false" signature="1806:1851" ph="SELECT * fro... treatment" />
+            <marker date="1513764117743" expanded="false" signature="2258:2297" ph="SELECT * FRO... review" />
+            <marker date="1513764117743" expanded="false" signature="3646:3667" ph="SELECT * FRO... message" />
+            <marker date="1513764117743" expanded="false" signature="5029:5122" ph="SELECT * FRO... product" />
+            <marker date="1513764117743" expanded="false" signature="5462:5530" ph="SELECT * FRO... product" />
+            <marker date="1513764117743" expanded="false" signature="5891:5974" ph="SELECT * FRO... product" />
+            <marker date="1513764117743" expanded="false" signature="6137:6195" ph="SELECT * FRO... product" />
+            <marker date="1513764117743" expanded="false" signature="7688:7774" ph="SELECT COUNT... product" />
+            <marker date="1513764117743" expanded="false" signature="7909:7970" ph="SELECT COUNT... product" />
+            <marker date="1513764117743" expanded="false" signature="9243:9286" ph="SELECT * FRO... product_category" />
+            <marker date="1513764117743" expanded="true" signature="10892:11022" ph="INSERT INTO appointment... " />
+            <marker date="1513764117743" expanded="false" signature="11986:12068" ph="INSERT INTO review... " />
+            <marker date="1513764117743" expanded="false" signature="14628:14650" ph="SELECT * FRO... employee" />
+            <marker date="1513764117743" expanded="false" signature="15282:15330" ph="SELECT * FRO... message" />
+            <marker date="1513764117743" expanded="false" signature="15839:15873" ph="SELECT * FRO... message" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="740" column="0" lean-forward="false" selection-start-line="740" selection-start-column="0" selection-end-line="740" selection-end-column="0" />
+          <folding>
+            <element signature="n#getWebsiteInfo#0;n#!!top" expanded="false" />
+            <element signature="n#getSocialInfo#0;n#!!top" expanded="false" />
+            <element signature="n#getAfspraakinfo#0;n#!!top" expanded="false" />
+            <element signature="e#670#1474#0#PHP" expanded="false" />
+            <element signature="e#738#998#0#PHP" expanded="false" />
+            <element signature="e#871#998#0#PHP" expanded="false" />
+            <element signature="e#1110#1474#0#PHP" expanded="false" />
+            <element signature="e#1124#1362#0#PHP" expanded="false" />
+            <element signature="e#1246#1362#0#PHP" expanded="false" />
+            <element signature="e#1906#1924#0#PHP" expanded="false" />
+            <element signature="e#2171#3775#0#PHP" expanded="false" />
+            <element signature="e#2405#2427#0#PHP" expanded="false" />
+            <element signature="e#3007#3029#0#PHP" expanded="false" />
+            <element signature="e#3278#3507#0#PHP" expanded="false" />
+            <element signature="n#getEmployee#0;n#!!top" expanded="false" />
+            <element signature="e#3994#4085#0#PHP" expanded="false" />
+            <element signature="e#4044#4085#0#PHP" expanded="false" />
+            <element signature="n#getEmployee_option#0;n#!!top" expanded="false" />
+            <element signature="e#4418#4797#0#PHP" expanded="false" />
+            <element signature="e#4521#4791#0#PHP" expanded="false" />
+            <element signature="e#4691#4791#0#PHP" expanded="false" />
+            <element signature="n#paginate#0;n#!!top" expanded="false" />
+            <element signature="e#4834#5051#0#PHP" expanded="false" />
+            <element signature="e#4954#5051#0#PHP" expanded="false" />
+            <element signature="e#5246#5410#0#PHP" expanded="false" />
+            <element signature="n#getUser#0;n#!!top" expanded="false" />
+            <element signature="n#deleteAppointment#0;n#!!top" expanded="false" />
+            <element signature="n#approveAppointment#0;n#!!top" expanded="false" />
+            <element signature="n#getRole#0;n#!!top" expanded="false" />
+            <element signature="n#deleteMessage#0;n#!!top" expanded="false" />
+            <element signature="n#getMessages#0;n#!!top" expanded="false" />
+            <element signature="e#6688#7233#0#PHP" expanded="false" />
+            <element signature="e#7039#7233#0#PHP" expanded="false" />
+            <element signature="e#7635#8615#0#PHP" expanded="false" />
+            <element signature="e#7981#8144#0#PHP" expanded="false" />
+            <element signature="e#8074#8144#0#PHP" expanded="false" />
+            <element signature="n#getMessageInfo#0;n#!!top" expanded="false" />
+            <element signature="n#updateMessage#0;n#!!top" expanded="false" />
+            <element signature="e#8975#9466#0#PHP" expanded="false" />
+            <element signature="n#paginateMessage#0;n#!!top" expanded="false" />
+            <element signature="e#9955#10088#0#PHP" expanded="false" />
+            <element signature="n#maakAfspraak1#0;n#!!top" expanded="false" />
+            <element signature="e#10198#10372#0#PHP" expanded="false" />
+            <element signature="e#10235#10366#0#PHP" expanded="false" />
+            <element signature="e#10306#10366#0#PHP" expanded="false" />
+            <element signature="e#10451#10628#0#PHP" expanded="false" />
+            <element signature="e#10489#10622#0#PHP" expanded="false" />
+            <element signature="e#10561#10622#0#PHP" expanded="false" />
+            <element signature="e#10701#10884#0#PHP" expanded="false" />
+            <element signature="e#10743#10878#0#PHP" expanded="false" />
+            <element signature="e#10816#10878#0#PHP" expanded="false" />
+            <element signature="e#10953#11129#0#PHP" expanded="false" />
+            <element signature="e#10994#11123#0#PHP" expanded="false" />
+            <element signature="e#11064#11123#0#PHP" expanded="false" />
+            <element signature="e#11208#11382#0#PHP" expanded="false" />
+            <element signature="e#11245#11376#0#PHP" expanded="false" />
+            <element signature="e#11316#11376#0#PHP" expanded="false" />
+            <element signature="e#11472#11668#0#PHP" expanded="false" />
+            <element signature="e#11513#11662#0#PHP" expanded="false" />
+            <element signature="e#11593#11662#0#PHP" expanded="false" />
+            <element signature="e#11751#11831#0#PHP" expanded="false" />
+            <element signature="e#12032#12335#0#PHP" expanded="false" />
+            <element signature="e#12069#12329#0#PHP" expanded="false" />
+            <element signature="e#12180#12329#0#PHP" expanded="false" />
+            <element signature="e#12199#12319#0#PHP" expanded="false" />
+            <element signature="e#12340#12675#0#PHP" expanded="false" />
+            <element signature="e#12381#12669#0#PHP" expanded="false" />
+            <element signature="e#12510#12669#0#PHP" expanded="false" />
+            <element signature="e#12529#12659#0#PHP" expanded="false" />
+            <element signature="n#maakAfspraak2#0;n#!!top" expanded="false" />
+            <element signature="e#12788#12962#0#PHP" expanded="false" />
+            <element signature="e#12825#12956#0#PHP" expanded="false" />
+            <element signature="e#12896#12956#0#PHP" expanded="false" />
+            <element signature="e#13045#13222#0#PHP" expanded="false" />
+            <element signature="e#13083#13216#0#PHP" expanded="false" />
+            <element signature="e#13155#13216#0#PHP" expanded="false" />
+            <element signature="e#13299#13482#0#PHP" expanded="false" />
+            <element signature="e#13341#13476#0#PHP" expanded="false" />
+            <element signature="e#13414#13476#0#PHP" expanded="false" />
+            <element signature="e#13555#13731#0#PHP" expanded="false" />
+            <element signature="e#13596#13725#0#PHP" expanded="false" />
+            <element signature="e#13666#13725#0#PHP" expanded="false" />
+            <element signature="e#13814#13988#0#PHP" expanded="false" />
+            <element signature="e#13851#13982#0#PHP" expanded="false" />
+            <element signature="e#13922#13982#0#PHP" expanded="false" />
+            <element signature="e#14082#14278#0#PHP" expanded="false" />
+            <element signature="e#14123#14272#0#PHP" expanded="false" />
+            <element signature="e#14203#14272#0#PHP" expanded="false" />
+            <element signature="e#14369#14563#0#PHP" expanded="false" />
+            <element signature="e#14410#14557#0#PHP" expanded="false" />
+            <element signature="e#14489#14557#0#PHP" expanded="false" />
+            <element signature="e#14648#14827#0#PHP" expanded="false" />
+            <element signature="e#14686#14821#0#PHP" expanded="false" />
+            <element signature="e#14759#14821#0#PHP" expanded="false" />
+            <element signature="e#14914#14994#0#PHP" expanded="false" />
+            <element signature="e#15195#15498#0#PHP" expanded="false" />
+            <element signature="e#15232#15492#0#PHP" expanded="false" />
+            <element signature="e#15343#15492#0#PHP" expanded="false" />
+            <element signature="e#15362#15482#0#PHP" expanded="false" />
+            <element signature="e#15503#15838#0#PHP" expanded="false" />
+            <element signature="e#15544#15832#0#PHP" expanded="false" />
+            <element signature="e#15673#15832#0#PHP" expanded="false" />
+            <element signature="e#15692#15822#0#PHP" expanded="false" />
+            <element signature="n#addAppointment_normal#0;n#!!top" expanded="false" />
+            <element signature="e#15887#16789#0#PHP" expanded="false" />
+            <element signature="e#15941#16783#0#PHP" expanded="false" />
+            <element signature="e#16094#16773#0#PHP" expanded="false" />
+            <element signature="n#addAppointment_home#0;n#!!top" expanded="false" />
+            <element signature="e#16836#17963#0#PHP" expanded="false" />
+            <element signature="e#16888#17957#0#PHP" expanded="false" />
+            <element signature="e#17096#17947#0#PHP" expanded="false" />
+            <element signature="n#paginateTreatment#0;n#!!top" expanded="false" />
+            <element signature="e#18144#18633#0#PHP" expanded="false" />
+            <element signature="e#18459#18633#0#PHP" expanded="false" />
+            <element signature="e#18825#19613#0#PHP" expanded="false" />
+            <element signature="e#18942#19613#0#PHP" expanded="false" />
+            <element signature="e#19109#19607#0#PHP" expanded="false" />
+            <element signature="e#19196#19408#0#PHP" expanded="false" />
+            <element signature="e#19419#19607#0#PHP" expanded="false" />
+            <element signature="e#19438#19597#0#PHP" expanded="false" />
+            <element signature="n#getTreatment#0;n#!!top" expanded="false" />
+            <element signature="e#19759#21313#0#PHP" expanded="false" />
+            <element signature="e#19857#20691#0#PHP" expanded="false" />
+            <element signature="e#20351#20691#0#PHP" expanded="false" />
+            <element signature="e#20697#21313#0#PHP" expanded="false" />
+            <element signature="e#20783#21307#0#PHP" expanded="false" />
+            <element signature="e#21121#21307#0#PHP" expanded="false" />
+            <element signature="e#21713#22837#0#PHP" expanded="false" />
+            <element signature="n#getTreatmentCategory_selector#0;n#!!top" expanded="false" />
+            <element signature="e#23164#23571#0#PHP" expanded="false" />
+            <element signature="e#23268#23565#0#PHP" expanded="false" />
+            <element signature="e#23462#23565#0#PHP" expanded="false" />
+            <element signature="n#deleteTreatment#0;n#!!top" expanded="false" />
+            <element signature="n#updateTreatment#0;n#!!top" expanded="false" />
+            <element signature="e#23843#25314#0#PHP" expanded="false" />
+            <element signature="e#23956#24626#0#PHP" expanded="false" />
+            <element signature="e#24633#25314#0#PHP" expanded="false" />
+            <element signature="e#24648#25308#0#PHP" expanded="false" />
+            <element signature="n#getTreatmentInfo#0;n#!!top" expanded="false" />
+            <element signature="n#getTreatmentCategory_select#0;n#!!top" expanded="false" />
+            <element signature="e#25840#26189#0#PHP" expanded="false" />
+            <element signature="e#25926#26183#0#PHP" expanded="false" />
+            <element signature="e#26076#26183#0#PHP" expanded="false" />
+            <element signature="n#getTreatmentCategory#0;n#!!top" expanded="false" />
+            <element signature="e#26353#26874#0#PHP" expanded="false" />
+            <element signature="e#26699#26874#0#PHP" expanded="false" />
+            <element signature="e#27161#27779#0#PHP" expanded="false" />
+            <element signature="n#paginateTreatmentCategory#0;n#!!top" expanded="false" />
+            <element signature="e#28252#28501#0#PHP" expanded="false" />
+            <element signature="e#28344#28495#0#PHP" expanded="false" />
+            <element signature="n#deleteTreatmentCategory#0;n#!!top" expanded="false" />
+            <element signature="e#28773#29134#0#PHP" expanded="false" />
+            <element signature="e#29029#29134#0#PHP" expanded="false" />
+            <element signature="n#updateTreatmentCategory#0;n#!!top" expanded="false" />
+            <element signature="e#29184#30263#0#PHP" expanded="false" />
+            <element signature="e#29297#29772#0#PHP" expanded="false" />
+            <element signature="e#29779#30263#0#PHP" expanded="false" />
+            <element signature="e#29794#30257#0#PHP" expanded="false" />
+            <element signature="n#getTreatmentCategoryInfo#0;n#!!top" expanded="false" />
+            <marker date="1513763814880" expanded="false" signature="210:245" ph="SELECT * FRO... option" />
+            <marker date="1513763814880" expanded="false" signature="433:463" ph="SELECT * FRO... ?" />
+            <marker date="1513763814880" expanded="false" signature="778:854" ph="SELECT * FRO... appointment" />
+            <marker date="1513763814880" expanded="false" signature="897:981" ph="SELECT * FRO... appointment" />
+            <marker date="1513763814880" expanded="false" signature="1164:1229" ph="SELECT * FRO... appointment" />
+            <marker date="1513763814880" expanded="false" signature="1272:1345" ph="SELECT * FRO... appointment" />
+            <marker date="1513763814880" expanded="false" signature="2247:2266" ph="..." />
+            <marker date="1513763814880" expanded="false" signature="3855:3890" ph="SELECT * FRO... employee" />
+            <marker date="1513763814880" expanded="false" signature="4187:4209" ph="SELECT * FRO... employee" />
+            <marker date="1513763814880" expanded="false" signature="4879:4946" ph="SELECT COUNT... appointment" />
+            <marker date="1513763814880" expanded="false" signature="4976:5043" ph="SELECT COUNT... appointment" />
+            <marker date="1513763814880" expanded="false" signature="5486:5519" ph="SELECT * FRO... user" />
+            <marker date="1513763814880" expanded="false" signature="5703:5739" ph="DELETE FROM " />
+            <marker date="1513763814880" expanded="false" signature="5938:5986" ph="UPDATE appoi... " />
+            <marker date="1513763814880" expanded="false" signature="6166:6197" ph="SELECT * FRO... role" />
+            <marker date="1513763814880" expanded="false" signature="6408:6440" ph="DELETE FROM " />
+            <marker date="1513763814880" expanded="false" signature="6855:6921" ph="SELECT * FRO... message" />
+            <marker date="1513763814880" expanded="false" signature="7061:7116" ph="SELECT * FRO... message" />
+            <marker date="1513763814880" expanded="false" signature="8702:8742" ph="SELECT ${$op... message" />
+            <marker date="1513763814880" expanded="false" signature="9196:9244" ph="UPDATE messa... " />
+            <marker date="1513763814880" expanded="false" signature="9571:9615" ph="SELECT COUNT... message" />
+            <marker date="1513763814880" expanded="false" signature="16486:16610" ph="INSERT INTO appointment... " />
+            <marker date="1513763814880" expanded="false" signature="17578:17734" ph="INSERT INTO appointment... " />
+            <marker date="1513763814880" expanded="false" signature="18279:18347" ph="SELECT COUNT... treatment" />
+            <marker date="1513763814880" expanded="false" signature="18482:18528" ph="SELECT COUNT... treatment" />
+            <marker date="1513763814880" expanded="false" signature="20147:20210" ph="SELECT * FRO... treatment" />
+            <marker date="1513763814880" expanded="false" signature="20521:20562" ph="SELECT * FRO... treatment" />
+            <marker date="1513763814880" expanded="false" signature="20928:20980" ph="SELECT * FRO... treatment" />
+            <marker date="1513763814880" expanded="false" signature="21148:21178" ph="SELECT * FRO... treatment" />
+            <marker date="1513763814880" expanded="false" signature="22015:22109" ph="SELECT name treatment_category" />
+            <marker date="1513763814880" expanded="false" signature="22063:22108" ph="SELECT categ... treatment" />
+            <marker date="1513763814880" expanded="false" signature="22971:23016" ph="SELECT * FRO... treatment_category" />
+            <marker date="1513763814880" expanded="false" signature="23664:23698" ph="DELETE FROM " />
+            <marker date="1513763814880" expanded="false" signature="24301:24363" ph="UPDATE treat... " />
+            <marker date="1513763814880" expanded="false" signature="24993:25058" ph="INSERT INTO treatment... " />
+            <marker date="1513763814880" expanded="false" signature="25381:25423" ph="SELECT ${$op... treatment" />
+            <marker date="1513763814880" expanded="false" signature="25650:25694" ph="SELECT * FRO... treatment_category" />
+            <marker date="1513763814880" expanded="false" signature="26534:26584" ph="SELECT * FRO... treatment_category" />
+            <marker date="1513763814880" expanded="false" signature="26722:26761" ph="SELECT * FRO... treatment_category" />
+            <marker date="1513763814880" expanded="false" signature="27918:27973" ph="SELECT COUNT... treatment_category" />
+            <marker date="1513763814880" expanded="false" signature="28565:28633" ph="SELECT COUNT... treatment" />
+            <marker date="1513763814880" expanded="false" signature="28856:28899" ph="DELETE FROM " />
+            <marker date="1513763814880" expanded="false" signature="29483:29530" ph="UPDATE treat... " />
+            <marker date="1513763814880" expanded="false" signature="29980:30028" ph="INSERT INTO treatment_category... " />
+            <marker date="1513763814880" expanded="false" signature="30338:30389" ph="SELECT ${$op... treatment_category" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/twitter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="19" column="16" lean-forward="false" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+          <folding>
+            <marker date="1513764812361" expanded="true" signature="1057:1454" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
