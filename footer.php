@@ -42,20 +42,23 @@
 
 
 <!--Popups-->
+<!--Appointment popup-->
 <div class="modal fade" id="maakAfspraak" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Maak een afspraak</h5>
+                <!--Button to close the popup-->
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-
+                <!--Adds the input form the user to the database if the submit button is pressed and the required fields are filled in-->
                 <?php
-                addAppointment($dbcon);
+                    addAppointment($dbcon);
                 ?>
+                <!--Form for the data needed to create an appointment-->
                 <form action="" method="post" autocomplete="on">
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -64,23 +67,26 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="appointment-input-email">Email*</label>
-                            <input type="email" class="form-control" id="appointment-input-email" placeholder="Email" name="appointment-email" required>
+                            <input type="email" class="form-control" id="appointment-input-email" placeholder="Email@email.com" name="appointment-email" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="appointment-input-telnr">Telefoon nummer</label>
-                            <input type="tel" class="form-control" id="appointment-input-telnr" placeholder="Telefoon nummer" name="appointment-telnr">
+                            <input type="number" class="form-control" id="appointment-input-telnr" placeholder="0123-1234567" name="appointment-telnr" maxlength="12">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputState">Kapper</label>
                             <select id="inputState" class="form-control" name="appointment-kapper">
                                 <option selected value="0">Geen voorkeur</option>
-                                <?php getEmployee_option($dbcon)?>
+                                <!--Gets all the employee info from the database and creates selectable options-->
+                                <?php
+                                    getEmployee_option($dbcon);
+                                ?>
                             </select>
                         </div>
 
                         <div class="col-md-12">
                             <label for="appointment-input-date">Datum*</label>
-                            <input type="date" format="DD-MM-YYYY" class="form-control" id="appointment-input-date" name="appointment-date" required>
+                            <input type="date" format="DD-MM-YYYY" min="2018-01-01" class="form-control" id="appointment-input-date" name="appointment-date" required>
                         </div>
 
                         <div class="col-md-8">
@@ -94,21 +100,20 @@
                         <div class="afspraak-container">
                             <div class="form-row">
                                 <div class="form-group col-md-8">
-                                    <label for="appointment-input-address">Adres (straatnaam en huisnummer)*</label>
-                                    <input type="text" class="form-control" id="appointment-input-address" placeholder="Adres" name="appointment-address">
+                                    <label for="appointment-input-address">Adres*</label>
+                                    <input type="text" class="form-control" id="appointment-input-address" placeholder="Straatnaam 12" name="appointment-address">
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label for="appointment-input-zip">Postcode</label>
-                                    <input type="text" class="form-control" id="appointment-input-zip" placeholder="1234AB" name="appointment-zip">
+                                    <label for="appointment-input-zip">Postcode*</label>
+                                    <input type="text" class="form-control" id="appointment-input-zip" placeholder="1234AB" maxlength="6" pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" name="appointment-zip">
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="appointment-input-reason">Reden*</label>
-                                    <!--<input type="text" class="form-control" id="appointment-input-zip" placeholder="Voordat wij aan huis komen moet u een goede reden hebben waarom u niet naar de zaak kan komen." name="appointment-reason">-->
                                     <textarea class="form-control" id="appointment-input-reason" placeholder="Voordat wij aan huis komen moet u een goede reden hebben waarom u niet naar de zaak kan komen." name="appointment-reason"></textarea>
                                 </div>
                             </div>
                         </div>
-
+                        <!--Asks the user to agree with the data they filled in-->
                         <div class="col-md-4">
                             <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
                                 <input type="checkbox" class="custom-control-input" name="appointment-agree" required>
@@ -117,13 +122,12 @@
                             </label>
                         </div>
                     </div>
+                    <!--Notifies the user certain fields must be filled in to continue-->
                     <p>Velden met * zijn verplicht.</p>
+                    <!--Button to call the addAppointment() function-->
                     <button type="submit" class="btn btn-primary" name="appointment-submit">Verstuur</button>
                 </form>
             </div>
-<!--            <div class="modal-footer">-->
-<!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>-->
-<!--            </div>-->
         </div>
     </div>
 </div>
@@ -156,7 +160,9 @@
                     <br>
                     <input type="submit" name="make-review-submit" value="Verzenden" id="make-review-submit">
                 </form>
-                <?php makeReview($dbcon); ?>
+                <?php
+                    makeReview($dbcon);
+                ?>
             </div>
             <!--            <div class="modal-footer">-->
             <!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>-->

@@ -156,7 +156,7 @@ include 'header.php'; ?>
                         <?php /*                             * **************************** postcode ***************************** */ ?>
                         <div class="form-group">
                             <label for="inputState">Postcode</label>
-                            <input type="text" name="postcode" class="form-control" placeholder="1234 AB" value="<?php
+                            <input type="text" name="postcode" class="form-control" placeholder="1234AB" maxlength="6" pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" value="<?php
                             $naam = "";
                             if (isset($_POST["poscode"])) {
                                 if (empty($_POST["postcode"])) {
@@ -226,7 +226,7 @@ include 'header.php'; ?>
                         <?php /*                             * **************************** telefoonnummer ***************************** */ ?>
                         <div class="form-group col-md-16">
                             <label for="appointment-input-email">Telefoonnummer</label>
-                            <input type="tel" placeholder="06 12345678" class="form-control" name="telefoon" value="<?php
+                            <input type="tel" placeholder="0123-12345678" maxlength="12" class="form-control" name="telefoon" value="<?php
                             $telefoon = "";
                             if (isset($_POST["telefoon"])) {
                                 if (empty($_POST["telefoon"])) {

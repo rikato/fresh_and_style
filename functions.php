@@ -121,9 +121,13 @@ function getHaircut($dbcon){
 }
 
 function getProduct($dbcon ,$page){
+    //If the user goes to the next page the next set of items is loaded
     if(isset($page)){
+        //If a category is selected only loads items from that category
         if (isset($_GET['productCategory']) && $_GET['productCategory'] > 0) {
+            //Sets the amount of desired items
             $rows = 8;
+            //Calculates where to start retrieving data
             $rowstart = $rows * ($page - 1);
 
             $category = $_GET['productCategory'];
@@ -132,14 +136,18 @@ function getProduct($dbcon ,$page){
             $stmt->execute([$category]);
             $data = $stmt->fetchAll();
         } else {
+            //Sets the amount of desired items
             $rows = 8;
+            //Calculates where to start retrieving data
             $rowstart = $rows * ($page - 1);
+
             $sql = "SELECT * FROM product where active = 1 order by id LIMIT $rowstart ,$rows";
             $stmt = $dbcon->prepare($sql);
             $stmt->execute();
             $data = $stmt->fetchAll();
         }
     }else{
+        //If a category is selected only loads items from that category
         if (isset($_GET['productCategory']) && $_GET['productCategory']> 0) {
             $category = $_GET['productCategory'];
             $sql = 'SELECT * FROM product where active = 1 and product_category = ? order by id LIMIT 8';
@@ -159,6 +167,7 @@ function getProduct($dbcon ,$page){
     $cutRow = 4;
 
 
+    //Echoes all the products with style and html
     foreach ($data as $product) {
         if ($i % $cutRow == 1) {
             echo '<div class="row">';
@@ -184,6 +193,8 @@ function getProduct($dbcon ,$page){
 }
 
 function paginateProduct ($dbcon){
+    //Gets the all the product data from the database
+    //If the user has selected a category gets products from only that category
     if (isset($_GET['productCategory']) && $_GET['productCategory'] > 0) {
         $var = $_GET['productCategory'];
 
@@ -200,26 +211,38 @@ function paginateProduct ($dbcon){
 
     $numberofrows = $data->numberofrows;
 
+    //Set the amount of desired rows
     $rows = 8;
+    //Calculates the amount of pages needed
     $pages = ceil($numberofrows / $rows);
 
-    if (isset($_GET['productCategory']) && $_GET['productCategory'] > 0) {
-        for ($i = 1; $i <= $pages; $i++) {
-            echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '&productCategory=' . $_GET['productCategory'] . '">' . $i . '</a></li>';
-        }
+    if ($pages == 1) {
+        //This is left empty so if there is only on page needed the page button does't show
     } else {
-        for ($i = 1; $i <= $pages; $i++) {
-            echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+        //Echos a button with according page number for each page
+        //If a product category is selected remembers the category through the pages.
+        if (isset($_GET['productCategory']) && $_GET['productCategory'] > 0) {
+            for ($i = 1; $i <= $pages; $i++) {
+                echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '&productCategory=' . $_GET['productCategory'] . '">' . $i . '</a></li>';
+            }
+        } else {
+            for ($i = 1; $i <= $pages; $i++) {
+                echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+            }
         }
     }
 }
 
 function getProductCategory($dbcon){
+    //Gets all the categories from the database
     $sql = 'SELECT * FROM product_category  order by id';
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([]);
     $data = $stmt->fetchAll();
+
+    //For each category makes a selectable option
     foreach ($data as $category){
+        //If a category is selected remembers the selected option
         if (isset($_GET['productCategory']) && $_GET['productCategory'] == $category->id) {
             echo '<option selected value="'. $category->id .'">'. $category->name .'</option>';
         } else {
@@ -229,8 +252,11 @@ function getProductCategory($dbcon){
 }
 
 function addAppointment($dbcon){
+    //Checks if the submit button is pressed
     if (isset($_POST["appointment-submit"])) {
+        //Checks if all required fields are filled in/checked and are not empty
         if (isset($_POST["appointment-agree"]) && (isset($_POST['appointment-name']) && $_POST['appointment-name'] != "") && (isset($_POST['appointment-email']) && $_POST['appointment-email'] != "") && (isset($_POST['appointment-date']) && $_POST['appointment-date'] != "")) {
+            //Add all POST items to variables for ease of use
             $appointmentName = $_POST["appointment-name"];
             $appointmentEmail = $_POST["appointment-email"];
             $appointmentTelnr = $_POST["appointment-telnr"];
@@ -242,6 +268,7 @@ function addAppointment($dbcon){
 
             $sql = "INSERT INTO appointment (name, email, telnumber, adres, postcode, kapper, rede, date, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $dbcon->prepare($sql);
+            //executes the SQL with the data provided by the user in the form
             $stmt->execute([$appointmentName, $appointmentEmail, $appointmentTelnr, $appointmentAddress, $appointmentZip, $appointmentKapper, $appointmentRede, $appointmentDate, 0]);
 
             header('location:homepage_template.php');
@@ -272,20 +299,28 @@ function makeReview($dbcon){
     }
 }
 
+//Function to load the last instagram photo's
 function getFeed_instagram(){
+    //Key the API needs to function
     $access_token = "291877665.1677ed0.6d4bd68d72e54d81a3a4390e3eb48c60";
+
+    //Sets the desired amount of pictures to be loaded
     $photo_count = 6;
 
+    //Link to the api
     $json_link = "https://api.instagram.com/v1/users/self/media/recent/?";
     $json_link .= "access_token={$access_token}&count={$photo_count}";
 
+    //Gets the last pictures with their data
     $json = file_get_contents($json_link);
     $obj = json_decode($json, true, 512, JSON_BIGINT_AS_STRING);
 
-    //print_r($obj);
+    //Counter to assure there is only one active carousel item
     $i = 0;
 
+    //Takes the photos and data out of array and makes them ready to be put in the carousel
     foreach ($obj['data'] as $post) {
+        //All available data that belongs to the picture
         $pic_text = $post['caption']['text'];
         $pic_link = $post['link'];
         $pic_like_count = $post['likes']['count'];
@@ -293,6 +328,8 @@ function getFeed_instagram(){
         $pic_src = str_replace('http://', 'https://', $post['images']['low_resolution']['url']);
         $pic_created_time = date('F j, Y', $post['caption']['created_time']);
         $pic_created_time = date('F j, Y', strtotime($pic_created_time . '+1 days'));
+
+        //IF the text under the picture is longer than 40 characters cuts it off and adds ...
         if (strlen($pic_text) > 40) {
             $pic_text = substr($pic_text, 0, 37) . '...';
         }
@@ -301,7 +338,6 @@ function getFeed_instagram(){
             echo "<div class='carousel-item item active'>";
         } else {
             echo "<div class='carousel-item item'>";
-
         }
 
         echo "<div class='col-4 slider-item'>";
@@ -324,11 +360,15 @@ function getFeed_instagram(){
 }
 
 function getEmployee_option ($dbcon) {
+    //Gets all the employees form the database
     $sql = 'SELECT * FROM employee';
     $stmt = $dbcon->prepare($sql);
-    $stmt->execute([]);
+    $stmt->execute();
     $data =  $stmt->fetchAll();
+
+    //Echoes an option for every employee and if the employee was already selected makes that option selected
     foreach($data as $employee){
+        //If a employee is selected remembers the selected option
         if (isset($_POST["kapper"]) && $_POST["kapper"] == $employee->id){
             echo '<option selected value = "'.$employee->id.'">'.$employee->name.'</option>';
         }else{

@@ -159,7 +159,7 @@ include 'header.php'; ?>
             <!--telefoonnummer-->
             <div class="form-group col-md-2">
                 <label for="appointment-input-email">Telefoonnummer</label>
-                <input type="tel" placeholder="06 12345678" class="form-control" name="telefoon" value="<?php
+                <input type="tel" placeholder="0123-12345678" maxlength="12" class="form-control" name="telefoon" value="<?php
                 $telefoon = "";
                 if (isset($_POST["telefoon"])) {
                     if (empty($_POST["telefoon"])) {

@@ -146,11 +146,15 @@ function getEmployee ($dbcon, $employee) {
 }
 
 function getEmployee_option ($dbcon) {
+    //Gets all the employees form the database
     $sql = 'SELECT * FROM employee';
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([]);
     $data =  $stmt->fetchAll();
+
+    //Echoes an option for every employee and if the employee was already selected makes that option selected
     foreach($data as $employee){
+        //If a employee is selected remembers the selected option
         if (isset($_POST["kapper"]) && $_POST["kapper"] == $employee->id){
             echo '<option selected value = "'.$employee->id.'">'.$employee->name.'</option>';
         }else{
@@ -213,6 +217,7 @@ function getRole ($dbcon, $user){
 }
 
 function deleteMessage ($dbcon, $message) {
+    //Deletes the selected message
     $sql = "DELETE FROM message WHERE id = ?";
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([$message]);
@@ -220,8 +225,12 @@ function deleteMessage ($dbcon, $message) {
 }
 
 function getMessages($dbcon, $page){
+    //Set the amount of desired rows
     $rows = 10;
+
+    //Determines which messages to display
     if(isset($page)){
+        //Calculates where to start retrieving messages if the user is further than page 1
         $rowstart = $rows * ($page - 1);
 
         $sql = "SELECT * FROM message order by creationdate DESC LIMIT $rowstart, $rows";
@@ -232,10 +241,11 @@ function getMessages($dbcon, $page){
     }else{
         $sql = "SELECT * FROM message order by creationdate DESC LIMIT $rows";
         $stmt = $dbcon->prepare($sql);
-        $stmt -> execute([]);
+        $stmt -> execute();
         $data = $stmt -> fetchall();
     }
 
+    //Echoes a table header for all the columns
     echo "<table class='table'>";
     echo "<tr>";
 
@@ -257,6 +267,7 @@ function getMessages($dbcon, $page){
 
     echo '</tr>';
 
+    //Echoes the data of each message in a table row
     foreach ($data as $message){
         echo '<tr>';
 
@@ -269,6 +280,7 @@ function getMessages($dbcon, $page){
         echo "</td>";
 
         echo "<td>";
+        //Determines whether the text should be green(for a visible message) or red(for a not visible message)
         if($message->visible == 1){
             echo '<span class="green">Openbaar</span>';
         }else{
@@ -276,6 +288,8 @@ function getMessages($dbcon, $page){
         }
         echo "</td>";
 
+
+        //Echoes the buttons to edit or delete a message.
         echo '<td>';
         echo '<a class="table-action" href="altermessage.php?id='.$message->id.'"><i class="fa fa-pencil" aria-hidden="true"></i></a>';
         echo '<a class="table-action" onclick="return confirm(\'Bericht verwijderen?\')" href="?deleteMessage='.$message->id.'"><i class="fa fa-trash" aria-hidden="true"></i></a>';
@@ -296,28 +310,34 @@ function getMessageInfo ($dbcon, $id, $option) {
 }
 
 function updateMessage($dbcon){
+    //Checks if the submit button is pressed and if the fields aren't empty
     if (isset($_POST["sendMessage_edited"]) && isset($_POST["messageTitle"]) && isset($_POST["messageText"])) {
         $messageTitle = $_POST["messageTitle"];
         $messageText = $_POST["wysiwyg-value"];
 
         $sql = "UPDATE message SET title=?, message=? WHERE id=?";
         $stmt = $dbcon->prepare($sql);
+        //Executes the SQL with the set values from the form.
         $stmt->execute([$messageTitle, $messageText, $_GET['id']]);
         header('location:alterMessage.php');
     }
 }
 
 function paginateMessage ($dbcon){
+    //Gets the all the message data from the database
     $sql = 'SELECT COUNT(*) as numberofrows FROM message';
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([]);
     $data =  $stmt->fetch();
     $numberofrows = $data->numberofrows;
 
+    //Set the amount of desired rows
     $rows = 10;
+    //Calculates the amount of pages needed
     $pages = ceil($numberofrows / $rows);
 
 
+    //Echos a button with according page number for each page
     for($i = 1; $i <= $pages; $i++){
         echo '<li class="page-item"><a class="page-link" href="?page='.$i.'">'.$i.'</a></li>';
     }
@@ -570,6 +590,357 @@ function addAppointment_home($dbcon) {
             }
         }
     }
+}
+
+function paginateTreatment($dbcon) {
+    //Gets the all the treatment data from the database
+    //If the user has selected a category gets products from only that category
+    if (isset($_GET['treatmentCategory']) && $_GET['treatmentCategory'] > 0) {
+        $var = $_GET['treatmentCategory'];
+
+        $sql = 'SELECT COUNT(*) as numberofrows FROM treatment WHERE category_id = ?';
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute([$var]);
+        $data = $stmt->fetch();
+    } else {
+        $sql = 'SELECT COUNT(*) as numberofrows FROM treatment';
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute();
+        $data = $stmt->fetch();
+    }
+    
+    $numberofrows = $data->numberofrows;
+
+    //Set the amount of desired rows
+    $rows = 10;
+    //Calculates the amount of pages needed
+    $pages = ceil($numberofrows / $rows);
+
+    if ($pages == 1) {
+        //This is left empty so if there is only on page needed the page button does't show
+    } else {
+        //Echos a button with according page number for each page
+        //If a product category is selected remembers the category through the pages.
+        if (isset($_GET['treatmentCategory']) && $_GET['treatmentCategory'] > 0) {
+            for ($i = 1; $i <= $pages; $i++) {
+                echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '&treatmentCategory=' . $_GET['treatmentCategory'] . '">' . $i . '</a></li>';
+            }
+        } else {
+            for ($i = 1; $i <= $pages; $i++) {
+                echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+            }
+        }
+    }
+}
+
+function getTreatment($dbcon, $page) {
+    //Set the amount of desired rows
+    $rows = 10;
+
+    //Determines which treatments to display
+    if(isset($page)){
+        //If a category is selected only loads items from that category
+        if (isset($_GET['treatmentCategory']) && $_GET['treatmentCategory'] > 0) {
+            //Calculates where to start retrieving treatments if the user is further than page 1
+            $rowstart = $rows * ($page - 1);
+
+            $category = $_GET['treatmentCategory'];
+            $sql = "SELECT * FROM treatment WHERE category_id = ? LIMIT $rowstart, $rows";
+            $stmt = $dbcon->prepare($sql);
+            $stmt->execute([$category]);
+            $data = $stmt->fetchall();
+        } else {
+            //Calculates where to start retrieving treatments if the user is further than page 1
+            $rowstart = $rows * ($page - 1);
+
+            $sql = "SELECT * FROM treatment LIMIT $rowstart, $rows";
+            $stmt = $dbcon->prepare($sql);
+            $stmt->execute();
+            $data = $stmt->fetchall();
+        }
+    }else{
+        //If a category is selected only loads items from that category
+        if (isset($_GET['treatmentCategory']) && $_GET['treatmentCategory'] > 0) {
+            $category = $_GET['productCategory'];
+            $sql = "SELECT * FROM treatment WHERE category_id = ? LIMIT $rows";
+            $stmt = $dbcon->prepare($sql);
+            $stmt->execute([$category]);
+            $data = $stmt->fetchall();
+        } else {
+            $sql = "SELECT * FROM treatment LIMIT $rows";
+            $stmt = $dbcon->prepare($sql);
+            $stmt->execute();
+            $data = $stmt->fetchall();
+        }
+    }
+
+    //Echoes a table header for all the columns
+    echo "<table class='table'>";
+    echo "<tr>";
+
+    echo "<th>";
+    echo "Naam";
+    echo "</th>";
+
+    echo "<th>";
+    echo "Prijs";
+    echo "</th>";
+
+    echo '<th>';
+    echo 'Categorie';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Acties';
+    echo '</th>';
+
+    echo '</tr>';
+
+    //Echoes the data of each treatment in a table row
+    foreach ($data as $treatment){
+        echo '<tr>';
+
+        echo "<td>";
+        echo $treatment->name;
+        echo "</td>";
+
+        echo "<td>";
+        echo $treatment->price;
+        echo "</td>";
+
+        //Gets the treatment category that belongs to the treatment being printed
+        $sql = "SELECT name FROM treatment_category WHERE id IN(SELECT category_id FROM treatment WHERE id= ?)";
+        $stmt = $dbcon->prepare($sql);
+        $stmt -> execute([$treatment->id]);
+        $data2 = $stmt -> fetchall();
+
+        echo "<td>";
+        foreach ($data2 as $category){echo $category->name;}
+        echo "</td>";
+
+        //Echoes the buttons to edit or delete a treatment.
+        echo '<td>';
+        echo '<a class="table-action" href="treatmentEdit.php?id='.$treatment->id.'&categoryId='.$treatment->category_id.'"><i class="fa fa-pencil" aria-hidden="true"></i></a>';
+        echo '<a class="table-action" onclick="return confirm(\'Behandeling verwijderen?\')" href="?deleteTreatment='.$treatment->id.'"><i class="fa fa-trash" aria-hidden="true"></i></a>';
+        echo '</td>';
+
+        echo '</tr>';
+    }
+
+    echo '</table>';
+}
+
+function getTreatmentCategory_selector($dbcon){
+    //Gets all the categories from the database
+    $sql = 'SELECT * FROM treatment_category  order by id';
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([]);
+    $data = $stmt->fetchAll();
+
+    //For each category makes a selectable option
+    foreach ($data as $category){
+        //If a category is selected remembers the selected option
+        if (isset($_GET['treatmentCategory']) && $_GET['treatmentCategory'] == $category->id) {
+            echo '<option selected value="'. $category->id .'">'. $category->name .'</option>';
+        } else {
+            echo '<option value="'. $category->id .'">'. $category->name .'</option>';
+        }
+    }
+}
+
+function deleteTreatment($dbcon, $id) {
+    //Deletes the selected treatment
+    $sql = "DELETE FROM treatment WHERE id = ?";
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$id]);
+    header('location: treatment.php');
+}
+
+function updateTreatment($dbcon){
+    if(isset($_GET['id'])) {
+        //Checks if the submit button is pressed and if the fields aren't empty
+        if (isset($_POST["sendTreatment_edited"]) && isset($_POST["treatmentName"]) && isset($_POST["treatmentPrice"]) && isset($_POST["treatmentCategory"])) {
+            $treatmentName = $_POST["treatmentName"];
+            $treatmentPrice = $_POST["treatmentPrice"];
+            $treatmentCategory = $_POST["treatmentCategory"];
+
+            $sql = "UPDATE treatment SET name=?, price=? ,category_id=? WHERE id=?";
+            $stmt = $dbcon->prepare($sql);
+            //Executes the SQL with the set values from the form.
+            $stmt->execute([$treatmentName, $treatmentPrice, $treatmentCategory, $_GET['id']]);
+            header('location:treatment.php');
+        }
+    } else {
+        if (isset($_POST["sendTreatment_edited"]) && isset($_POST["treatmentName"]) && isset($_POST["treatmentPrice"]) && isset($_POST["treatmentCategory"])) {
+            $treatmentName = $_POST["treatmentName"];
+            $treatmentPrice = $_POST["treatmentPrice"];
+            $treatmentCategory = $_POST["treatmentCategory"];
+
+            $sql = "INSERT INTO treatment (name, price, category_id) VALUES (?, ?, ?)";
+            $stmt = $dbcon->prepare($sql);
+            //Executes the SQL with the set values from the form.
+            $stmt->execute([$treatmentName, $treatmentPrice, $treatmentCategory]);
+            header('location:treatment.php');
+        }
+    }
+}
+
+function getTreatmentInfo ($dbcon, $id, $option) {
+    $sql = "SELECT $option FROM treatment WHERE id = ?";
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$id]);
+    $data = $stmt->fetch();
+    echo $data->$option;
+}
+
+function getTreatmentCategory_select($dbcon){
+    //Gets all the categories from the database
+    $sql = 'SELECT * FROM treatment_category order by id';
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute();
+    $data = $stmt->fetchAll();
+
+    //For each category makes a selectable option
+    foreach ($data as $category){
+        //makes the treatment category selected
+        if ($_GET['categoryId'] == $category->id) {
+            echo '<option selected value="'. $category->id .'">'. $category->name .'</option>';
+        } else {
+            echo '<option value="' . $category->id . '">' . $category->name . '</option>';
+        }
+    }
+}
+
+function getTreatmentCategory($dbcon, $page){
+    //Set the amount of desired rows
+    $rows = 10;
+
+    //Determines which treatments categories to display
+    if (isset($page)) {
+        //Calculates where to start retrieving treatment categories if the user is further than page 1
+        $rowstart = $rows * ($page - 1);
+
+        $sql = "SELECT * FROM treatment_category LIMIT $rowstart, $rows";
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute();
+        $data = $stmt->fetchall();
+
+    } else {
+        $sql = "SELECT * FROM treatment_category LIMIT $rows";
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute();
+        $data = $stmt->fetchall();
+    }
+
+    //Echoes a table header for all the columns
+    echo "<table class='table'>";
+    echo "<tr>";
+
+    echo "<th>";
+    echo "Naam";
+    echo "</th>";
+
+    echo '<th>';
+    echo 'Acties';
+    echo '</th>';
+
+    echo '</tr>';
+
+    //Echoes the data of each category in a table row
+    foreach ($data as $category){
+        echo '<tr>';
+
+        echo "<td>";
+        echo $category->name;
+        echo "</td>";
+
+        //Echoes the buttons to edit or delete a treatment category.
+        echo '<td>';
+        echo '<a class="table-action" href="treatmentCategoryEdit.php?id='.$category->id.'"><i class="fa fa-pencil" aria-hidden="true"></i></a>';
+        echo '<a class="table-action" onclick="return confirm(\'Behandeling categorie verwijderen?\')" href="?deleteTreatmentCategory='.$category->id.'"><i class="fa fa-trash" aria-hidden="true"></i></a>';
+        echo '</td>';
+
+        echo '</tr>';
+    }
+
+    echo '</table>';
+}
+
+function paginateTreatmentCategory($dbcon) {
+    //Gets the all the treatment data from the database
+    $sql = "SELECT COUNT(*) as numberofrows FROM treatment_category";
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([]);
+    $data =  $stmt->fetch();
+    $numberofrows = $data->numberofrows;
+
+
+    //Set the amount of desired rows
+    $rows = 10;
+    //Calculates the amount of pages needed
+    $pages = ceil($numberofrows / $rows);
+
+
+    if ($pages == 1) {
+        //This is left empty so if there is only on page needed the page button does't show
+    } else {
+        //Echos a button with according page number for each page
+        for ($i = 1; $i <= $pages; $i++) {
+            echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+        }
+    }
+}
+
+function deleteTreatmentCategory($dbcon, $id) {
+    $sql = "SELECT COUNT(*) as numberofrows FROM treatment WHERE category_id = ?";
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$id]);
+    $data = $stmt->fetch();
+
+    $numberofrows = $data->numberofrows;
+
+    if ($numberofrows == 0) {
+        //Deletes the selected treatment
+        $sql = "DELETE FROM treatment_category WHERE id = ?";
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute([$id]);
+        header('location: treatmentCategory.php');
+    } elseif ($numberofrows > 0) {
+        echo '<span class="red">De categorie bevat nog inhoud</span>';
+    }
+}
+
+function updateTreatmentCategory($dbcon){
+    if(isset($_GET['id'])) {
+        //Checks if the submit button is pressed and if the fields aren't empty
+        if (isset($_POST["sendTreatmentCategory_edited"]) && isset($_POST["treatmentCategoryName"])) {
+            $treatmentCategoryName = $_POST["treatmentCategoryName"];
+
+            $sql = "UPDATE treatment_category SET name=? WHERE id=?";
+            $stmt = $dbcon->prepare($sql);
+            //Executes the SQL with the set values from the form.
+            $stmt->execute([$treatmentCategoryName, $_GET['id']]);
+            header('location:treatmentCategory.php');
+        }
+    } else {
+        if (isset($_POST["sendTreatmentCategory_edited"]) && isset($_POST["treatmentCategoryName"])) {
+            $treatmentCategoryName = $_POST["treatmentCategoryName"];
+
+            $sql = "INSERT INTO treatment_category (name) VALUES (?)";
+            $stmt = $dbcon->prepare($sql);
+            //Executes the SQL with the set values from the form.
+            $stmt->execute([$treatmentCategoryName]);
+            header('location:treatmentCategory.php');
+        }
+    }
+}
+
+function getTreatmentCategoryInfo ($dbcon, $id, $option) {
+    $sql = "SELECT $option FROM treatment_category WHERE id = ?";
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$id]);
+    $data = $stmt->fetch();
+    echo $data->$option;
 }
 
 ?>

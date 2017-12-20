@@ -1,13 +1,17 @@
 $(document).ready( function() {
+    //Sets the three form options for an appointment at home to not be shown at default.
     var appointmentOpen = false;
+    //If the box for an appointment at home is checked, adds the class show to the inputs so they are visible and ads the required property to the fields.
     $("#aanHuis").on("click", function (){
         if(appointmentOpen === false){
             $(".afspraak-container").addClass("show");
-            $(".afspraak-container input").prop("required", true);
+            $(".afspraak-container input, .afspraak-container textarea").prop("required", true);
             appointmentOpen = true;
-        }else{
+        }
+        //If the box is unchecked removes the show class and required property from the inputs.
+        else{
             $(".afspraak-container").removeClass("show");
-            $(".afspraak-container input").prop("required", false);
+            $(".afspraak-container input, .afspraak-container textarea").prop("required", false);
             appointmentOpen = false;
         }
 
@@ -17,13 +21,13 @@ $(document).ready( function() {
         $(hash).modal('toggle');
     }
 
-    // Instantiate the Bootstrap carousel
+    // Makes the carousel auto rotate every 6 seconds
     $('.multi-item-carousel').carousel({
         interval: 6000
     });
 
-    // for every slide in carousel, copy the next slide's item in the slide.
-    // Do the same for the next, next item.
+    // For every slide in carousel, copy the next slide's picture in the slide.
+    // Do this over for every cycle.
     $('.multi-item-carousel .item').each(function(){
         var next = $(this).next();
         if (!next.length) {
