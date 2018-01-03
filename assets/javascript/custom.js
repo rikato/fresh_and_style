@@ -51,19 +51,22 @@ $(document).ready( function() {
     //getting the geolaction of a user
     function getLocation() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
+            navigator.geolocation.getCurrentPosition(function (position){
+                //if user allows geoLocation go to google maps with directions.
+                window.location = "https://www.google.com/maps/dir/?api=1&origin="+position.coords.latitude+","+position.coords.longitude+"&destination=52.697959,6.190004";
+            },function(positionError) {
+                //if user does not allow geoLocation go to google maps without directions.
+                window.location = "https://www.google.nl/maps/place/Fresh+%26+Style+Hairfashion/@52.6979623,6.1878158,17z/data=!3m1!4b1!4m5!3m4!1s0x47c8728e186b4e55:0xe1862690480f4768!8m2!3d52.6979591!4d6.1900045";
+            });
         } else {
-            alert("Helaas ondersteund uw browser dit niet.");
+            //if browser does not support geoLocation go to google maps without directions.
+            window.location = "https://www.google.nl/maps/place/Fresh+%26+Style+Hairfashion/@52.6979623,6.1878158,17z/data=!3m1!4b1!4m5!3m4!1s0x47c8728e186b4e55:0xe1862690480f4768!8m2!3d52.6979591!4d6.1900045";
         }
     }
-    function showPosition(position) {
-        window.location = "https://www.google.com/maps/dir/?api=1&origin="+position.coords.latitude+","+position.coords.longitude+"&destination=52.697959,6.190004";
-    }
-
+    //when user clicks on 'routebeschrijving' button prevent button from actually being clicked and then initiate the getLocation function.
     $("a.get-location").on("click", function(e) {
         e.preventDefault();
         getLocation();
-
     });
 
     if($("#txtEditor").length){

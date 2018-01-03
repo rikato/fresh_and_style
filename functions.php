@@ -377,8 +377,9 @@ function getEmployee_option ($dbcon) {
     }
 }
 
-function getMessages($dbcon){
-    $sql = 'SELECT * FROM message order by creationdate DESC';
+function getBlogMessages($dbcon){
+    $rows = 5;
+    $sql = "SELECT * FROM message order by creationdate DESC LIMIT $rows";
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([]);
     $data = $stmt->fetchAll();
@@ -391,7 +392,7 @@ function getMessages($dbcon){
     }
 }
 
-function getMessage1($dbcon){
+function getBlogMessage($dbcon){
     $id = $_GET["id"];
     $sql = 'SELECT * FROM message where id = ?';
     $stmt = $dbcon->prepare($sql);
@@ -399,4 +400,26 @@ function getMessage1($dbcon){
     $data = $stmt->fetch();
     echo '<h1>'.$data->title.'</h1>';
     echo $data->message;
+}
+
+function paginateBlogMessages ($dbcon) {
+    //Gets the all the message data from the database
+    $sql = 'SELECT COUNT(*) as numberofrows FROM message';
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([]);
+    $data =  $stmt->fetch();
+    $numberofrows = $data->numberofrows;
+
+    //Set the amount of desired rows
+    $rows = 5;
+    //Calculates the amount of pages needed
+    $pages = ceil($numberofrows / $rows);
+
+
+    //Echos a button with according page number for each page
+    if($numberofrows > $rows) {
+        for($i = 1; $i <= $pages; $i++){
+            echo '<li class="page-item"><a class="page-link" href="?page='.$i.'">'.$i.'</a></li>';
+        }
+    }
 }

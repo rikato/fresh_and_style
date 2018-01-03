@@ -16,7 +16,7 @@
 
 <nav aria-label="Page navigation example">
     <ul class="pagination">
-        <?php paginate($dbcon); ?>
+        <?php paginateAppointments($dbcon); ?>
     </ul>
 </nav>
 
@@ -37,7 +37,7 @@
 
 <nav aria-label="Page navigation example">
     <ul class="pagination">
-        <?php paginate($dbcon); ?>
+        <?php paginateAppointments($dbcon); ?>
     </ul>
 </nav>
 

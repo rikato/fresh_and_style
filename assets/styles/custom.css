@@ -3,6 +3,9 @@
 *{
     font-family: 'Open Sans', sans-serif;
 }
+html, body{
+    overflow-x: hidden;
+}
 h2{
     margin-bottom: 1.5rem;
     font-weight: 100;
@@ -18,8 +21,8 @@ header {
     min-height: 450px;
     /*background: url(http://i.huffpost.com/gen/1501366/images/o-HAIRSTYLIST-facebook.jpg) no-repeat fixed center center/cover;*/
     /*background: red url(http://www.freshandstyle.nl/wp-content/uploads/zaak-foto.jpg) no-repeat fixed center center/cover;*/
-    background: linear-gradient(rgba(232, 136, 136, 0.5), #000000), url(../../media/allef-vinicius-354911.jpg) no-repeat fixed center center/cover;
-
+    /*background: linear-gradient(rgba(232, 136, 136, 0.5), #000000), url(../../media/allef-vinicius-354911.jpg) no-repeat fixed center center/cover;*/
+    background: linear-gradient(rgba(232, 136, 136, 0), #000000), url(../../media/allef-vinicius-354911.jpg) no-repeat fixed center center/cover;
     /*margin bottom height of navbar*/
     /*background: #000;*/
     margin-bottom: 56px;

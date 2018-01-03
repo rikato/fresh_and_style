@@ -39,7 +39,7 @@ include 'header.php'; ?>
         <div class="form-group">
             <div class="form-group col-md-2">
                 <label for="appointment-input-name"></label>
-                Naam<input type="text" class="form-control" id="appointment-input-naam" name="naam" placeholder="voornaam achternaam"value="<?php
+                Naam<input required type="text" class="form-control" id="appointment-input-naam" name="naam" placeholder="voornaam achternaam"value="<?php
                 $naam = "";
                 if (isset($_POST["naam"])) {
                     if (empty($_POST["naam"])) {
@@ -50,21 +50,21 @@ include 'header.php'; ?>
                 }
                 ?>">
                 <?php
-                $name = "";
-                if (isset($_POST["naam"])) {
-                    if (empty($_POST["naam"])) {
-                        print("Naam is verplicht");
-                    } else {
-                        $name = $_POST["naam"];
-                    }
-                }
+//                $name = "";
+//                if (isset($_POST["naam"])) {
+//                    if (empty($_POST["naam"])) {
+//                        print("Naam is verplicht");
+//                    } else {
+//                        $name = $_POST["naam"];
+//                    }
+//                }
                 ?>
             </div>
 
             <!--datum-->
             <div class="col-md-2">
                 <label for="inputState">Datum</label>
-                <input type="date" format="DD-MM-YYYY" class="form-control" name="datum" value="<?php
+                <input required type="date" format="DD-MM-YYYY" class="form-control" name="datum" value="<?php
                 if (isset($_POST["datum"])) {
                     if (empty($_POST["datum"])) {
                         $datum = "";
@@ -74,14 +74,14 @@ include 'header.php'; ?>
                 }
                 ?>">
                 <?php
-                $date = "";
-                if (isset($_POST["datum"])) {
-                    if (empty($_POST["datum"])) {
-                        print("Datum is verplicht");
-                    } else {
-                        $date = $_POST["datum"];
-                    }
-                }
+//                $date = "";
+//                if (isset($_POST["datum"])) {
+//                    if (empty($_POST["datum"])) {
+//                        print("Datum is verplicht");
+//                    } else {
+//                        $date = $_POST["datum"];
+//                    }
+//                }
                 ?><br>
             </div>
 
@@ -98,13 +98,13 @@ include 'header.php'; ?>
                 }
                 ?>">
                 <?php
-                if (isset($_POST["BeginTijd"])) {
-                    if (empty($_POST["BeginTijd"])) {
-                        print("Begintijd is verplicht");
-                    } else {
-                        $begin = $_POST["BeginTijd"];
-                    }
-                }
+//                if (isset($_POST["BeginTijd"])) {
+//                    if (empty($_POST["BeginTijd"])) {
+//                        print("Begintijd is verplicht");
+//                    } else {
+//                        $begin = $_POST["BeginTijd"];
+//                    }
+//                }
                 ?>
             </div>
             <br>
@@ -121,13 +121,13 @@ include 'header.php'; ?>
                     }
                  ?>">
                  <?php
-                 if (isset($_POST["EindTijd"])) {
-                    if (empty($_POST["EindTijd"])) {
-                        print("Eindtijd is verplicht");
-                    } else {
-                        $eind = $_POST["EindTijd"];
-                    }
-                }
+//                 if (isset($_POST["EindTijd"])) {
+//                    if (empty($_POST["EindTijd"])) {
+//                        print("Eindtijd is verplicht");
+//                    } else {
+//                        $eind = $_POST["EindTijd"];
+//                    }
+//                }
                 ?>
             </div>
             <br>
@@ -144,15 +144,15 @@ include 'header.php'; ?>
                 }
                 ?>">
                 <?php
-                if (isset($_POST["mail"])) {
-                    if (empty($_POST["mail"]) && empty($_POST["telefoon"])) {
-                       print("Mail of telefoonnummer moet worden opgegeven.");
-                    } else {
-                        if (!empty($_POST["mail"])) {
-                            $mail = $_POST["mail"];
-                        }
-                    }
-                }
+//                if (isset($_POST["mail"])) {
+//                    if (empty($_POST["mail"]) && empty($_POST["telefoon"])) {
+//                       print("Mail of telefoonnummer moet worden opgegeven.");
+//                    } else {
+//                        if (!empty($_POST["mail"])) {
+//                            $mail = $_POST["mail"];
+//                        }
+//                    }
+//                }
                 ?>
             </div>
 
@@ -170,24 +170,24 @@ include 'header.php'; ?>
                 }
                 ?>">
                 <?php
-                if (isset($_POST["telefoon"])) {
-                    if (empty($_POST["telefoon"]) && empty($_POST["mail"])) {
-                        print("Mail of telefoonnummer moet worden opgegeven.");
-                    } else {
-                        if (!empty($_POST["telefoon"])) {
-                            if (strlen($_POST["telefoon"]) > 10) {
-                                print("Onjuist telefoonnummer");
-                            } else {
-                                if (strlen($_POST["telefoon"]) < 3) {
-                                    print("Onjuist telefoonnummer");
-                                }
-                                if (strlen($_POST["telefoon"]) <= 10) {
-                                   $telefoonnummer = $_POST["telefoon"];
-                                }
-                            }
-                        }
-                    }
-                }
+//                if (isset($_POST["telefoon"])) {
+//                    if (empty($_POST["telefoon"]) && empty($_POST["mail"])) {
+//                        print("Mail of telefoonnummer moet worden opgegeven.");
+//                    } else {
+//                        if (!empty($_POST["telefoon"])) {
+//                            if (strlen($_POST["telefoon"]) > 10) {
+//                                print("Onjuist telefoonnummer");
+//                            } else {
+//                                if (strlen($_POST["telefoon"]) < 3) {
+//                                    print("Onjuist telefoonnummer");
+//                                }
+//                                if (strlen($_POST["telefoon"]) <= 10) {
+//                                   $telefoonnummer = $_POST["telefoon"];
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
                 ?>
             </div>
 

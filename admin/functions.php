@@ -26,7 +26,7 @@ function getSocialInfo($platform, $option, $dbcon) {
 }
 
 function getAfspraakinfo ($dbcon, $page, $approved){
-    $rows = 25;
+    $rows = 10;
     if(isset($page)){
 
         $rowStart = $rows * ($page - 1);
@@ -171,7 +171,7 @@ function getEmployee_option ($dbcon) {
     }
 }
 
-function paginate ($dbcon){
+function paginateAppointments ($dbcon){
 
     if($_GET['approved'] == 1) {
         $sql = 'SELECT COUNT(*) as numberofrows FROM appointment where approved = 1';
@@ -183,14 +183,14 @@ function paginate ($dbcon){
     $data =  $stmt->fetch();
     $numberofrows = $data->numberofrows;
 
-    $rows = 25;
+    $rows = 10;
     $pages = ceil($numberofrows / $rows);
 
-
-    for($i = 1; $i <= $pages; $i++){
-        echo '<li class="page-item"><a class="page-link" href="?approved='.$_GET['approved'].'&page='.$i.'">'.$i.'</a></li>';
+    if($numberofrows > $rows) {
+        for($i = 1; $i <= $pages; $i++){
+            echo '<li class="page-item"><a class="page-link" href="?approved='.$_GET['approved'].'&page='.$i.'">'.$i.'</a></li>';
+        }
     }
-
 }
 
 function getUser ($dbcon){
@@ -347,8 +347,10 @@ function paginateMessage ($dbcon){
 
 
     //Echos a button with according page number for each page
-    for($i = 1; $i <= $pages; $i++){
-        echo '<li class="page-item"><a class="page-link" href="?page='.$i.'">'.$i.'</a></li>';
+    if($numberofrows > $rows) {
+        for($i = 1; $i <= $pages; $i++){
+            echo '<li class="page-item"><a class="page-link" href="?page='.$i.'">'.$i.'</a></li>';
+        }
     }
 
 }
@@ -950,4 +952,3 @@ function getTreatmentCategoryInfo ($dbcon, $id, $option) {
     echo $data->$option;
 }
 
-?>
