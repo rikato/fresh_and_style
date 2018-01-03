@@ -303,6 +303,7 @@ function getFeed_instagram($dbcon){
     //get the acess token from the database trought the getWebsiteInfo function.
     $access_token = getWebsiteInfo('instagramAccesToken', $dbcon);
 
+    //amount of pictures loaded from instagram
     $photo_count = 6;
 
     //Link to the api
@@ -315,7 +316,6 @@ function getFeed_instagram($dbcon){
 
 
     //Counter to assure there is only one active carousel item
-
     $i = 0;
 
     //Takes the photos and data out of array and makes them ready to be put in the carousel
@@ -325,7 +325,7 @@ function getFeed_instagram($dbcon){
         $pic_link = $post['link'];
         $pic_like_count = $post['likes']['count'];
         $pic_comment_count = $post['comments']['count'];
-        $pic_src = str_replace('http://', 'https://', $post['images']['low_resolution']['url']);
+        $pic_src = str_replace('http://', 'https://', $post['images']['standard_resolution']['url']);
         $pic_created_time = date('F j, Y', $post['caption']['created_time']);
         $pic_created_time = date('F j, Y', strtotime($pic_created_time . '+1 days'));
 
@@ -335,9 +335,9 @@ function getFeed_instagram($dbcon){
         }
 
         if ($i == 0) {
-            echo "<div class='carousel-item col-4 item active'>";
+            echo "<div class='carousel-item col-12 item active'>";
         } else {
-            echo "<div class='carousel-item col-4 item'>";
+            echo "<div class='carousel-item col-12 item'>";
         }
 
         echo "<div class='col-12 slider-item'>";

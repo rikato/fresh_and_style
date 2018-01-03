@@ -12,10 +12,6 @@
         exit;
     } else {
         if($_SESSION['user']);
-        
-        // De verbinding met de database wordt gelegd
-        $dbcon = new PDO ("mysql:host=localhost; dbname=fresh_and_style; port=3306", "root", "");
-    
         /*
          * Alle ingevoerde gegevens van de gebruiker worden opgeslagen in de
          * array POST. De verschillende invoervelden zijn gekoppeld aan vars

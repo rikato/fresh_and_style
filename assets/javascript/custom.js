@@ -23,7 +23,7 @@ $(document).ready( function() {
 
     // Makes the carousel auto rotate every 6 seconds
     $('.multi-item-carousel').carousel({
-        interval: 600000
+        interval: 6000
     });
 
 
@@ -66,14 +66,19 @@ $(document).ready( function() {
 
     });
 
+    if($("#txtEditor").length){
+        $("#txtEditor").Editor();
+
+        $("#save-wysiwyg-form").on('click', function(){
+            $('input.wysiwyg-value').attr('value', $("#txtEditor").Editor("getText"));
+            console.log($('input.wysiwyg-value').attr('value'));
+        })
+
+        var getText = $(".wysiwyg-value-current").attr("data-value");
+        $("#txtEditor").Editor("setText", getText);
+
+        $("a[title='Insert Image']").attr("data-target", "upload-image").attr("href", "").attr("data-toggle=", "modal");
+    }
 
 
-    $("#txtEditor").Editor();
-
-   $("#save-wysiwyg-form").on('click', function(){
-       $('input.wysiwyg-value').attr('value', $("#txtEditor").Editor("getText"));
-    })
-
-    var getText = $(".wysiwyg-value-current").attr("data-value");
-    $("#txtEditor").Editor("setText", getText);
 });

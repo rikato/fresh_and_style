@@ -45,7 +45,7 @@ include 'header.php';
 <!--Section for instagram live feed to show their work-->
 <section class="haircut-slider section gray">
     <div class="container">
-        <h2>Ons werk.</h2>
+<!--        <h2>Ons werk.</h2>-->
         <div class="row">
             <div class="col-md-12">
                 <div class="carousel slide multi-item-carousel" id="theCarousel" data-ride="carousel">

@@ -319,7 +319,8 @@ function getMessageInfo ($dbcon, $id, $option) {
 
 function updateMessage($dbcon){
     //Checks if the submit button is pressed and if the fields aren't empty
-    if (isset($_POST["sendMessage_edited"]) && isset($_POST["messageTitle"]) && isset($_POST["messageText"])) {
+    if (isset($_POST["sendMessage_edited"]) && isset($_POST["messageTitle"]) && isset($_POST["wysiwyg-value"])) {
+        echo 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
         $messageTitle = $_POST["messageTitle"];
         $messageText = $_POST["wysiwyg-value"];
 

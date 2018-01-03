@@ -15,7 +15,7 @@ function mediaform ($dbcon){
          foreach ($data as $photoInfo) {
               
              echo '<div><h1>'.$photoInfo->title.'</h1></div>';
-             echo '<img src= media/'.$photoInfo->url.'><br>';
+             echo '<img class="edit-image" src= ../media/'.$photoInfo->url.'><br>';
          
          }
          }
