@@ -23,7 +23,7 @@ include 'twitter.php';
         <link rel="stylesheet" href="assets/styles/custom.css">
     </head>
     <body class="gray body-page">
-        <header>
+        <header class="page-header">
             <div class="container d-flex d-flex-center">
                 <div class="header-holder">
                     <h1><?php echo getWebsiteInfo('title', $dbcon); ?></h1>
@@ -42,7 +42,7 @@ include 'twitter.php';
                 <a class="navbar-brand" href="#"></a>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link active" href="homepage_template.php">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link active" href="index.php">Home <span class="sr-only">(current)</span></a>
                         <a class="nav-item nav-link" href="products_template.php">Producten</a>
                         <a class="nav-item nav-link" href="blog.php">Berichten</a>
                     </div>

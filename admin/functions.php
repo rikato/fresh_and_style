@@ -320,15 +320,23 @@ function getMessageInfo ($dbcon, $id, $option) {
 function updateMessage($dbcon){
     //Checks if the submit button is pressed and if the fields aren't empty
     if (isset($_POST["sendMessage_edited"]) && isset($_POST["messageTitle"]) && isset($_POST["wysiwyg-value"])) {
-        echo 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
         $messageTitle = $_POST["messageTitle"];
         $messageText = $_POST["wysiwyg-value"];
+
 
         $sql = "UPDATE message SET title=?, message=? WHERE id=?";
         $stmt = $dbcon->prepare($sql);
         //Executes the SQL with the set values from the form.
         $stmt->execute([$messageTitle, $messageText, $_GET['id']]);
-        header('location:alterMessage.php');
+//        header('location:alterMessage.php');
+
+        if($_FILES['photo']['error'] <= 0){
+            $photo = $_FILES['photo']['name'];
+            $sql = "UPDATE message SET image=? WHERE id=?";
+            $stmt = $dbcon->prepare($sql);
+            //Executes the SQL with the set values from the form.
+            $stmt->execute([$photo, $_GET['id']]);
+        }
     }
 }
 
@@ -952,3 +960,59 @@ function getTreatmentCategoryInfo ($dbcon, $id, $option) {
     echo $data->$option;
 }
 
+function getMediaphotos($dbcon, $page){
+    $rows = 20;
+
+    //Determines which messages to display
+    if(isset($page)){
+        //Calculates where to start retrieving messages if the user is further than page 1
+        $rowstart = $rows * ($page - 1);
+
+        $sql = "SELECT * FROM media order by id DESC LIMIT $rowstart, $rows";
+        $stmt = $dbcon->prepare($sql);
+        $stmt -> execute();
+        $data = $stmt -> fetchall();
+
+    }else{
+        $sql = "SELECT * FROM media order by id DESC LIMIT $rows";
+        $stmt = $dbcon->prepare($sql);
+        $stmt -> execute();
+        $data = $stmt -> fetchall();
+    }
+
+
+
+    echo '<div class="media-pictures">';
+    foreach ($data as $photo) {
+
+        echo '<div class="media-pictures-container">';
+
+        echo '<a class="" href="mediaPhotosEdit.php?id='.$photo->id.'"><img class="img-fluid img-thumbnail media-photo" src=../media/'.$photo->url.'></a><br>';
+
+        echo '</div>';
+
+    }
+    echo '</div>';
+}
+
+function paginateMediaPhotos ($dbcon) {
+    //Gets the all the message data from the database
+    $sql = 'SELECT COUNT(*) as numberofrows FROM media';
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([]);
+    $data =  $stmt->fetch();
+    $numberofrows = $data->numberofrows;
+
+    //Set the amount of desired rows
+    $rows = 20;
+    //Calculates the amount of pages needed
+    $pages = ceil($numberofrows / $rows);
+
+
+    //Echos a button with according page number for each page
+    if($numberofrows > $rows) {
+        for($i = 1; $i <= $pages; $i++){
+            echo '<li class="page-item"><a class="page-link" href="?page='.$i.'">'.$i.'</a></li>';
+        }
+    }
+}

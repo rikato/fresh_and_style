@@ -377,12 +377,27 @@ function getEmployee_option ($dbcon) {
     }
 }
 
-function getBlogMessages($dbcon){
+function getBlogMessages($dbcon, $page){
+    //Set the amount of desired rows
     $rows = 5;
-    $sql = "SELECT * FROM message order by creationdate DESC LIMIT $rows";
-    $stmt = $dbcon->prepare($sql);
-    $stmt->execute([]);
-    $data = $stmt->fetchAll();
+
+    //Determines which messages to display
+    if(isset($page)){
+        //Calculates where to start retrieving messages if the user is further than page 1
+        $rowstart = $rows * ($page - 1);
+
+        $sql = "SELECT * FROM message order by creationdate DESC LIMIT $rowstart, $rows";
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute([]);
+        $data = $stmt->fetchAll();
+
+    }else{
+        $sql = "SELECT * FROM message order by creationdate DESC LIMIT $rows";
+        $stmt = $dbcon->prepare($sql);
+        $stmt -> execute();
+        $data = $stmt -> fetchall();
+    }
+
     foreach ($data as $message){
         $creationDateMysql = strtotime($message->creationdate);
         $creationDate = date("Y/m/d H:i", $creationDateMysql) ;
@@ -398,6 +413,7 @@ function getBlogMessage($dbcon){
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([$id]);
     $data = $stmt->fetch();
+    echo '<img height="250px" src="media/'.$data->image.'">';
     echo '<h1>'.$data->title.'</h1>';
     echo $data->message;
 }

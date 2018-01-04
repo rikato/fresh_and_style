@@ -17,7 +17,13 @@ include 'header.php';
     <h1>Blog</h1>
     <br>
     <div class="messages">
-        <?php getBlogMessages($dbcon); ?>
+        <?php
+            if(isset($_GET['page'])) {
+                getBlogMessages($dbcon, $_GET["page"]);
+            } else {
+                getBlogMessages($dbcon, 1);
+            }
+        ?>
     </div>
     <nav aria-label="Page navigation example">
         <ul class="pagination">

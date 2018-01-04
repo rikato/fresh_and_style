@@ -15,24 +15,47 @@
 <?php
 // Redirects the user to the previous page if there is no message is set.
 if(!(isset($_GET['id']))){
-    header("location: message.php");
+    header('location: alterMessage.php?id='.$_GET['id'].'');
 }
 ?>
 <!--Form in which the message contents are places and can be edited-->
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     <input type="hidden" name="name" value="<?php echo $_GET['id'];?>" required>
+
     <div class="form-group">
         <div class="form-group col-md-2">
             <label>Titel</label>
             <input type="text" class="form-control" name="messageTitle" value="<?php /*Retrieves the message title form the database*/ if(isset($_GET['id'])){getMessageInfo($dbcon, $_GET['id'], 'title');} ?>">
         </div>
-    </div>ll
+    </div>
 
     <!--Text editor that allows for text formatting-->
     <input hidden type="text" class="wysiwyg-value" name="wysiwyg-value" required>
     <div class="wysiwyg-value-current" data-value='<?php /*Retrieves the message contents form the database*/ if(isset($_GET['id'])){getMessageInfo($dbcon, $_GET['id'], 'message');} ?>'></div>
     <div class="form-group">
         <div id="txtEditor"></div>
+    </div>
+
+    Afbeelding:<br>
+    <?php
+
+    $sql = "SELECT image FROM message WHERE id = ?";
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$_GET['id']]);
+    $data = $stmt->fetch();
+    //if no image saved in database show message
+    //else show image
+    if (empty($data->image)){
+        echo 'Geen afbeelding geselecteerd.';
+    }else{
+        echo '<img height="250" src="../media/'.$data->image.'">';
+    }
+    ?>
+
+    <div class="form-group">
+        <div class="form-group">
+            <input type="file" name="photo" id="fileSelect" class="file-select">
+        </div>
     </div>
 
     <!--Button to submit the changes-->
@@ -45,23 +68,26 @@ if(!(isset($_GET['id']))){
 
 
 
+<?php
 
-    <div class="modal fade" id="upload-image" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Maak een afspraak</h5>
-                    <!--Button to close the popup-->
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    test
-                </div>
-            </div>
-        </div>
-    </div>
-
+if(isset($_POST['sendMessage_edited'])){
+    $name = $_FILES['photo']['name'];
+    $tmp_name = $_FILES['photo']['tmp_name'];
+    $userId = $_SESSION["id"];
+    if(isset($name)){
+        if(!(empty($name))){
+            $location = '../media/';
+            if(move_uploaded_file($tmp_name, $location.$name)){
+                echo $name.' geupload.';
+                $sql = "INSERT INTO media (url, createdby) VALUES (?, ?)";
+                $stmt = $dbcon->prepare($sql);
+                $stmt->execute([$name, $userId]);
+            }
+        }
+    }else{
+        echo 'Selecteer een bestand.';
+    }
+}
+?>
 
 <?php include "footer.php"; ?>

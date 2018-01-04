@@ -27,6 +27,10 @@ header {
     /*background: #000;*/
     margin-bottom: 56px;
 }
+
+header.homepage-header {
+    height: 25vh;
+}
 header nav {
     background: #fff;
 }
@@ -519,6 +523,10 @@ h1{
     padding-top: 25px;
 }
 
+.message{
+    padding-top: 25px;
+}
+
 .message-container{
     margin-bottom: 25px;
 }
@@ -528,7 +536,7 @@ h1{
 }
 
 input.file-select{
-    color: transparent;
+    /*color: transparent;*/
 }
 
 body.admin h1{

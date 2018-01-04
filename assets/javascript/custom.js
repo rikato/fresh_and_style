@@ -80,7 +80,14 @@ $(document).ready( function() {
         var getText = $(".wysiwyg-value-current").attr("data-value");
         $("#txtEditor").Editor("setText", getText);
 
-        $("a[title='Insert Image']").attr("data-target", "upload-image").attr("href", "").attr("data-toggle=", "modal");
+        // $("a[title='Insert Image']").attr("data-target", "upload-image").attr("href", "").attr("data-toggle=", "modal");
+        $("a[title='Insert Image']").remove();
+    }
+
+    //check if homepage
+    //this is for scaling the header on different pages.
+    if (!($(".homepage").length)) {
+        $("header.page-header").addClass("homepage-header");
     }
 
 

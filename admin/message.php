@@ -28,6 +28,8 @@ include "header.php";
     </ul>
 </nav>
 
+
+
 <!--Gets the messages from the database-->
 <?php
 // If you are on a page further than one the messages that should be on that page are loaded, if you are not yet on a further page the first set of messages is loaded
@@ -40,7 +42,7 @@ if(isset($_GET['page'])) {
 if(isset($_GET['deleteMessage'])){
     deleteMessage($dbcon, $_GET['deleteMessage']);
 }
-
+//if message is made place some text
 if(isset($_GET["addedMessage"])){
     echo '<span class="green">Bericht toegevoegd.</span>';
 }
