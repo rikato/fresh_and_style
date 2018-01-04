@@ -120,7 +120,8 @@ header .header-holder button{
 
 /*Zebra coloring for table*/
 .tarieven table tr:nth-child(odd) {
-    background: #F9F9F9;
+    background: rgba(255, 255, 255, 0.5686274509803921);
+
 }
 
 .tarieven ul li{
@@ -130,18 +131,19 @@ header .header-holder button{
 .tarieven .card-header h5 a{
     font-weight: 100;
     font-size: 25px;
-    color: #000;
+    color: #fff;
 }
 .tarieven .card-header h5 a:hover{
-    border-bottom: 1px solid #0000003d;
+    border-bottom: 1px solid #fff;
     text-decoration: none;
 }
 .tarieven .card{
     border-radius: 0;
     border: none;
+    background: rgba(255, 255, 255, 0.5215686274509804);
 }
 .tarieven .card-body{
-    background: #f7f7f7;
+    background: rgba(255, 255, 255, 0.5215686274509804);
 }
 .tarieven .card .collapse.show, .tarieven .card .collapsing{
     box-shadow: 0 18px 25px rgba(0, 0, 0, 0.04);
@@ -149,6 +151,7 @@ header .header-holder button{
 }
 .tarieven table{
     margin: 0;
+    background: rgba(255, 255, 255, 0.5215686274509804);
 }
 .tarieven .card-header{
     border: none;
@@ -196,6 +199,12 @@ header .header-holder button{
 .carousel-control i{
     color: #000;
     font-size: 25px;
+}
+
+.review button.make-review-button{
+    margin: 30px auto 0 auto;
+    display: flex;
+    justify-content: center;
 }
 
 /*twitter sectie*/
@@ -561,4 +570,26 @@ img.edit-image{
 .haircut-slider .carousel-item{
     margin: 0 auto;
     text-align: center;
+}
+footer.page-footer {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+footer.page-footer ul{
+    padding: 0;
+}
+
+@media screen and (max-width: 1020px) {
+    footer.page-footer p{
+        font-size: 13px;
+    }
+    footer.page-footer h2{
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 770px) {
+    footer ul li{
+        width: 100%;
+    }
 }
