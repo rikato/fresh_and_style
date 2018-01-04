@@ -161,6 +161,14 @@ header .header-holder button{
     box-shadow: 0 0px 18px rgba(0, 0, 0, 0.21);
 }
 /*review sectie*/
+
+section.review{
+    background: url(../../media/dscn1497.jpg) no-repeat fixed center center/cover;
+    color: #fff;
+}
+section.review .carousel-control i{
+    color: #fff;
+}
 .review h3.review-title{
     font-size: 25px;
     font-weight: 400;
@@ -578,6 +586,11 @@ footer.page-footer {
 footer.page-footer ul{
     padding: 0;
 }
+footer.page-footer a.get-location{
+    background: #dddddd;
+    color: black;
+    border: none;
+}
 
 @media screen and (max-width: 1020px) {
     footer.page-footer p{
@@ -592,4 +605,22 @@ footer.page-footer ul{
     footer ul li{
         width: 100%;
     }
+}
+
+
+/*buttons*/
+body.body-page .btn-outline-primary:hover {
+    color: #fff;
+    background-color: #ff00007a;
+    border-color: #ff0000;
+}
+
+body.body-page .btn.btn-primary:hover {
+    background: #b3b3b3;
+}
+
+body.body-page .btn.btn-primary{
+    background: #dddddd;
+    color: black;
+    border: none;
 }
