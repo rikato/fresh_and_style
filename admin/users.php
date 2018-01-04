@@ -36,6 +36,10 @@ echo '<th>';
 echo 'Naam';
 echo '</th>';
 
+echo '<th>';
+echo 'Acties';
+echo '</th>';
+
 echo '</tr>';
 foreach ($data as $user){
     echo '<tr>';
@@ -51,9 +55,16 @@ foreach ($data as $user){
     echo '<td>';
     echo $user->name;
     echo '</td>';
+    echo '<td>';
+    echo '<a class="table-action" onclick="return confirm(\'Gebruiker verwijderen?\')" href="?deleteUser='.$user->id.'"><i class="fa fa-trash" aria-hidden="true"></i></a>';
+    echo '</td>';
     echo '</tr>';
 }
 echo '</table>';
+
+if(isset($_GET['deleteUser'])){
+    deleteUser($dbcon, $_GET['deleteUser']);
+}
 
 ?>
 

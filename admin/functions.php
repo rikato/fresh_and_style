@@ -202,6 +202,17 @@ function getUser ($dbcon){
     echo $data->name;
 }
 
+function deleteUser ($dbcon, $user) {
+    if(!($user == 1)){
+        $sql = "DELETE FROM user WHERE id = ?";
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute([$user]);
+        header('location: users.php');
+    }else{
+        echo '<span class="red">U kunt deze gebruiker niet verwijderen.</span><br>';
+    }
+}
+
 function deleteAppointment ($dbcon, $appointment) {
     $sql = "DELETE FROM appointment WHERE id = ?";
     $stmt = $dbcon->prepare($sql);
@@ -1016,3 +1027,4 @@ function paginateMediaPhotos ($dbcon) {
         }
     }
 }
+
