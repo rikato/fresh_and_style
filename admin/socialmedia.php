@@ -8,6 +8,11 @@
 
 include 'header.php';
 ?>
+
+<?php
+//if not a beheerder relocate to admin.php
+userCheckBeheerder($dbcon);
+?>
 <h1>Social media</h1>
 
 <h2>Instagram</h2>

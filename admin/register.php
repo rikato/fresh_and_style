@@ -7,6 +7,8 @@
      */
 
     include "header.php";
+    //if not a beheerder relocate to admin.php
+    userCheckBeheerder($dbcon);
     if(!$_SESSION['user']){
         header('location: login.php');
         exit;
@@ -29,6 +31,7 @@
             $user = $_POST['user'];
             $pass = $_POST['pass'];
             $pass2 = $_POST['pass2'];
+            $function = $_POST['role_id'];
             
             // De database word voorbereid om de ingevoerde gebruikersnaam te controleren
             
@@ -48,6 +51,12 @@
                 $error = 'Het opgegeven emailadres is al geregistreerd<br>';
             }
             
+            // If there isn't a function selected, the user will see the notification below
+            
+            if($function == 0){
+                $error = "U heeft geen functie geselecteerd<br>";
+            }
+            
             // Het wachtwoord moet 2x ingevoerd worden, als ze niet overeenkomen
             // krijgt de gebruiker onderstaande melding te zien
             
@@ -55,17 +64,23 @@
                 $error = "De ingevoerde wachtwoorden komen niet overeen";
             }
             
-            // Onderstaande meldingen krijgt de gebruiker als er niet aan de
-            // opgestelde eisen van het wachtwoord word voldaan.
+            // Onderstaande meldingen krijgt de gebruiker te zien als er niet
+            // aan de opgestelde eisen van het wachtwoord word voldaan.
             
-            if (strlen($_POST["pass"]) < '8') {
+            if (strlen($pass) < '8') {
             $error = "Uw wachtwoord moet minimaal 8 karakters bevatten";
+            }
+            elseif (strlen($pass) > '12'){
+            $error = "Uw wachtwoord mag maximaal 12 karakters bevatten";
             }
             elseif(!preg_match("#[0-9]+#",$pass)) {
             $error = "Uw wachtwoord moet minimaal 1 nummer bevatten";
             }
             elseif(!preg_match("#[A-Z]+#",$pass)) {
             $error = "Uw wachtwoord moet minimaal 1 hoofdletter bevatten";
+            }
+            elseif(!preg_match("#\W+#",$pass)) {
+            $error = "Uw wachtwoord moet minimaal 1 speciaal karakter bevatten (# ? ! @ $ % ^ & * -)";
             }
             elseif(!preg_match("#[a-z]+#",$pass)) {
             $error = "Uw wachtwoord moet minimaal 1 kleine letter bevatten";
@@ -122,6 +137,12 @@ if(isset($error)){
 // Als er geen errors zijn en de gebruiker is toegevoegd dan word dat hieronder bevestigd.
 
 if(isset($result)){
+            $name = '';
+            $email = '';
+            $user = '';
+            $pass = '';
+            $pass2 = '';
+            $function = '';
     print "<span class='green'>Gebruiker is toegevoegd.</span>";
 }
 ?>
@@ -154,9 +175,10 @@ if(isset($result)){
             <div class="form-group col-md-12">
                 <label for="roleId">Selecteer een functie</label>
                 <select id="roleId" class="form-control" name="role_id">
-                    <option value="1">Beheerder</option>
-                    <option value="2">Redacteur</option>
-                    <option value="3">Kapper</option>
+                    <option value="0" >Maak een keuze</option>
+                    <option value="1" <?php if(isset($function) && $function == '1') {echo "selected=selected"; } ?>>Beheerder</option>
+                    <option value="2" <?php if(isset($function) && $function == '2') {echo "selected=selected"; } ?>>Redacteur</option>
+                    <option value="3" <?php if(isset($function) && $function == '3') {echo "selected=selected"; } ?>>Kapper</option>
                 </select>
             </div>
             <br>
@@ -169,11 +191,13 @@ if(isset($result)){
             Het wachtwoord moet bestaan uit:
             <br>
             <br>
-            Minimaal: <br>
-            - 8 karakters<br>
+            - minimaal 8 karakters<br>
             - 1 nummer<br>
             - 1 hoofdletter<br>
             - 1 kleine letter<br>
+            - 1 speciaal karakter<br>
+            &nbsp;&nbsp;(# ? ! @ $ % ^ & * -)<br>
+            - maximaal 12 karakters<br>
             <br>
             <br>
             <button class="btn btn-primary" type="submit" name="register" value="Registreer">Registreer</button>

@@ -8,6 +8,11 @@
 include 'header.php';
 ?>
 
+<?php
+//if not a beheerder relocate to admin.php
+userCheckBeheerder($dbcon);
+?>
+
 <h1>Instellingen</h1>
 <div class="option-container form-container">
     <form method="POST" action="">

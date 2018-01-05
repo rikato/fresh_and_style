@@ -344,17 +344,17 @@ function getFeed_instagram($dbcon){
 
         if ($c % 3 == 0) {echo "<div class='col-12 slider-item row'>";} else {}
         echo "<div class='col-xs'>";
-            echo "<a href='{$pic_link}' target='_blank'>";
-                echo "<img class='img-responsive photo-thumb slider-photo' style='margin-right: 10px;' src='{$pic_src}' alt='{$pic_text}'>";
-            echo "</a>";
-            echo "<p>";
-                echo "<p>";
-                    echo "<div style='color:#888;'>";
-                        echo "<a href='{$pic_link}' target='_blank'>{$pic_created_time}</a>";
-                    echo "</div>";
-                echo "</p>";
-                echo "<p>{$pic_text}</p>";
-            echo "</p>";
+        echo "<a href='{$pic_link}' target='_blank'>";
+        echo "<img class='img-responsive photo-thumb slider-photo' style='margin-right: 10px;' src='{$pic_src}' alt='{$pic_text}'>";
+        echo "</a>";
+        echo "<p>";
+        echo "<p>";
+        echo "<div style='color:#888;'>";
+        echo "<a href='{$pic_link}' target='_blank'>{$pic_created_time}</a>";
+        echo "</div>";
+        echo "</p>";
+        echo "<p>{$pic_text}</p>";
+        echo "</p>";
         echo "</div>";
 
         //Close the div's at the right point
@@ -430,26 +430,73 @@ function getEmployee_option ($dbcon) {
     }
 }
 
-function getMessages($dbcon){
-    $sql = 'SELECT * FROM message order by creationdate DESC';
-    $stmt = $dbcon->prepare($sql);
-    $stmt->execute([]);
-    $data = $stmt->fetchAll();
+function getBlogMessages($dbcon, $page){
+    //Set the amount of desired rows
+    $rows = 5;
+
+    //Determines which messages to display
+    if(isset($page)){
+        //Calculates where to start retrieving messages if the user is further than page 1
+        $rowstart = $rows * ($page - 1);
+
+        $sql = "SELECT * FROM message order by creationdate DESC LIMIT $rowstart, $rows";
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute([]);
+        $data = $stmt->fetchAll();
+
+    }else{
+        //if page is not set in the url get the first 5 messages from database
+        $sql = "SELECT * FROM message order by creationdate DESC LIMIT $rows";
+        $stmt = $dbcon->prepare($sql);
+        $stmt -> execute();
+        $data = $stmt -> fetchall();
+    }
+
     foreach ($data as $message){
+        //create a date format with php based on the date saved in the database
         $creationDateMysql = strtotime($message->creationdate);
         $creationDate = date("Y/m/d H:i", $creationDateMysql) ;
+        //place the message container containing the message title and creation date.
         echo '<div class="message-container">';
         echo '<h2><a href="?id='.$message->id.'">'.$message->title.'</a></h2>';
         echo '<span>'.$creationDate.'</span></div>';
     }
 }
-
-function getMessage1($dbcon){
+//get the selected blog post data
+function getBlogMessage($dbcon){
     $id = $_GET["id"];
     $sql = 'SELECT * FROM message where id = ?';
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([$id]);
     $data = $stmt->fetch();
+    //if blog post has an image place it if not do nothing
+    if (!(empty($data->image))){
+        echo '<img height="250" src="media/'.$data->image.'">';
+    }
+    //place the title of the blog
     echo '<h1>'.$data->title.'</h1>';
+    //place the message of the blog
     echo $data->message;
+}
+
+function paginateBlogMessages ($dbcon) {
+    //Gets the all the message data from the database
+    $sql = 'SELECT COUNT(*) as numberofrows FROM message';
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([]);
+    $data =  $stmt->fetch();
+    $numberofrows = $data->numberofrows;
+
+    //Set the amount of desired rows
+    $rows = 5;
+    //Calculates the amount of pages needed
+    $pages = ceil($numberofrows / $rows);
+
+
+    //Echos a button with according page number for each page
+    if($numberofrows > $rows) {
+        for($i = 1; $i <= $pages; $i++){
+            echo '<li class="page-item"><a class="page-link" href="?page='.$i.'">'.$i.'</a></li>';
+        }
+    }
 }

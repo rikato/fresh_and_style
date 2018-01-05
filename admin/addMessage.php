@@ -7,9 +7,15 @@
  */
 include 'header.php';
 ?>
+
+<?php
+//if not a redactuer or beheerder relocate to admin.php
+userCheckRedactuer($dbcon);
+?>
+
     <h1>Bericht aanmaken</h1>
 
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <input hidden type="text" class="wysiwyg-value" name="wysiwyg-value">
         <div class="form-group">
             <div class="form-group col-md-5">
@@ -27,11 +33,33 @@ include 'header.php';
             </div>
         </div>
         <div class="form-group">
+            <div class="form-group">
+                <input type="file" name="photo" id="fileSelect" class="file-select">
+            </div>
+        </div>
+        <div class="form-group">
             <div class="form-group col-md-2">
                 <button id="save-wysiwyg-form" type="submit" class="btn btn-primary" name="save-wysiwyg-form">Opslaan</button>
             </div>
         </div>
     </form>
+
+<?php
+
+if(isset($_POST['save-wysiwyg-form'])){
+    $name = $_FILES['photo']['name'];
+    $tmp_name = $_FILES['photo']['tmp_name'];
+    if(isset($name)){
+        if(!(empty($name))){
+            $location = '../media/';
+            move_uploaded_file($tmp_name, $location.$name);
+        }
+    }else{
+        echo 'Selecteer een bestand.';
+    }
+}
+?>
+
 
 <?php
 if(isset($_POST["save-wysiwyg-form"])){
@@ -43,16 +71,20 @@ if(isset($_POST["save-wysiwyg-form"])){
         $visible = 0;
     }
 
-    if(!(empty($title)) && !(empty($message))){
-        $sql = "INSERT INTO message (title, message, visible) VALUES (?, ?, ?)";
+    if(!(empty($title)) && !(empty($message)) && $_FILES['photo']['error'] <= 0){
+        $photo = $_FILES['photo']['name'];
+        $sql = "INSERT INTO message (title, message, visible, image) VALUES (?, ?, ?, ?)";
         $stmt = $dbcon->prepare($sql);
-        $stmt->execute([$title, $message, $visible]);
+        $stmt->execute([$title, $message, $visible, $photo]);
         header("location: message.php?addedMessage");
     }else{
         echo '<span class="red">Vul alle velden in.</span>';
     }
 
+
 }
 ?>
+
+
 
 <?php include 'footer.php';?>

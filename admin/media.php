@@ -16,4 +16,18 @@ include 'header.php';
     </li>
 </ul>
 
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <?php paginateMediaPhotos($dbcon); ?>
+    </ul>
+</nav>
+
+<?php
+    if(isset($_GET['page'])) {
+        getMediaphotos($dbcon, $_GET['page']);
+    } else {
+        getMediaphotos($dbcon, 1);
+    }
+?>
+
 <?php include 'footer.php'; ?>

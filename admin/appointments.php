@@ -1,5 +1,10 @@
 <?php include 'header.php'; ?>
 
+<?php
+    //if not a kapper of beheerder relocate to admin.php
+    userCheckKapper($dbcon);
+?>
+
 <ul class="nav nav-tabs">
     <li class="nav-item">
         <a class="nav-link" href="addAppointment.php">Maak een afspraak</a>
@@ -16,7 +21,7 @@
 
 <nav aria-label="Page navigation example">
     <ul class="pagination">
-        <?php paginate($dbcon); ?>
+        <?php paginateAppointments($dbcon); ?>
     </ul>
 </nav>
 
@@ -37,7 +42,7 @@
 
 <nav aria-label="Page navigation example">
     <ul class="pagination">
-        <?php paginate($dbcon); ?>
+        <?php paginateAppointments($dbcon); ?>
     </ul>
 </nav>
 

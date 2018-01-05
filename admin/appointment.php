@@ -9,6 +9,11 @@
 include 'header.php';
 ?>
 
+<?php
+//if not a kapper of beheerder relocate to admin.php
+userCheckKapper($dbcon);
+?>
+
 <h1>Afspraak #<?php echo $_GET['id'] ?></h1>
 
 <?php

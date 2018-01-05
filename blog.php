@@ -11,14 +11,26 @@ include 'header.php';
 <div class="container">
 <?php if(isset($_GET["id"])) : ?>
     <div class="message">
-        <?php getMessage1($dbcon); ?>
+        <?php getBlogMessage($dbcon); ?>
     </div>
 <?php else : ?>
     <h1>Blog</h1>
     <br>
     <div class="messages">
-        <?php getMessages($dbcon); ?>
+        <?php
+            if(isset($_GET['page'])) {
+                getBlogMessages($dbcon, $_GET["page"]);
+            } else {
+                getBlogMessages($dbcon, 1);
+            }
+        ?>
     </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <?php paginateBlogMessages($dbcon); ?>
+        </ul>
+    </nav>
+
 <?php endif; ?>
 </div>
 

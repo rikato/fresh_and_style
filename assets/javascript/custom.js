@@ -21,6 +21,11 @@ $(document).ready( function() {
         $(hash).modal('toggle');
     }
 
+    // Makes the carousel auto rotate every 6 seconds
+    $('.multi-item-carousel').carousel({
+        interval: 6000
+    });
+
 
     // For every slide in carousel, copy the next slide's picture in the slide.
     // Do this over for every cycle.
@@ -46,19 +51,22 @@ $(document).ready( function() {
     //getting the geolaction of a user
     function getLocation() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
+            navigator.geolocation.getCurrentPosition(function (position){
+                //if user allows geoLocation go to google maps with directions.
+                window.location = "https://www.google.com/maps/dir/?api=1&origin="+position.coords.latitude+","+position.coords.longitude+"&destination=52.697959,6.190004";
+            },function(positionError) {
+                //if user does not allow geoLocation go to google maps without directions.
+                window.location = "https://www.google.nl/maps/place/Fresh+%26+Style+Hairfashion/@52.6979623,6.1878158,17z/data=!3m1!4b1!4m5!3m4!1s0x47c8728e186b4e55:0xe1862690480f4768!8m2!3d52.6979591!4d6.1900045";
+            });
         } else {
-            alert("Helaas ondersteund uw browser dit niet.");
+            //if browser does not support geoLocation go to google maps without directions.
+            window.location = "https://www.google.nl/maps/place/Fresh+%26+Style+Hairfashion/@52.6979623,6.1878158,17z/data=!3m1!4b1!4m5!3m4!1s0x47c8728e186b4e55:0xe1862690480f4768!8m2!3d52.6979591!4d6.1900045";
         }
     }
-    function showPosition(position) {
-        window.location = "https://www.google.com/maps/dir/?api=1&origin="+position.coords.latitude+","+position.coords.longitude+"&destination=52.697959,6.190004";
-    }
-
+    //when user clicks on 'routebeschrijving' button prevent button from actually being clicked and then initiate the getLocation function.
     $("a.get-location").on("click", function(e) {
         e.preventDefault();
         getLocation();
-
     });
 
     if($("#txtEditor").length){
@@ -72,8 +80,14 @@ $(document).ready( function() {
         var getText = $(".wysiwyg-value-current").attr("data-value");
         $("#txtEditor").Editor("setText", getText);
 
-        $("a[title='Insert Image']").attr("data-target", "upload-image").attr("href", "").attr("data-toggle=", "modal");
+        // $("a[title='Insert Image']").attr("data-target", "upload-image").attr("href", "").attr("data-toggle=", "modal");
+        $("a[title='Insert Image']").remove();
     }
 
+    //check if homepage
+    //this is for scaling the header on different pages.
+    if (!($(".homepage").length)) {
+        $("header.page-header").addClass("homepage-header");
+    }
 
 });

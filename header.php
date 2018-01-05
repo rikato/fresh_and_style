@@ -16,14 +16,14 @@ include 'twitter.php';
     <head>
         <meta charset="UTF-8">
         <title><?php //@TODO current page title  ?></title>
-
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!--stylesheets-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="assets/styles/custom.css">
     </head>
-    <body class="gray">
-        <header>
+    <body class="gray body-page">
+        <header class="page-header">
             <div class="container d-flex d-flex-center">
                 <div class="header-holder">
                     <h1><?php echo getWebsiteInfo('title', $dbcon); ?></h1>
@@ -42,7 +42,7 @@ include 'twitter.php';
                 <a class="navbar-brand" href="#"></a>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link active" href="homepage_template.php">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link active" href="index.php">Home <span class="sr-only">(current)</span></a>
                         <a class="nav-item nav-link" href="products_template.php">Producten</a>
                         <a class="nav-item nav-link" href="blog.php">Berichten</a>
                     </div>

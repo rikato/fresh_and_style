@@ -8,35 +8,33 @@
 
 ?>
 
-<footer id="footer" class="gray">
-    <div class="container">
-        <ul class="small-block-grid-1 medium-block-grid-3 appels footer-r">
-            <li>
-                <div class="holder">
-                    <h3>Adres</h3>
-                    <p><?php echo getWebsiteInfo('adres', $dbcon); ?></p>
-                    <p><?php echo getWebsiteInfo('postalcode', $dbcon); ?> <?php echo getWebsiteInfo('city', $dbcon); ?></p>
-                    <p><a class="get-location btn btn-primary" href="">Routebeschrijving</a></p>
-                </div>
-            </li>
-            <li>
-                <div class="holder">
-                    <h3>Contact</h3>
-                    <p>Tel: <?php echo getWebsiteInfo('telephone', $dbcon); ?></p>
-                    <p><?php echo getWebsiteInfo('email', $dbcon); ?></p>
-                </div>
-            </li>
-            <li>
-                <div class="holder">
-                    <h3>Openingstijden</h3>
-                    <p>Maandag: Gesloten</p>
-                    <p>Dinsdag t/m donderdag: 09:00-18:00</p>
-                    <p>Vrijdag: 09:00-21:00</p>
-                    <p>Zaterdag: 09:00-17:00</p>
-                </div>
-            </li>
-        </ul>
-    </div>
+<footer id="footer" class="gray page-footer">
+    <ul>
+        <li>
+            <div class="holder">
+                <h3>Adres</h3>
+                <p><?php echo getWebsiteInfo('adres', $dbcon); ?></p>
+                <p><?php echo getWebsiteInfo('postalcode', $dbcon); ?> <?php echo getWebsiteInfo('city', $dbcon); ?></p>
+                <p><a class="get-location btn btn-primary" href="">Routebeschrijving</a></p>
+            </div>
+        </li>
+        <li>
+            <div class="holder">
+                <h3>Contact</h3>
+                <p>Tel: <?php echo getWebsiteInfo('telephone', $dbcon); ?></p>
+                <p><?php echo getWebsiteInfo('email', $dbcon); ?></p>
+            </div>
+        </li>
+        <li>
+            <div class="holder">
+                <h3>Openingstijden</h3>
+                <p>Maandag: Gesloten</p>
+                <p>Dinsdag t/m donderdag: 09:00-18:00</p>
+                <p>Vrijdag: 09:00-21:00</p>
+                <p>Zaterdag: 09:00-17:00</p>
+            </div>
+        </li>
+    </ul>
 </footer>
 
 

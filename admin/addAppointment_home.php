@@ -7,6 +7,11 @@
  */
 include 'header.php'; ?>
 
+<?php
+//if not a kapper or beheerder relocate to admin.php
+userCheckKapper($dbcon);
+?>
+
 <ul class="nav nav-tabs">
     <li class="nav-item">
         <a class="nav-link" href="addAppointment.php">Maak een afspraak</a>
