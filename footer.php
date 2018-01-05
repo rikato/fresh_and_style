@@ -73,7 +73,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputState">Kapper</label>
-                            <select id="inputState" class="form-control" name="appointment-kapper">
+                            <select id="inputState" class="custom-select filter-select form-control" name="appointment-kapper">
                                 <option selected value="0">Geen voorkeur</option>
                                 <!--Gets all the employee info from the database and creates selectable options-->
                                 <?php
@@ -84,7 +84,7 @@
 
                         <div class="col-md-12">
                             <label for="appointment-input-date">Datum*</label>
-                            <input type="date" format="DD-MM-YYYY" min="2018-01-01" class="form-control" id="appointment-input-date" name="appointment-date" required>
+                            <input type="date" format="DD-MM-YYYY" min="2018-01-01" class="form-control filter-select" id="appointment-input-date" name="appointment-date" required>
                         </div>
 
                         <div class="col-md-8">

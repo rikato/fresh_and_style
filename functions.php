@@ -114,8 +114,8 @@ function getProduct($dbcon ,$page){
 
     //If the user goes to the next page the next set of items is loaded
 
-    //if the product category is set we will only show the product with the corresponding category.
-    //if product category is not set show the first 8 products
+    //If the product category is set we will only show the product with the corresponding category.
+    //If product category is not set show the first 8 products
 
     if(isset($page)){
         //If a category is selected only loads items from that category
@@ -126,7 +126,7 @@ function getProduct($dbcon ,$page){
             $rowstart = $rows * ($page - 1);
 
             $category = $_GET['productCategory'];
-            $sql = "SELECT * FROM product where active = 1 and product_category = ? order by id LIMIT $rowstart ,$rows";
+            $sql = "SELECT * FROM product where product_category = ? order by id LIMIT $rowstart ,$rows";
             $stmt = $dbcon->prepare($sql);
             $stmt->execute([$category]);
             $data = $stmt->fetchAll();
@@ -136,7 +136,7 @@ function getProduct($dbcon ,$page){
             //Calculates where to start retrieving data
             $rowstart = $rows * ($page - 1);
 
-            $sql = "SELECT * FROM product where active = 1 order by id LIMIT $rowstart ,$rows";
+            $sql = "SELECT * FROM product order by id LIMIT $rowstart ,$rows";
             $stmt = $dbcon->prepare($sql);
             $stmt->execute();
             $data = $stmt->fetchAll();
@@ -145,19 +145,19 @@ function getProduct($dbcon ,$page){
         //If a category is selected only loads items from that category
         if (isset($_GET['productCategory']) && $_GET['productCategory']> 0) {
             $category = $_GET['productCategory'];
-            $sql = 'SELECT * FROM product where active = 1 and product_category = ? order by id LIMIT 8';
+            $sql = 'SELECT * FROM product where product_category = ? order by id LIMIT 8';
             $stmt = $dbcon->prepare($sql);
             $stmt->execute([$category]);
             $data = $stmt->fetchAll();
         } else {
-            $sql = 'SELECT * FROM product where active = 1 order by id LIMIT 8';
+            $sql = 'SELECT * FROM product order by id LIMIT 8';
             $stmt = $dbcon->prepare($sql);
             $stmt->execute([$_GET['productCategory']]);
             $data = $stmt->fetchAll();
         }
     }
 
-    // start counter at 1 because 0 % 3 is equal to 0
+    //Counter to make good looking rows
     $i = 1;
     $cutRow = 4;
 
@@ -187,7 +187,7 @@ function getProduct($dbcon ,$page){
     }
 }
 
-//adding paginate to the product page
+//Adding paginate to the product page
 //this function gets the amount of rows from the products table and counts them based on this number we make a sum, number of rows / the amount of items
 function paginateProduct ($dbcon){
     //Gets the all the product data from the database
@@ -195,12 +195,12 @@ function paginateProduct ($dbcon){
     if (isset($_GET['productCategory']) && $_GET['productCategory'] > 0) {
         $var = $_GET['productCategory'];
 
-        $sql = 'SELECT COUNT(*) as numberofrows FROM product where active = 1 and product_category = ?';
+        $sql = 'SELECT COUNT(*) as numberofrows FROM product where product_category = ?';
         $stmt = $dbcon->prepare($sql);
         $stmt->execute([$var]);
         $data = $stmt->fetch();
     } else {
-        $sql = 'SELECT COUNT(*) as numberofrows FROM product where active = 1';
+        $sql = 'SELECT COUNT(*) as numberofrows FROM product';
         $stmt = $dbcon->prepare($sql);
         $stmt->execute();
         $data = $stmt->fetch();
@@ -300,10 +300,10 @@ function makeReview($dbcon){
 
 //Function to load the last instagram photo's
 function getFeed_instagram($dbcon){
-    //get the acess token from the database trought the getWebsiteInfo function.
+    //get the access token from the database trough the getWebsiteInfo function.
     $access_token = getWebsiteInfo('instagramAccesToken', $dbcon);
 
-    //amount of pictures loaded from instagram
+    //Amount of pictures loaded from instagram
     $photo_count = 6;
 
     //Link to the api
@@ -315,8 +315,9 @@ function getFeed_instagram($dbcon){
     $obj = json_decode($json, true, 512, JSON_BIGINT_AS_STRING);
 
 
-    //Counter to assure there is only one active carousel item
+    //Counters to assure there is only one active carousel item and the div's are placed correctly
     $i = 0;
+    $c = 0;
 
     //Takes the photos and data out of array and makes them ready to be put in the carousel
     foreach ($obj['data'] as $post) {
@@ -325,39 +326,91 @@ function getFeed_instagram($dbcon){
         $pic_link = $post['link'];
         $pic_like_count = $post['likes']['count'];
         $pic_comment_count = $post['comments']['count'];
-        $pic_src = str_replace('http://', 'https://', $post['images']['standard_resolution']['url']);
+        $pic_src = str_replace('http://', 'https://', $post['images']['low_resolution']['url']);
         $pic_created_time = date('F j, Y', $post['caption']['created_time']);
         $pic_created_time = date('F j, Y', strtotime($pic_created_time . '+1 days'));
 
-        //IF the text under the picture is longer than 40 characters cuts it off and adds ...
+        //If the text under the picture is longer than 40 characters cuts it off and adds ...
         if (strlen($pic_text) > 40) {
             $pic_text = substr($pic_text, 0, 37) . '...';
         }
 
+        //Place div's at the right point
         if ($i == 0) {
             echo "<div class='carousel-item col-12 item active'>";
-        } else {
+        } elseif ($i == 3) {
             echo "<div class='carousel-item col-12 item'>";
         }
 
-        echo "<div class='col-12 slider-item'>";
+        if ($c % 3 == 0) {echo "<div class='col-12 slider-item row'>";} else {}
+        echo "<div class='col-xs'>";
+        echo "<a href='{$pic_link}' target='_blank'>";
+        echo "<img class='img-responsive photo-thumb slider-photo' style='margin-right: 10px;' src='{$pic_src}' alt='{$pic_text}'>";
+        echo "</a>";
+        echo "<p>";
+        echo "<p>";
+        echo "<div style='color:#888;'>";
+        echo "<a href='{$pic_link}' target='_blank'>{$pic_created_time}</a>";
+        echo "</div>";
+        echo "</p>";
+        echo "<p>{$pic_text}</p>";
+        echo "</p>";
+        echo "</div>";
+
+        //Close the div's at the right point
+        if ($c == 2) {
+            echo "</div>";
+            echo "</div>";
+        } elseif ($c == 5) {
+            echo "</div>";
+            echo "</div>";
+        }
+
+        $i++;
+        $c++;
+    }
+}
+
+function getFeed_instagram2(){
+        $access_token = "291877665.1677ed0.6d4bd68d72e54d81a3a4390e3eb48c60";
+        $photo_count = 3;
+
+        $json_link = "https://api.instagram.com/v1/users/self/media/recent/?";
+        $json_link .= "access_token={$access_token}&count={$photo_count}";
+
+        $json = file_get_contents($json_link);
+        $obj = json_decode($json, true, 512, JSON_BIGINT_AS_STRING);
+
+        //print_r($obj);
+
+        foreach ($obj['data'] as $post) {
+                $pic_text = $post['caption']['text'];
+                $pic_link = $post['link'];
+                $pic_like_count = $post['likes']['count'];
+                $pic_comment_count = $post['comments']['count'];
+                $pic_src = str_replace('http://', 'https://', $post['images']['low_resolution']['url']);
+                $pic_created_time = date('F j, Y', $post['caption']['created_time']);
+                $pic_created_time = date('F j, Y', strtotime($pic_created_time . '+1 days'));
+                if (strlen($pic_text) > 40) {
+                        $pic_text = substr($pic_text, 0, 37) . '...';
+                }
+
+        echo "<div class='col-md-4 col-sm-4 col-xs-2 item_box'>";
             echo "<a href='{$pic_link}' target='_blank'>";
                 echo "<img class='img-responsive photo-thumb' src='{$pic_src}' alt='{$pic_text}'>";
             echo "</a>";
-            //echo "<p>";
-                //echo "<p>";
-                    //echo "<div style='color:#888;'>";
-                        //echo "<a href='{$pic_link}' target='_blank'>{$pic_created_time}</a>";
-                    //echo "</div>";
-                //echo "</p>";
-               // echo "<p>{$pic_text}</p>";
-            //echo "</p>";
-        echo "</div>";
+            echo "<p>";
+                echo "<p>";
+                    echo "<div style='color:#888;'>";
+                        echo "<a href='{$pic_link}' target='_blank'>{$pic_created_time}</a>";
+                    echo "</div>";
+                echo "</p>";
+                echo "<p>{$pic_text}</p>";
+            echo "</p>";
         echo "</div>";
 
-        $i++;
-    }
-}
+     }
+ }
 
 function getEmployee_option ($dbcon) {
     //Gets all the employees form the database

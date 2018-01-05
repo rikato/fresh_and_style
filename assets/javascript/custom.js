@@ -90,5 +90,4 @@ $(document).ready( function() {
         $("header.page-header").addClass("homepage-header");
     }
 
-
 });
