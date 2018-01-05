@@ -723,6 +723,39 @@ function getTreatmentCategoryInfo ($dbcon, $id, $option) {
     echo $data->$option;
 }
 
+//get the role id form logged in user
+function userRightsCheck ($dbcon) {
+    $sql = 'select id from role where id = ( select role_id from user where user = ? );';
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$_SESSION['user']]);
+    $data = $stmt->fetch();
+    return $data->id;
+}
+
+//check if beheerder if not relocate to admin.php
+function userCheckBeheerder ($dbcon) {
+    $roleId = userRightsCheck($dbcon);
+    if (!($roleId == 1)){
+        header('location: admin.php');
+    }
+}
+
+//check if radacteur or beheerder if not relocate to admin.php
+function userCheckRedactuer ($dbcon) {
+    $roleId = userRightsCheck($dbcon);
+    if (!($roleId == 2 || $roleId == 1)){
+        header('location: admin.php');
+    }
+}
+
+//check if kapper or beheerder if not relocate to admin.php
+function userCheckKapper ($dbcon) {
+    $roleId = userRightsCheck($dbcon);
+    if (!($roleId == 3 || $roleId == 1)){
+        header('location: admin.php');
+    }
+}
+
 //code jozef
 
 function maakAfspraak1() {
@@ -1030,3 +1063,5 @@ function paginateMediaPhotos ($dbcon) {
         }
     }
 }
+
+

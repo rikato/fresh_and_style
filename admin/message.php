@@ -8,6 +8,11 @@
 include "header.php";
 ?>
 
+<?php
+//if not a redactuer or beheerder relocate to admin.php
+userCheckRedactuer($dbcon);
+?>
+
 <!--Navigation tabs for the message menu-->
 <ul class="nav nav-tabs">
     <li class="nav-item">

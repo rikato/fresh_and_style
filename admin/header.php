@@ -32,30 +32,44 @@ include 'functions.php';
         <li class="nav-item">
             <a class="nav-link active" href="admin.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="message.php"><i class="fa fa-thumb-tack" aria-hidden="true"></i> Berichten</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="media.php"><i class="fa fa-file-image-o" aria-hidden="true"></i> Media</a>
-        </li>
-<!--        <li class="nav-item">-->
-<!--            <a class="nav-link" href="#"><i class="fa fa-file" aria-hidden="true"></i> Pagina's</a>-->
-<!--        </li>-->
-        <li class="nav-item">
-            <a class="nav-link" href="addAppointment.php"><i class="fa fa-scissors" aria-hidden="true"></i> Afspraken</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fa fa-comment" aria-hidden="true"></i> Reviews</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="socialmedia.php"><i class="fa fa-instagram" aria-hidden="true"></i> Socialmedia</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="users.php"><i class="fa fa-users" aria-hidden="true"></i> Gebruikers</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="settings.php"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
-        </li>
+        <?php $roleId = userRightsCheck($dbcon); if($roleId == 1) : ?>
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="message.php"><i class="fa fa-thumb-tack" aria-hidden="true"></i> Berichten</a>-->
+<!--            </li>-->
+            <li class="nav-item">
+                <a class="nav-link" href="media.php"><i class="fa fa-file-image-o" aria-hidden="true"></i> Media</a>
+            </li>
+            <!--        <li class="nav-item">-->
+            <!--            <a class="nav-link" href="#"><i class="fa fa-file" aria-hidden="true"></i> Pagina's</a>-->
+            <!--        </li>-->
+            <li class="nav-item">
+                <a class="nav-link" href="addAppointment.php"><i class="fa fa-scissors" aria-hidden="true"></i> Afspraken</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="message.php"><i class="fa fa-thumb-tack" aria-hidden="true"></i> Berichten</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fa fa-comment" aria-hidden="true"></i> Reviews</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="socialmedia.php"><i class="fa fa-instagram" aria-hidden="true"></i> Socialmedia</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="users.php"><i class="fa fa-users" aria-hidden="true"></i> Gebruikers</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="settings.php"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
+            </li>
+            <?php $roleId = userRightsCheck($dbcon); elseif($roleId == 2) : ?>
+            <li class="nav-item">
+                <a class="nav-link" href="message.php"><i class="fa fa-thumb-tack" aria-hidden="true"></i> Berichten</a>
+            </li>
+            <?php $roleId = userRightsCheck($dbcon); elseif($roleId == 3) : ?>
+            <li class="nav-item">
+                <a class="nav-link" href="addAppointment.php"><i class="fa fa-scissors" aria-hidden="true"></i> Afspraken</a>
+            </li>
+        <?php endif; ?>
+
     </ul>
 </nav>
 <div class="menu-back"></div>

@@ -9,6 +9,11 @@
 include 'header.php';
 ?>
 
+<?php
+//if not a beheerder relocate to admin.php
+userCheckBeheerder($dbcon);
+?>
+
 <h1>Gebruikers</h1>
 <?php
 

@@ -12,34 +12,87 @@
 <body class="admin gray">
 
 <?php
-    session_start();
+session_start();
     include '../config.php';
+    
+        // Sets variables when button is clicked
+    
         if (isset($_POST['Login'])){
             $error = "";
+            $clean = '0';
             $user = $_POST['Username'];
             $pass = $_POST['Password'];
+                        
+            if ($pass == "")
+                $error = 'Vul een wachtwoord in<br>';
             
             if ($user == "")
                 $error = 'Vul een gebruikersnaam in<br>';
             
-            if ($pass == "")
-                $error = 'Vul een wachtwoord in<br>';
+            // When username and password aren't empty, belows code will be executed
             
             if($error == ''){
-			$stmt = $dbcon->prepare('SELECT id,user,pass FROM user WHERE user = :user');
+                
+                // Checks user input given in the form with information in the database
+                
+                $current_date = date('Y-m-d H:i:s');
+                $login_attempt_date = date('Y-m-d H:i:s');
+                        $stmt = $dbcon->prepare('SELECT id,user,pass,login_attempts,login_attempt_date FROM user WHERE user = :user');
 			$stmt->bindParam(':user', $user);
 			$stmt->execute();
 			$results = $stmt->fetch(PDO::FETCH_ASSOC);
-			if(count($results) > 0 && password_verify($pass, $results['pass'])){
+                        $login_attempt_date_db = $results['login_attempt_date'];
+                        $login_attempt_date_db_plus_five = date("Y-m-d H:i:s", strtotime($login_attempt_date_db . '+5 minutes'));
+                        
+                        // Checks if the given username & password matches in the database
+                        // Then it checks if the user matches our security guidelines before giving access to the adminpanel
+                        
+                        if(count($results ? : [] ) > 0 && password_verify($pass, $results['pass'])){
+                            if($results['login_attempts'] >= 3 && $current_date < $login_attempt_date_db_plus_five){
+                                $stmt = $dbcon->prepare('UPDATE user SET login_attempt_date = :login_attempt_date WHERE user = :user');
+                                $stmt->bindParam(':user', $user);
+                                $stmt->bindParam(':login_attempt_date', $login_attempt_date);
+                                $stmt->execute();
+                                $error = 'U heeft minimaal 3 foutieve loginpogingen en bent daarom gedurende 5 minuten lang geblokkeerd.';
+                            } else {
+                                $stmt = $dbcon->prepare('UPDATE user SET login_attempts = :clean WHERE user = :user');
+                                $stmt->bindParam(':user', $user);
+                                $stmt->bindParam(':clean', $clean);
+                                $stmt->execute();
 				$_SESSION['user'] = $results['user'];
-				$_SESSION['id'] = $results['id'];
 				header('location: admin.php');
 				exit;
-			}else{
-				$error = 'Gebruikersnaam of wachtwoord niet gevonden.';
+                            }
+                        } else {
+                            $error = 'Gebruikersnaam of wachtwoord niet gevonden';
+                        }
+                        
+			if(count($results ? : [] ) > 0 && !password_verify($pass, $results['pass'])) {
+                            if($current_date >= $login_attempt_date_db_plus_five){
+                                $stmt = $dbcon->prepare('UPDATE user SET login_attempts = :clean WHERE user = :user');
+                                $stmt->bindParam(':user', $user);
+                                $stmt->bindParam(':clean', $clean);
+                                $stmt->execute();
+                            }
+                            $stmt = $dbcon->prepare('UPDATE user SET login_attempts = login_attempts + 1, login_attempt_date = :login_attempt_date WHERE user = :user');
+                            $stmt->bindParam(':user', $user);
+                            $stmt->bindParam(':login_attempt_date', $login_attempt_date);
+                            $stmt->execute();
+                            $stmt = $dbcon->prepare('SELECT login_attempts,login_attempt_date FROM user WHERE user = :user');
+                            $stmt->bindParam(':user', $user);
+                            $stmt->execute();
+                            $results = $stmt->fetch(PDO::FETCH_ASSOC);
+                            if(count($results ? : [] ) > 0 && $results['login_attempts'] <= 2){
+                            $error = 'Dit is uw ' . $results['login_attempts'] . 'e' . ' foutieve loginpoging.<br><br>'
+                                    . 'Bij minimaal 3 foutieve loginpogingen zult u gedurende 5 minuten lang geblokkeerd zijn.';
+
+                        }if(count($results ? : [] ) > 0 && $results['login_attempts'] >= 3){
+                            $error = 'U heeft minimaal 3 foutieve loginpogingen en bent daarom gedurende 5 minuten lang geblokkeerd.<br>';                           
+                            }
+                        }
+				
             }
         }
-    }
 ?>
  <div class="login-container">
 
@@ -61,6 +114,8 @@
 
          <button type="submit" class="btn btn-primary" name="Login">Login</button>
      </form>
+     <br>
+     <a href=forgotpassword.php>Wachtwoord vergeten?</a>
  </div>
     </div>
 

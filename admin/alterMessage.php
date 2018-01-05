@@ -1,5 +1,10 @@
 <?php include "header.php"; ?>
 
+<?php
+//if not a redactuer or beheerder relocate to admin.php
+userCheckRedactuer($dbcon);
+?>
+
 <!--Navigation tabs for the message menu-->
 <ul class="nav nav-tabs">
     <li class="nav-item">
@@ -73,16 +78,10 @@ if(!(isset($_GET['id']))){
 if(isset($_POST['sendMessage_edited'])){
     $name = $_FILES['photo']['name'];
     $tmp_name = $_FILES['photo']['tmp_name'];
-    $userId = $_SESSION["id"];
     if(isset($name)){
         if(!(empty($name))){
             $location = '../media/';
-            if(move_uploaded_file($tmp_name, $location.$name)){
-                echo $name.' geupload.';
-                $sql = "INSERT INTO media (url, createdby) VALUES (?, ?)";
-                $stmt = $dbcon->prepare($sql);
-                $stmt->execute([$name, $userId]);
-            }
+            move_uploaded_file($tmp_name, $location.$name);
         }
     }else{
         echo 'Selecteer een bestand.';

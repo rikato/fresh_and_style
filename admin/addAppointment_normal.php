@@ -7,6 +7,11 @@
  */
 include 'header.php'; ?>
 
+<?php
+//if not a kapper or beheerder relocate to admin.php
+userCheckKapper($dbcon);
+?>
+
 <ul class="nav nav-tabs">
     <li class="nav-item">
         <a class="nav-link" href="addAppointment.php">Maak een afspraak</a>
@@ -37,7 +42,7 @@ include 'header.php'; ?>
 
         <!--naam-->
         <div class="form-group">
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-5">
                 <label for="appointment-input-name"></label>
                 Naam<input required type="text" class="form-control" id="appointment-input-naam" name="naam" placeholder="voornaam achternaam"value="<?php
                 $naam = "";
@@ -62,7 +67,7 @@ include 'header.php'; ?>
             </div>
 
             <!--datum-->
-            <div class="col-md-2">
+            <div class="col-md-5">
                 <label for="inputState">Datum</label>
                 <input required type="date" format="DD-MM-YYYY" class="form-control" name="datum" value="<?php
                 if (isset($_POST["datum"])) {
@@ -86,7 +91,7 @@ include 'header.php'; ?>
             </div>
 
             <!--BeginTijd-->
-            <div class="col-md-2">
+            <div class="col-md-5">
                 <label for="inputState"></label>
                 Begintijd<input class="form-control" type="time" name="BeginTijd" value="<?php
                 if (isset($_POST["BeginTijd"])) {
@@ -109,7 +114,7 @@ include 'header.php'; ?>
             </div>
             <br>
             <!--EindTijd-->
-            <div class="col-md-2">
+            <div class="col-md-5">
                  <label for="inputState"></label>
                  Eindtijd<input class="form-control" type="time" name="EindTijd" id="Tijd2" value="<?php
                  if (isset($_POST["EindTijd"])) {
@@ -132,7 +137,7 @@ include 'header.php'; ?>
             </div>
             <br>
             <!--mail-->
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-5">
                 <label for="appointment-input-email">Email</label>
                 <input type="email" class="form-control" id="appointment-input-email" placeholder="example@gmail.com" name="mail" value="<?php
                 if (isset($_POST["mail"])) {
@@ -157,7 +162,7 @@ include 'header.php'; ?>
             </div>
 
             <!--telefoonnummer-->
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-5">
                 <label for="appointment-input-email">Telefoonnummer</label>
                 <input type="tel" placeholder="0123-12345678" maxlength="12" class="form-control" name="telefoon" value="<?php
                 $telefoon = "";
@@ -192,7 +197,7 @@ include 'header.php'; ?>
             </div>
 
             <!--kapper/kapster-->
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-5">
                 <label for="inputState">Kapper</label>
                 <?php $kapper = ""; ?>
                 <select id="inputState" class="form-control" name="kapper" value = "kapper" id = "kapper">
