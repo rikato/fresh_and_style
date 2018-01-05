@@ -11,6 +11,6 @@
 <div class="admin-bar">
     <span>Beheerpaneel </span><a href="../homepage_template.php">Website bekijken</a>
 <div class="welcome-user">
-    <a href="logout.php">Uitloggen </a><span>Welkom <?php getUser($dbcon); ?> <img src="http://placehold.it/200x200" height="18" alt=""></span>
+    <a href="logout.php">Uitloggen </a><span>Welkom <?php getUser($dbcon); ?></span>
 </div>
 </div>

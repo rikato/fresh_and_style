@@ -8,6 +8,11 @@
 
 include 'header.php'; ?>
 
+<?php
+//if not a beheerder relocate to admin.php
+userCheckBeheerder($dbcon);
+?>
+
 <!--Function to send the updated category to the database when the submit button is pressed-->
 <?php updateTreatmentCategory($dbcon); ?>
 

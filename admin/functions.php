@@ -623,6 +623,7 @@ function addAppointment_normal($dbcon) {
                 $stmt = $dbcon->prepare($sql);
                 $stmt->execute([$name, $date, $begin, $eind, $mail, $telefoonnummer, $kapper, 0]);
 
+                header('location: addAppointment_normal.php');
             }
         }
     }
@@ -645,7 +646,7 @@ function addAppointment_home($dbcon) {
                 $sql = "INSERT INTO appointment (name, date, startTime, endTime, email, telnumber, kapper, postcode, adres, rede, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $dbcon->prepare($sql);
                 $stmt->execute([$name, $date, $begin, $eind, $mail, $telefoonnummer, $kapper, $postcode, $adres, "Opgegeven door admin/kapper", 0]);
-
+                header('location: addAppointment_home.php');
             }
         }
     }
