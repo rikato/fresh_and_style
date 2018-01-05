@@ -8,6 +8,11 @@
 
 include 'header.php'; ?>
 
+<?php
+//if not a beheerder relocate to admin.php
+userCheckBeheerder($dbcon);
+?>
+
 <!--Navigation tabs for the treatment category menu-->
 <ul class="nav nav-tabs">
     <li class="nav-item">

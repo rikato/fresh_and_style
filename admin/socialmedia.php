@@ -24,10 +24,10 @@ userCheckBeheerder($dbcon);
                 <label for="instagram-access-token">Access token:</label>
                 <input required id="instagram-access-token" class="form-control" type="text" name="instagram-access-token" value="<?php getWebsiteInfo('instagramAccesToken', $dbcon ); ?>">
             </div>
-            <div class="form-group col-md-12">
-                <label for="instagram-photo-count">Aantal foto's:</label>
-                <input required id="instagram-photo-count"  class="form-control" type="number" name="instagram-photo-count" value="<?php getWebsiteInfo('instagramPhotoCount', $dbcon ); ?>">
-            </div>
+<!--            <div class="form-group col-md-12">-->
+<!--                <label for="instagram-photo-count">Aantal foto's:</label>-->
+<!--                <input required id="instagram-photo-count"  class="form-control" type="number" name="instagram-photo-count" value="--><?php //getWebsiteInfo('instagramPhotoCount', $dbcon ); ?><!--">-->
+<!--            </div>-->
         </div>
 
         <button type="submit" class="btn btn-primary" name="save-instagram">Opslaan</button>

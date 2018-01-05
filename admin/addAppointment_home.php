@@ -45,7 +45,7 @@ userCheckKapper($dbcon);
                 <br><b><div class="afspraak-container>"<b> Afspraakgegevens</b></b>
 
                 <?php /*                     * **************************** datum ***************************** */ ?>
-                <div class="col-md-2">
+                <div class="col-md-5">
                     <label for="inputState">Datum</label>
                     <input type="date" format="DD-MM-YYYY" class="form-control" name="datum" value="<?php
                     if (isset($_POST["datum"])) {
@@ -69,7 +69,7 @@ userCheckKapper($dbcon);
                 </div>
 
                 <?php /*                     * **************************** BeginTijd ***************************** */ ?>
-                <div class="col-md-2">
+                <div class="col-md-5">
                     <label for="inputState"></label>
                     Begintijd<input class="form-control" type="time" name="BeginTijd" value="<?php
                     if (isset($_POST["BeginTijd"])) {
@@ -93,7 +93,7 @@ userCheckKapper($dbcon);
                 <br>
 
                 <?php /*                     * **************************** EindTijd ***************************** */ ?>
-                <div class="col-md-2">
+                <div class="col-md-5">
                     <label for="inputState"></label>
                     Eindtijd<input class="form-control" type="time" name="EindTijd" id="Tijd2" value="<?php
                     if (isset($_POST["EindTijd"])) {
@@ -116,7 +116,7 @@ userCheckKapper($dbcon);
                 </div><br>
 
                 <?php /*                     * **************************** kapper/kapster ***************************** */ ?>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-5">
                     <label for="inputState">Kapper</label>
                     <?php $kapper = ""; ?>
                     <select id="inputState" class="form-control" name = "kapper" value = "kapper" id = "kapper">
@@ -249,124 +249,7 @@ userCheckKapper($dbcon);
             </form>
         </div>
         <br>
-        <?php
 
-        ///////////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////// functie ////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////
-
-        function maakAfspraak2() {
-
-            // *************** $functionName ***************
-            $functionNaam = "";
-            if (isset($_POST["naam"])) {
-                if (empty($_POST["naam"])) {
-                    $functionNaam = "";
-                } else {
-                    $functionNaam = $_POST["naam"];
-                }
-            }
-
-            // *************** $functionDate ***************
-            $functionDate = "";
-            if (isset($_POST["datum"])) {
-                if (empty($_POST["datum"])) {
-                    $functionDate = "";
-                } else {
-                    $functionDate = $_POST["datum"];
-                }
-            }
-
-            // *************** $StartTime ***************
-            $StartTime = "";
-            if (isset($_POST["BeginTijd"])) {
-                if (empty($_POST["BeginTijd"])) {
-                    $StartTime = "";
-                } else {
-                    $StartTime = $_POST["BeginTijd"];
-                }
-            }
-
-            // *************** $EndTime ***************
-            $EndTime = "";
-            if (isset($_POST["EindTijd"])) {
-                if (empty($_POST["EindTijd"])) {
-                    $EndTime = "";
-                } else {
-                    $EndTime = $_POST["EindTijd"];
-                }
-            }
-
-            // *************** $functionMail ***************
-            $functionMail = "";
-            if (isset($_POST["mail"])) {
-                if (empty($_POST["mail"])) {
-                    $functionMail = "";
-                } else {
-                    $functionMail = $_POST["mail"];
-                }
-            }
-
-
-            // *************** $functionTelephone ***************
-            $functionTelephone = "";
-            if (isset($_POST["telefoon"])) {
-                if (empty($_POST["telefoon"])) {
-                    $functionTelephone = "";
-                } else {
-                    $functionTelephone = $_POST["telefoon"];
-                }
-            }
-
-            // *************** $functionPostcode ***************
-            $functionPostcode = "";
-            if (isset($_POST["postcode"])) {
-                if (empty($_POST["postcode"])) {
-                    $functionPostcode = "";
-                } else {
-                    $functionPostcode = $_POST["postcode"];
-                }
-            }
-
-            // *************** $functionAdres ***************
-            $functionAdres = "";
-            if (isset($_POST["adres"])) {
-                if (empty($_POST["adres"])) {
-                    $functionAdres = "";
-                } else {
-                    $functionAdres = $_POST["adres"];
-                }
-            }
-
-            // *************** $functionBarber ***************
-            $functionBarber = "";
-            if (isset($_POST["kapper"])) {
-                $functionBarber = $_POST["kapper"];
-            }
-
-            print("Afspraak (bij klant thuis) gemaakt voor " . $functionNaam . " op " . $functionDate . " van " . $StartTime . " tot " . $EndTime . " uur, bij kapper/kapster: " . $functionBarber . ".");
-            if (isset($_POST["mail"])) {
-                if (!empty($_POST["mail"])) {
-                    print(" Mail klant: ");
-                    print($_POST["mail"]);
-                } else {
-                    if (!empty($_POST["telefoon"]) || !empty($_POST["mail"])) {
-                        print("Mail niet opgegeven.");
-                    }
-                }
-            }
-            if (isset($_POST["telefoon"])) {
-                if (!empty($_POST["telefoon"])) {
-                    print(" Telefoonnummer klant: ");
-                    print($_POST["telefoon"]);
-                } else {
-                    if (!empty($_POST["telefoon"]) || !empty($_POST["mail"])) {
-                        print("Telefoonnummer niet opgegeven.");
-                    }
-                }
-            }
-        }
-        ?>
         <?php
         if (isset($_POST["naam"]) && !empty($_POST["naam"]) && isset($_POST["datum"]) && !empty($_POST["datum"]) && isset($_POST["BeginTijd"]) && !empty($_POST["BeginTijd"]) && isset($_POST["EindTijd"]) && !empty($_POST["EindTijd"]) && !empty($_POST["postcode"]) && !empty($_POST["adres"])) {
             if (!empty($_POST["telefoon"]) || !empty($_POST["mail"])) {
