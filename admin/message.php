@@ -41,6 +41,7 @@ if(isset($_GET['deleteMessage'])){
     deleteMessage($dbcon, $_GET['deleteMessage']);
 }
 
+//Message to notify the user the message was added successfully
 if(isset($_GET["addedMessage"])){
     echo '<span class="green">Bericht toegevoegd.</span>';
 }

@@ -27,6 +27,7 @@ include 'functions.php';
 
 <?php include 'adminbar.php'; ?>
 
+<!--Navigation for the admin page-->
 <nav class="side-nav">
     <ul class="nav">
         <li class="nav-item">
@@ -42,10 +43,16 @@ include 'functions.php';
             <a class="nav-link" href="#"><i class="fa fa-file" aria-hidden="true"></i> Pagina's</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="addAppointment.php"><i class="fa fa-scissors" aria-hidden="true"></i> Afspraken</a>
+            <a class="nav-link" href="addAppointment.php"><i class="fa fa-address-book" aria-hidden="true"></i> Afspraken</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#"><i class="fa fa-comment" aria-hidden="true"></i> Reviews</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="treatment.php"><i class="fa fa-scissors" aria-hidden="true"></i> Behandelingen</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="products.php"><i class="fa fa-beer" aria-hidden="true"></i> Producten</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="socialmedia.php"><i class="fa fa-instagram" aria-hidden="true"></i> Socialmedia</a>
@@ -56,6 +63,10 @@ include 'functions.php';
         <li class="nav-item">
             <a class="nav-link" href="settings.php"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="documentation.php"><i class="fa fa-book" aria-hidden="true"></i> Documentatie</a>
+        </li>
+
     </ul>
 </nav>
 <div class="menu-back"></div>

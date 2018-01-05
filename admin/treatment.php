@@ -8,7 +8,7 @@
 
 include 'header.php'; ?>
 
-<!--Navigation tabs for the message menu-->
+<!--Navigation tabs for the treatment menu-->
 <ul class="nav nav-tabs">
     <li class="nav-item">
         <a class="nav-link" href="treatment.php">Behandelingen</a>

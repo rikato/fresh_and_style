@@ -18,19 +18,20 @@ $connection = new TwitterOAuth($consumer_key, $consumer_secret, $access_token, $
 $content = $connection->get('account/verify_credentials');
 
 //Loads the  recent tweets, the count parameter sets how many tweets to load
-$tweets = $connection->get('statuses/home_timeline', ["count" => 3, "exclude_replies" => TRUE]);
+$tweets = $connection->get('statuses/user_timeline', ["count" => 3, "exclude_replies" => TRUE]);
 
 //Function that gets the tweets out of the array and makes them ready to be loaded on the page
 function getTweets ($tweets){
     foreach ($tweets as $tweet) {
-        //created date to time format
+        //Created date to time format
         $date = strtotime($tweet->created_at);
-        //username of tweet
+
         echo '<div class="tweet">';
+        //Username of tweet
         echo '<div class="tweet-user"><a target="_blank" href="https://twitter.com/'.$tweet->user->screen_name.'">'.$tweet->user->name.'</a><span> @'.$tweet->user->screen_name.'</span></div>';
-        //tweet text
+        //Tweet text
         echo '<div class="tweet-text">'.$tweet->text.'</div>';
-        //tweet date
+        //Tweet date
         echo '<div class="tweet-date">'.date('d-m-Y h:i:s',$date).'</div>';
         echo '</div>';
     }

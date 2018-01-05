@@ -11,19 +11,20 @@ include 'header.php'; ?>
 <!--Function to send the updated treatment to the database when the submit button is pressed-->
 <?php updateTreatment($dbcon); ?>
 
+<!--Form to edit or add a treatment-->
 <form method="post" action="">
     <div class="form-group">
         <div class="form-group col-md-2">
             <label>Naam</label>
-            <input type="text" class="form-control" name="treatmentName" value="<?php /*Retrieves the treatment name form the database*/ if(isset($_GET['id'])){getTreatmentInfo($dbcon, $_GET['id'], 'name');} ?>">
+            <input type="text" class="form-control" name="treatmentName" value="<?php /*Retrieves the treatment name form the database*/ if(isset($_GET['id'])){getTreatmentInfo($dbcon, $_GET['id'], 'name');} ?>" required>
         </div>
         <div class="form-group col-md-2">
             <label>Prijs</label>
-            <input type="text" class="form-control" name="treatmentPrice" value="<?php /*Retrieves the treatment price form the database*/ if(isset($_GET['id'])){getTreatmentInfo($dbcon, $_GET['id'], 'price');} ?>">
+            <input type="number" class="form-control" name="treatmentPrice" value="<?php /*Retrieves the treatment price form the database*/ if(isset($_GET['id'])){getTreatmentInfo($dbcon, $_GET['id'], 'price');} ?>" required>
         </div>
         <div class="form-group col-md-3">
             <label>Categorie</label><br>
-            <select name="treatmentCategory" class="custom-select">
+            <select name="treatmentCategory" class="custom-select" required>
                 <!--Gets all the categories from the database and creates selectable options-->
                 <?php
                 getTreatmentCategory_select($dbcon);
