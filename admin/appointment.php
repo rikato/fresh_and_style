@@ -75,6 +75,38 @@ userCheckKapper($dbcon);
             echo '</tr>';
         }
         echo '</table>';
+        //If the appointment is set for at home, show that info too
+        if (!empty($afspraak->rede)) {
+            echo '<table class="table">';
+            echo '<tr>';
+
+            echo '<th>';
+            echo 'Adres';
+            echo '</th>';
+
+            echo '<th>';
+            echo 'Postcode';
+            echo '</th>';
+
+            echo '<th>';
+            echo 'Rede';
+            echo '</th>';
+
+            echo '</tr>';
+            foreach ($data as $afspraak){
+                echo '<tr>';
+                echo '<td>';
+                echo $afspraak->adres;
+                echo '</td>';
+                echo '<td>';
+                echo $afspraak->postcode;
+                echo '</td>';
+                echo '<td>';
+                echo $afspraak->rede;
+                echo '</td>';
+                echo '</tr>';
+            }
+        }
     }
 ?>
 

@@ -65,6 +65,9 @@ include 'functions.php';
                 <a class="nav-link" href="users.php"><i class="fa fa-users" aria-hidden="true"></i> Gebruikers</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="employees.php"><i class="fa fa-user-circle" aria-hidden="true"></i> Medewerkers</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="settings.php"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
             </li>
             <?php $roleId = userRightsCheck($dbcon); elseif($roleId == 2) : ?>

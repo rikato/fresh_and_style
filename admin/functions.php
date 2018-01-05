@@ -76,6 +76,10 @@ function getAfspraakinfo ($dbcon, $page, $approved){
     echo '</th>';
 
     echo '<th>';
+    echo 'Aan huis';
+    echo '</th>';
+
+    echo '<th>';
     echo 'Acties';
     echo '</th>';
 
@@ -103,6 +107,16 @@ function getAfspraakinfo ($dbcon, $page, $approved){
         echo '<td>';
         echo $afspraak->creationdate;
         echo '</td>';
+        //If the appointment is set for at home print a house icon
+        if (!empty($afspraak->rede)) {
+            echo '<td>';
+            echo '<i class="fa fa-home" aria-hidden="true"></i>';
+            echo '</td>';
+        } else {
+            echo '<td>';
+            echo '';
+            echo '</td>';
+        }
         echo '<td>';
         if($approved == 0){echo '<a class="table-action" onclick="return confirm(\'Afspraak bevestigen?\')" href="?approved='.$_GET['approved'].'&approveAppointment='.$afspraak->id.'"><i class="fa fa-check" aria-hidden="true"></i></a>';}
         echo '<a class="table-action" onclick="return confirm(\'Afspraak verwijderen?\')" href="?approved='.$_GET['approved'].'&deleteAppointment='.$afspraak->id.'"><i class="fa fa-trash" aria-hidden="true"></i></a>';
@@ -1309,7 +1323,7 @@ function getProductCategory_select($dbcon){
 
     //For each category makes a selectable option
     foreach ($data as $category){
-        //makes the treatment category selected
+        //makes the product category selected
         if ($_GET['categoryId'] == $category->id) {
             echo '<option selected value="'. $category->id .'">'. $category->name .'</option>';
         } else {
@@ -1324,7 +1338,7 @@ function getProductCategory($dbcon, $page){
 
     //Determines which product categories to display
     if (isset($page)) {
-        //Calculates where to start retrieving treatment categories if the user is further than page 1
+        //Calculates where to start retrieving product categories if the user is further than page 1
         $rowstart = $rows * ($page - 1);
 
         $sql = "SELECT * FROM product_category LIMIT $rowstart, $rows";
@@ -1361,7 +1375,7 @@ function getProductCategory($dbcon, $page){
         echo $category->name;
         echo "</td>";
 
-        //Echoes the buttons to edit or delete a treatment category.
+        //Echoes the buttons to edit or delete a product category.
         echo '<td>';
         echo '<a class="table-action" href="productCategoryEdit.php?id='.$category->id.'"><i class="fa fa-pencil" aria-hidden="true"></i></a>';
         echo '<a class="table-action" onclick="return confirm(\'Product categorie verwijderen?\')" href="?deleteProductCategory='.$category->id.'"><i class="fa fa-trash" aria-hidden="true"></i></a>';
@@ -1408,7 +1422,7 @@ function deleteProductCategory($dbcon, $id) {
     $numberofrows = $data->numberofrows;
 
     if ($numberofrows == 0) {
-        //Deletes the selected treatment
+        //Deletes the selected caegory
         $sql = "DELETE FROM product_category WHERE id = ?";
         $stmt = $dbcon->prepare($sql);
         $stmt->execute([$id]);
@@ -1447,6 +1461,141 @@ function updateProductCategory($dbcon){
 
 function getProductCategoryInfo ($dbcon, $id, $option) {
     $sql = "SELECT $option FROM product_category WHERE id = ?";
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$id]);
+    $data = $stmt->fetch();
+    echo $data->$option;
+}
+
+function getEmployees($dbcon, $page){
+    //Set the amount of desired rows
+    $rows = 10;
+
+    //Determines which employees to display
+    if (isset($page)) {
+        //Calculates where to start retrieving treatment categories if the user is further than page 1
+        $rowstart = $rows * ($page - 1);
+
+        $sql = "SELECT * FROM employee LIMIT $rowstart, $rows";
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute();
+        $data = $stmt->fetchall();
+
+    } else {
+        $sql = "SELECT * FROM employee LIMIT $rows";
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute();
+        $data = $stmt->fetchall();
+    }
+
+    //Echoes a table header for all the columns
+    echo "<table class='table'>";
+    echo "<tr>";
+
+    echo "<th>";
+    echo "Naam";
+    echo "</th>";
+
+    echo '<th>';
+    echo 'Acties';
+    echo '</th>';
+
+    echo '</tr>';
+
+    //Echoes the data of each employee in a table row
+    foreach ($data as $employee){
+        echo '<tr>';
+
+        echo "<td>";
+        echo $employee->name;
+        echo "</td>";
+
+        //Echoes the buttons to edit or delete an employee.
+        echo '<td>';
+        echo '<a class="table-action" href="employeeEdit.php?id='.$employee->id.'"><i class="fa fa-pencil" aria-hidden="true"></i></a>';
+        echo '<a class="table-action" onclick="return confirm(\'Medewerker verwijderen?\')" href="?deleteEmployee='.$employee->id.'"><i class="fa fa-trash" aria-hidden="true"></i></a>';
+        echo '</td>';
+
+        echo '</tr>';
+    }
+
+    echo '</table>';
+}
+
+function paginateEmployees($dbcon) {
+    //Gets the all the employee data from the database
+    $sql = "SELECT COUNT(*) as numberofrows FROM employee";
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([]);
+    $data =  $stmt->fetch();
+    $numberofrows = $data->numberofrows;
+
+
+    //Set the amount of desired rows
+    $rows = 10;
+    //Calculates the amount of pages needed
+    $pages = ceil($numberofrows / $rows);
+
+
+    if ($pages == 1) {
+        //This is left empty so if there is only on page needed the page button does't show
+    } else {
+        //Echos a button with according page number for each page
+        for ($i = 1; $i <= $pages; $i++) {
+            echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+        }
+    }
+}
+
+function deleteEmployee($dbcon, $id) {
+    //Check if the employee still has appointments scheduled
+    $sql = "SELECT COUNT(*) as numberofrows FROM appointment WHERE kapper = ?";
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$id]);
+    $data = $stmt->fetch();
+
+    $numberofrows = $data->numberofrows;
+
+    if ($numberofrows == 0) {
+        //Deletes the selected employee
+        $sql = "DELETE FROM employee WHERE id = ?";
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute([$id]);
+        header('location: employees.php');
+    } elseif ($numberofrows > 0) {
+        //Notifies the user the employee still has appointments scheduled
+        echo '<span class="red">De medewerker heeft nog afspraken gepland</span>';
+    }
+}
+
+function updateEmployee($dbcon){
+    //Check what to use, update for edit or insert for create
+    if(isset($_GET['id'])) {
+        //Checks if the submit button is pressed and if the fields aren't empty
+        if (isset($_POST["sendEmployee_edited"]) && isset($_POST["employeeName"])) {
+            $employeeName = $_POST["employeeName"];
+
+            $sql = "UPDATE employee SET name=? WHERE id=?";
+            $stmt = $dbcon->prepare($sql);
+            //Executes the SQL with the set values from the form.
+            $stmt->execute([$employeeName, $_GET['id']]);
+            header('location:employees.php');
+        }
+    } else {
+        if (isset($_POST["sendEmployee_edited"]) && isset($_POST["employeeName"])) {
+            $employeeName = $_POST["employeeName"];
+
+            $sql = "INSERT INTO employee (name) VALUES (?)";
+            $stmt = $dbcon->prepare($sql);
+            //Executes the SQL with the set values from the form.
+            $stmt->execute([$employeeName]);
+            header('location:employees.php');
+        }
+    }
+}
+
+function getEMPLOYEEInfo ($dbcon, $id, $option) {
+    $sql = "SELECT $option FROM employee WHERE id = ?";
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([$id]);
     $data = $stmt->fetch();

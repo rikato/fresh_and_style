@@ -270,11 +270,11 @@ function addAppointment($dbcon){
             //executes the SQL with the data provided by the user in the form
             $stmt->execute([$appointmentName, $appointmentEmail, $appointmentTelnr, $appointmentAddress, $appointmentZip, $appointmentKapper, $appointmentRede, $appointmentDate, 0]);
 
-            header('location:homepage_template.php');
+            header('location:index.php');
 
 
         } else {
-            header('location:homepage_template.php#maakAfspraak');
+            header('location:index.php#maakAfspraak');
         }
     }
 }
