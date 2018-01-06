@@ -371,47 +371,6 @@ function getFeed_instagram($dbcon){
     }
 }
 
-function getFeed_instagram2(){
-        $access_token = "291877665.1677ed0.6d4bd68d72e54d81a3a4390e3eb48c60";
-        $photo_count = 3;
-
-        $json_link = "https://api.instagram.com/v1/users/self/media/recent/?";
-        $json_link .= "access_token={$access_token}&count={$photo_count}";
-
-        $json = file_get_contents($json_link);
-        $obj = json_decode($json, true, 512, JSON_BIGINT_AS_STRING);
-
-        //print_r($obj);
-
-        foreach ($obj['data'] as $post) {
-                $pic_text = $post['caption']['text'];
-                $pic_link = $post['link'];
-                $pic_like_count = $post['likes']['count'];
-                $pic_comment_count = $post['comments']['count'];
-                $pic_src = str_replace('http://', 'https://', $post['images']['low_resolution']['url']);
-                $pic_created_time = date('F j, Y', $post['caption']['created_time']);
-                $pic_created_time = date('F j, Y', strtotime($pic_created_time . '+1 days'));
-                if (strlen($pic_text) > 40) {
-                        $pic_text = substr($pic_text, 0, 37) . '...';
-                }
-
-        echo "<div class='col-md-4 col-sm-4 col-xs-2 item_box'>";
-            echo "<a href='{$pic_link}' target='_blank'>";
-                echo "<img class='img-responsive photo-thumb' src='{$pic_src}' alt='{$pic_text}'>";
-            echo "</a>";
-            echo "<p>";
-                echo "<p>";
-                    echo "<div style='color:#888;'>";
-                        echo "<a href='{$pic_link}' target='_blank'>{$pic_created_time}</a>";
-                    echo "</div>";
-                echo "</p>";
-                echo "<p>{$pic_text}</p>";
-            echo "</p>";
-        echo "</div>";
-
-     }
- }
-
 function getEmployee_option ($dbcon) {
     //Gets all the employees form the database
     $sql = 'SELECT * FROM employee';
@@ -500,3 +459,11 @@ function paginateBlogMessages ($dbcon) {
         }
     }
 }
+
+//encode strings which contain html entities to string.
+function encode($str){
+    if(is_string($str)) {
+        return htmlentities($str, ENT_NOQUOTES | ENT_HTML5, 'ISO-8859-1');
+    }
+}
+

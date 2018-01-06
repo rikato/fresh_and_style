@@ -123,6 +123,9 @@
                     <!--Notifies the user certain fields must be filled in to continue-->
                     <p>Velden met * zijn verplicht.</p>
                     <!--Button to call the addAppointment() function-->
+                    <p>
+                        * U hoort zo snel mogelijk welke tijden beschikbaar zijn op de datum van uw voorkeur, of welke opties we voor u hebben.
+                    </p>
                     <button type="submit" class="btn btn-primary" name="appointment-submit">Verstuur</button>
                 </form>
             </div>
@@ -141,22 +144,28 @@
             </div>
             <div class="modal-body">
                 <form id="make-review" action="" method="post">
-                    Naam: <input type="text" name="review-name">
-                    <br>
-                    Titel: <input type="text" name="review-title">
-                    <br>
-                    Review: <textarea name="review-textarea" rows="4" cols="50">
-                    </textarea>
-                    <br>
-                    Je cijfer:
-                    <input name="star" type="radio" value="0">
-                    <input name="star" type="radio" value="1">
-                    <input name="star" type="radio" value="2">
-                    <input name="star" type="radio" value="3">
-                    <input name="star" type="radio" value="4">
-                    <input name="star" type="radio" value="5">
-                    <br>
-                    <input type="submit" name="make-review-submit" value="Verzenden" id="make-review-submit">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            Naam: <input required class="form-control" type="text" name="review-name">
+                        </div>
+                        <div class="form-group col-md-12">
+                            Titel: <input required class="form-control" type="text" name="review-title">
+                        </div>
+                        <div class="form-group col-md-12 form-control">
+                            Review: <textarea required name="review-textarea" rows="4" cols="50">
+                        </textarea>
+                        </div>
+                        <div class="form-group col-md-12">
+                            Je cijfer:
+                            <input required name="star" type="radio" value="1">
+                            <input name="star" type="radio" value="2">
+                            <input name="star" type="radio" value="3">
+                            <input name="star" type="radio" value="4">
+                            <input name="star" type="radio" value="5">
+                        </div>
+
+                        <input type="submit" class="btn btn-primary" name="make-review-submit" value="Verzenden" id="make-review-submit">
+                    </div>
                 </form>
                 <?php
                     makeReview($dbcon);

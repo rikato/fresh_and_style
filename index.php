@@ -34,15 +34,6 @@ include 'header.php';
     </div>
 </section>
 
-<!--<section class="section haircut gray">
-    <div class="container">
-        <h2>Ons werk</h2>
-        <div class="row">
-            <?php //getFeed_instagram2(); ?>
-        </div>
-    </div>
-</section>-->
-
 <!--Section for instagram live feed to show their work-->
 <section class="haircut-slider section gray">
     <div class="container">

@@ -50,7 +50,7 @@ include 'functions.php';
                 <a class="nav-link" href="message.php"><i class="fa fa-thumb-tack" aria-hidden="true"></i> Berichten</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-comment" aria-hidden="true"></i> Reviews</a>
+                <a class="nav-link" href="confirmedReviewList.php?approved=1"><i class="fa fa-comment" aria-hidden="true"></i> Reviews</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="socialmedia.php"><i class="fa fa-instagram" aria-hidden="true"></i> Socialmedia</a>

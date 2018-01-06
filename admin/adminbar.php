@@ -9,7 +9,7 @@
 ?>
 
 <div class="admin-bar">
-    <span>Beheerpaneel </span><a href="../homepage_template.php">Website bekijken</a>
+    <span>Beheerpaneel </span><a href="../index.php">Website bekijken</a>
 <div class="welcome-user">
     <a href="logout.php">Uitloggen </a><span>Welkom <?php getUser($dbcon); ?></span>
 </div>

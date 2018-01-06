@@ -71,11 +71,18 @@ if(isset($_POST["save-wysiwyg-form"])){
         $visible = 0;
     }
 
-    if(!(empty($title)) && !(empty($message)) && $_FILES['photo']['error'] <= 0){
-        $photo = $_FILES['photo']['name'];
-        $sql = "INSERT INTO message (title, message, visible, image) VALUES (?, ?, ?, ?)";
-        $stmt = $dbcon->prepare($sql);
-        $stmt->execute([$title, $message, $visible, $photo]);
+    if(!(empty($title)) && !(empty($message))){
+        if($_FILES['photo']['error'] <= 0){
+            $sql = "INSERT INTO message (title, message, visible, image) VALUES (?, ?, ?, ?)";
+            $photo = $_FILES['photo']['name'];
+            $stmt = $dbcon->prepare($sql);
+            $stmt->execute([$title, $message, $visible, $photo]);
+        }else{
+            $sql = "INSERT INTO message (title, message, visible) VALUES (?, ?, ?)";
+            $stmt = $dbcon->prepare($sql);
+            $stmt->execute([$title, $message, $visible]);
+        }
+
         header("location: message.php?addedMessage");
     }else{
         echo '<span class="red">Vul alle velden in.</span>';

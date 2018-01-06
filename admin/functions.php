@@ -272,11 +272,11 @@ function getMessages($dbcon, $page){
     echo "<tr>";
 
     echo "<th>";
-    echo "Title";
+    echo "Titel";
     echo "</th>";
 
     echo "<th>";
-    echo "Date";
+    echo "Datum";
     echo "</th>";
 
     echo '<th>';
@@ -637,7 +637,7 @@ function addAppointment_normal($dbcon) {
                 $stmt = $dbcon->prepare($sql);
                 $stmt->execute([$name, $date, $begin, $eind, $mail, $telefoonnummer, $kapper, 0]);
 
-                header('location: addAppointment_normal.php');
+                header('location: addAppointment.php');
             }
         }
     }
@@ -1601,4 +1601,215 @@ function getEMPLOYEEInfo ($dbcon, $id, $option) {
     $stmt->execute([$id]);
     $data = $stmt->fetch();
     echo $data->$option;
+}
+
+//Jozef
+
+function getReview1($dbcon, $page, $approved){
+    if(isset($page)){
+
+        $rows = 10;
+        $rowstart = $rows * ($page - 1);
+        $sql = "SELECT * FROM review WHERE approved = 0 LIMIT $rowstart , $rows"; // Haalt alle onbevestigde reviews uit de database.
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute([]);
+        $data = $stmt->fetchall();
+    } else{
+        $sql = 'SELECT * FROM review WHERE approved = 0 LIMIT 10'; // Haalt alle onbevestigde reviews uit de database.
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute([]);
+        $data = $stmt->fetchall();
+    }
+
+    echo '<table class="table">'; // Tabel voor de reviews.
+    echo '<tr>';
+
+    echo '<th>';
+    echo '';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'reviewID';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'titel';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'naam';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'rating';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'acties';
+    echo '</th>';
+
+    echo '</tr>';
+
+    foreach ($data as $review){ // Haalt de gevraagde gegevens en plaatst ze in de tabel.
+        echo '<tr>';
+        echo '<td style="text-align: center;">';
+        echo '<a href="viewReview.php?id='.$review->id.'"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+        echo '</td>';
+        echo '<td>';
+        echo $review->id;
+        echo '</td>';
+        echo '<td>';
+        echo $review->title;
+        echo '</td>';
+        echo '<td>';
+        echo $review->name;
+        echo '</td>';
+        echo '<td>';
+        echo $review->rating;
+        echo '</td>';
+        echo '<td>';
+        if($approved == 0){echo '<a class="table-action" onclick="return confirm(\'Review goedkeuren?\')" href="?approved='.$_GET["approved"].'&approveReview='.$review->id.'"><i class="fa fa-check" aria-hidden="true"></i></a>';}
+        echo '<a class="table-action" onclick="return confirm(\'Review verwijderen?\')"href="?approved='.$_GET["approved"].'&deleteReview='.$review->id.'"><i class="fa fa-trash" aria-hidden="true"></i></a>';
+        echo '</td>';
+        echo '</tr>';
+    }
+
+    echo '</table>';
+}
+
+/* function for confirmed reviews */
+function getReview2($dbcon, $page, $approved){
+    if(isset($page)){
+
+        $rows = 10;
+        $rowstart = $rows * ($page - 1);
+        $sql = "SELECT * FROM review WHERE approved = 1 LIMIT $rowstart , $rows"; // Haalt alle onbevestigde reviews uit de database.
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute([]);
+        $data = $stmt->fetchall();
+    } else{
+        $sql = 'SELECT * FROM review WHERE approved = 1 LIMIT 10'; // Haalt alle onbevestigde reviews uit de database.
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute([]);
+        $data = $stmt->fetchall();
+    }
+
+    echo '<table class="table">'; // table for information
+    echo '<tr>';
+
+    echo '<th>';
+    echo ''; // row for the eye buttons
+    echo '</th>';
+
+
+    echo '<th>';
+    echo 'reviewID'; // row for review ID's
+    echo '</th>';
+
+    echo '<th>';
+    echo 'titel'; // row for review titles
+    echo '</th>';
+
+    echo '<th>';
+    echo 'naam'; // row for review names
+
+    echo '<th>';
+    echo 'rating'; // row for review ratings
+    echo '</th>';
+
+    echo '<th>';
+    echo 'acties'; // row for the trash bins
+    echo '</th>';
+
+    echo '</tr>';
+
+    foreach ($data as $review){ // summons the requested information into the table with a for each
+        echo '<tr>';
+        echo '<td style="text-align: center;">';
+        echo '<a href="viewReview.php?id='.$review->id.'"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+        echo '</td>';
+        echo '<td>';
+        echo $review->id;
+        echo '</td>';
+        echo '<td>';
+        echo $review->title;
+        echo '</td>';
+        echo '<td>';
+        echo $review->name;
+        echo '</td>';
+        echo '<td>';
+        echo $review->rating;
+        echo '</td>';
+        echo '<td>';
+        echo '<a class="table-action" onclick="return confirm(\'Review verwijderen?\')"href="?approved='.$_GET["approved"].'&deleteReview='.$review->id.'"><i class="fa fa-trash" aria-hidden="true"></i></a>';
+        echo '</td>';
+        echo '</tr>';
+    }
+
+    echo '</table>';
+}
+
+/* function to paginate the row */
+function paginateReview ($dbcon){
+
+    //$_GET["approved"] ="";
+
+    if($_GET['approved'] == 1) { // when approved = 1
+        $sql = 'SELECT COUNT(*) as numberofrows FROM review where approved = 1';
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute([]);
+        $data =  $stmt->fetch();
+        $numberofrows = $data->numberofrows;
+
+        $rows = 10; // amount of rows per page
+        $pages = ceil($numberofrows / $rows); // top to bottom
+
+        if($numberofrows > $rows) {
+            for($i = 1; $i <= $pages; $i++){
+                echo '<li class="page-item"><a class="page-link" href="confirmedReviewList.php?approved='.$_GET['approved'].'&page='.$i.'">'.$i.'</a></li>';
+            }
+        }
+
+    }else{
+        $sql = 'SELECT COUNT(*) as numberofrows FROM review where approved = 0'; // when approved = 0
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute([]);
+        $data =  $stmt->fetch();
+        $numberofrows = $data->numberofrows;
+
+        $rows = 10; // amount of rows per page
+        $pages = ceil($numberofrows / $rows); // top to bottom
+
+        if($numberofrows > $rows) {
+            for ($i = 1; $i <= $pages; $i++) {
+                echo '<li class="page-item"><a class="page-link" href="unconfirmedReviewList.php?approved='.$_GET['approved'].'&page='.$i.'">'.$i.'</a></li>';
+            }
+        }
+    }
+}
+
+/* function to delete a revew */
+function deleteReview ($dbcon, $review) {
+    $sql = "DELETE FROM review WHERE id = ?";
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$review]);
+    header('location: ?approved='.$_GET['approved'].'');
+}
+
+/* function to approve a review */
+function approveReview ($dbcon, $review) {
+    $sql = "UPDATE review SET approved = 1 WHERE id = ?"; // change approved = 0 to approved = 1
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$review]);
+    header('location: ?approved='.$_GET['approved'].'');
+}
+
+function insertReview($dbcon){
+    $reviewTitle = $_POST["reviewTitel"];
+    $reviewName = $_POST["reviewNaam"];
+    $reviewComment = $_POST["reviewComment"];
+    $reviewRating = $_POST["star"];
+    $sql = "INSERT INTO review (title, comment,rating, name) VALUES (?, ?, ?, ?)";
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$reviewTitle, $reviewComment, $reviewRating, $reviewName]);
 }
