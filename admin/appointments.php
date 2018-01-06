@@ -27,9 +27,9 @@
 
 <?php
     if(isset($_GET['page'])){
-        getAfspraakinfo($dbcon, $_GET['page'], $_GET['approved']);
+        getAppointmentInfo($dbcon, $_GET['page'], $_GET['approved']);
     }else{
-        getAfspraakinfo($dbcon, 1, $_GET['approved']);
+        getAppointmentInfo($dbcon, 1, $_GET['approved']);
     }
 
     if(isset($_GET['deleteAppointment'])){

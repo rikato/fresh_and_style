@@ -646,3 +646,15 @@ body.body-page .btn.btn-primary{
     color: black;
     border: none;
 }
+
+.g-recaptcha.error {
+    border: solid 2px #c64848;
+    padding: .2em;
+    width: 19em;
+}
+
+/*spam prevention*/
+
+.url-field-holder{
+    /*display: none;*/
+}

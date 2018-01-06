@@ -71,6 +71,10 @@
                             <label for="appointment-input-telnr">Telefoon nummer</label>
                             <input type="number" class="form-control" id="appointment-input-telnr" placeholder="0123-1234567" name="appointment-telnr" maxlength="12">
                         </div>
+                        <div class="form-group col-md-6 url-field-holder">
+                            <label for="url-field">Url*</label>
+                            <input id="url-field" type="text" name="url" />
+                        </div>
                         <div class="form-group col-md-6">
                             <label for="inputState">Kapper</label>
                             <select id="inputState" class="custom-select filter-select form-control" name="appointment-kapper">
@@ -163,7 +167,10 @@
                             <input name="star" type="radio" value="4">
                             <input name="star" type="radio" value="5">
                         </div>
-
+                        <div class="form-group col-md-6 url-field-holder">
+                            <label for="url-field">Url*</label>
+                            <input id="url-field" type="text" name="url" />
+                        </div>
                         <input type="submit" class="btn btn-primary" name="make-review-submit" value="Verzenden" id="make-review-submit">
                     </div>
                 </form>

@@ -2,7 +2,7 @@
 
 include 'config.php';
 
-//Turn on output buffering so header will work
+//Turn on output buffering so header() will work
 ob_start();
 
 //get basic information of the website.
@@ -252,18 +252,19 @@ function getProductCategory($dbcon){
 
 function addAppointment($dbcon){
     //Checks if the submit button is pressed
-    if (isset($_POST["appointment-submit"])) {
+    /* POST url is for spam prevention*/
+    if (isset($_POST["appointment-submit"]) && isset($_POST['url']) && $_POST['url'] == '') {
         //Checks if all required fields are filled in/checked and are not empty
         if (isset($_POST["appointment-agree"]) && (isset($_POST['appointment-name']) && $_POST['appointment-name'] != "") && (isset($_POST['appointment-email']) && $_POST['appointment-email'] != "") && (isset($_POST['appointment-date']) && $_POST['appointment-date'] != "")) {
             //Add all POST items to variables for ease of use
-            $appointmentName = $_POST["appointment-name"];
-            $appointmentEmail = $_POST["appointment-email"];
-            $appointmentTelnr = $_POST["appointment-telnr"];
-            $appointmentKapper = $_POST["appointment-kapper"];
-            $appointmentDate = $_POST["appointment-date"];
-            $appointmentAddress = $_POST["appointment-address"];
-            $appointmentZip = $_POST["appointment-zip"];
-            $appointmentRede = $_POST["appointment-reason"];
+            $appointmentName = encode($_POST["appointment-name"]);
+            $appointmentEmail = encode($_POST["appointment-email"]);
+            $appointmentTelnr = encode($_POST["appointment-telnr"]);
+            $appointmentKapper = encode($_POST["appointment-kapper"]);
+            $appointmentDate = encode($_POST["appointment-date"]);
+            $appointmentAddress = encode($_POST["appointment-address"]);
+            $appointmentZip = encode($_POST["appointment-zip"]);
+            $appointmentRede = encode($_POST["appointment-reason"]);
 
             $sql = "INSERT INTO appointment (name, email, telnumber, adres, postcode, kapper, rede, date, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $dbcon->prepare($sql);
@@ -280,14 +281,15 @@ function addAppointment($dbcon){
 }
 
 function makeReview($dbcon){
-    if(isset($_POST['make-review-submit'])){
+    /* POST url is for spam prevention*/
+    if(isset($_POST['make-review-submit']) && isset($_POST['url']) && $_POST['url'] == ''){
         if(empty($_POST['review-name']) || empty($_POST['review-textarea']) || empty($_POST['star']) || empty($_POST['review-title'])){
             print 'alle velden zijn verplicht';
         }else{
-            $name = $_POST['review-name'];
-            $title = $_POST['review-title'];
-            $comment = $_POST['review-textarea'];
-            $rating = $_POST['star'];
+            $name = encode($_POST['review-name']);
+            $title = encode($_POST['review-title']);
+            $comment = encode($_POST['review-textarea']);
+            $rating = encode($_POST['star']);
             $approved = 0;
 
             $sql = 'INSERT INTO review (name, title, comment, rating, approved) VALUES (?, ?, ?, ?, ?)';

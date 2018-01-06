@@ -8,9 +8,15 @@
 
 include '../config.php';
 
-//get basic information of the website.
-//u can use getWebsiteInfo('{rowValue}', $dbcon); to get a value from the option table.
+
 function getWebsiteInfo($option, $dbcon) {
+    /**
+     * Get basic website info.
+     * Echo data from the 'option' table, by using a string that equals to 'name' column.
+     * It will output the value from this row.
+     */
+    //get basic information of the website.
+    //u can use getWebsiteInfo('{rowValue}', $dbcon); to get a value from the option table.
     $sql = 'SELECT * FROM option WHERE name = ?';
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([$option]);
@@ -18,117 +24,14 @@ function getWebsiteInfo($option, $dbcon) {
     echo $data->value;
 }
 
-function getAfspraakinfo ($dbcon, $page, $approved){
-    //the number of appointments shown per page
-    $rows = 10;
-    if(isset($page)){
-        // $rowstart is the amount we use in the LIMIT within the sql statements. This will output then rows on every page and $rowstart will go up in increments of 10.
-        $rowStart = $rows * ($page - 1);
-        if($approved == 1){
-            $sql = "SELECT * FROM appointment where approved = 1 order by date LIMIT $rowStart, $rows";
-        }else{
-            $sql = "SELECT * FROM appointment where approved = 0 order by creationdate LIMIT $rowStart, $rows";
-        }
-        $stmt = $dbcon->prepare($sql);
-        $stmt -> execute([]);
-        $data = $stmt -> fetchall();
-    }else{
-        //if no page is set in the url and user is on the first page.
-        if($approved == 1){
-            $sql = "SELECT * FROM appointment where approved = 1 order by date LIMIT $rows";
-        }else{
-            $sql = "SELECT * FROM appointment where approved = 0 order by creationdate LIMIT $rows";
-        }
-        $stmt = $dbcon->prepare($sql);
-        $stmt -> execute([]);
-        $data = $stmt -> fetchall();
-    }
-
-    echo '<table class="table">';
-    echo '<tr>';
-
-    echo '<th>';
-    echo '';
-    echo '</th>';
-
-    echo '<th>';
-    echo 'Naam';
-    echo '</th>';
-
-    echo '<th>';
-    echo 'E-mail';
-    echo '</th>';
-
-    echo '<th>';
-    echo 'Telefoon';
-    echo '</th>';
-
-    echo '<th>';
-    echo 'Kapper';
-    echo '</th>';
-
-    echo '<th>';
-    echo 'Datum';
-    echo '</th>';
-
-    echo '<th>';
-    echo 'Gemaakt';
-    echo '</th>';
-
-    echo '<th>';
-    echo 'Aan huis';
-    echo '</th>';
-
-    echo '<th>';
-    echo 'Acties';
-    echo '</th>';
-
-    echo '</tr>';
-    foreach ($data as $afspraak){
-        echo '<tr>';
-        echo '<td style="text-align: center;">';
-        echo '<a href="appointment.php?id='.$afspraak->id.'"><i class="fa fa-eye" aria-hidden="true"></i></a>';
-        echo '</td>';
-        echo '<td>';
-        echo $afspraak->name;
-        echo '</td>';
-        echo '<td>';
-        echo $afspraak->email;
-        echo '</td>';
-        echo '<td>';
-        echo $afspraak->telnumber;
-        echo '</td>';
-        echo '<td>';
-        getEmployee($dbcon, $afspraak->kapper);
-        echo '</td>';
-        echo '<td>';
-        echo $afspraak->date;
-        echo '</td>';
-        echo '<td>';
-        echo $afspraak->creationdate;
-        echo '</td>';
-        //If the appointment is set for at home print a house icon
-        if (!empty($afspraak->rede)) {
-            echo '<td>';
-            echo '<i class="fa fa-home" aria-hidden="true"></i>';
-            echo '</td>';
-        } else {
-            echo '<td>';
-            echo '';
-            echo '</td>';
-        }
-        echo '<td>';
-        if($approved == 0){echo '<a class="table-action" onclick="return confirm(\'Afspraak bevestigen?\')" href="?approved='.$_GET['approved'].'&approveAppointment='.$afspraak->id.'"><i class="fa fa-check" aria-hidden="true"></i></a>';}
-        echo '<a class="table-action" onclick="return confirm(\'Afspraak verwijderen?\')" href="?approved='.$_GET['approved'].'&deleteAppointment='.$afspraak->id.'"><i class="fa fa-trash" aria-hidden="true"></i></a>';
-        echo '</td>';
-        echo '</tr>';
-    }
-    echo '</table>';
-}
-
-//get the employees from the employee table.
-//if employee > 0 echo the name else echo 'geen voorkeur'.
 function getEmployee ($dbcon, $employee) {
+    /**
+     * Get employees from 'employee' table.
+     * This is used for the appointments section. To show which employee is wanted by the customer.
+     * If no one is selected it will show 'Geen voorkeur'.
+     */
+    //get the employees from the employee table.
+    //if employee > 0 echo the name else echo 'geen voorkeur'.
     $sql = 'SELECT * FROM employee where id = ?';
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([$employee]);
@@ -141,6 +44,10 @@ function getEmployee ($dbcon, $employee) {
 }
 
 function getEmployee_option ($dbcon) {
+    /**
+     * Get all employees from 'employee' table.
+     * This is used in the 'add appoinment section' it will output all employees inside a select box.
+     */
     //Gets all the employees form the database
     $sql = 'SELECT * FROM employee';
     $stmt = $dbcon->prepare($sql);
@@ -158,34 +65,8 @@ function getEmployee_option ($dbcon) {
     }
 }
 
-//paginate the appointments on the appointment page.
-function paginateAppointments ($dbcon){
-    //if of only approved appointments are shown select only appointments which are actually approved.
-    //else select non approved appointments.
-    if($_GET['approved'] == 1) {
-        $sql = 'SELECT COUNT(*) as numberofrows FROM appointment where approved = 1';
-    }else{
-        $sql = 'SELECT COUNT(*) as numberofrows FROM appointment where approved = 0';
-    }
-    $stmt = $dbcon->prepare($sql);
-    $stmt->execute([]);
-    $data =  $stmt->fetch();
-    //the number that comes from the select statement above which will get us the total number of records.
-    $numberofrows = $data->numberofrows;
-    //the amount of appointments on a page
-    $rows = 10;
-    //round the number up
-    $pages = ceil($numberofrows / $rows);
-    //if the amount of records is higher then the wanted amount place buttons which contain the page numbers
-    if($numberofrows > $rows) {
-        for($i = 1; $i <= $pages; $i++){
-            echo '<li class="page-item"><a class="page-link" href="?approved='.$_GET['approved'].'&page='.$i.'">'.$i.'</a></li>';
-        }
-    }
-}
-
-//get a user from the user table this is used to get the info of a user that is currently logged in.
 function getUser ($dbcon){
+    //get a user from the user table this is used to get the info of a user that is currently logged in.
     $user =  $_SESSION["user"];
     $sql = 'SELECT * FROM user WHERE user = ?';
     $stmt = $dbcon->prepare($sql);
@@ -194,8 +75,8 @@ function getUser ($dbcon){
     echo $data->name;
 }
 
-//delete user from user table
 function deleteUser ($dbcon, $user) {
+    //delete user from user table
     //if user 1 is deleted give an error we don't want anyone deleting this user because then no one could log in anymore.
     if(!($user == 1)){
         $sql = "DELETE FROM user WHERE id = ?";
@@ -207,8 +88,8 @@ function deleteUser ($dbcon, $user) {
     }
 }
 
-//delete selected appointment from appointment table.
 function deleteAppointment ($dbcon, $appointment) {
+    //delete selected appointment from appointment table.
     $sql = "DELETE FROM appointment WHERE id = ?";
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([$appointment]);
@@ -216,8 +97,8 @@ function deleteAppointment ($dbcon, $appointment) {
     header('location: ?approved='.$_GET['approved'].'');
 }
 
-//approve selected appointment in appointment table.
 function approveAppointment ($dbcon, $appointment) {
+    //approve selected appointment in appointment table.
     $sql = "UPDATE appointment SET approved = 1 WHERE id = ?";
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([$appointment]);
@@ -225,9 +106,15 @@ function approveAppointment ($dbcon, $appointment) {
     header('location: ?approved='.$_GET['approved'].'');
 }
 
-//get role from user
-//this function is used to get a role based on a user id
 function getRole ($dbcon, $user){
+    /**
+     * Get a role based on user id.
+     * Get a user from 'user' table and get his user_id.
+     * Then use getRole($dbcon, $user->role_id); where $user is the user from who you want to know his role.
+     * It will output the role name.
+     */
+    //get role from user
+    //this function is used to get a role based on a user id
     $sql = 'SELECT * FROM role WHERE id = ?';
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([$user]);
@@ -235,8 +122,8 @@ function getRole ($dbcon, $user){
     echo $data->name;
 }
 
-//delete message from message table.
 function deleteMessage ($dbcon, $message) {
+    //delete message from message table.
     //Deletes the selected message
     $sql = "DELETE FROM message WHERE id = ?";
     $stmt = $dbcon->prepare($sql);
@@ -245,8 +132,8 @@ function deleteMessage ($dbcon, $message) {
     header('location: message.php');
 }
 
-//get all messaged form database and place them in a table
 function getMessages($dbcon, $page){
+    //get all messaged form database and place them in a table
     //Set the amount of desired rows
     $rows = 10;
 
@@ -323,8 +210,8 @@ function getMessages($dbcon, $page){
     echo '</table>';
 }
 
-//get the data from a selected message.
 function getMessageInfo ($dbcon, $id, $option) {
+    //get the data from a selected message.
     $sql = "SELECT $option FROM message WHERE id = ?";
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([$id]);
@@ -332,10 +219,10 @@ function getMessageInfo ($dbcon, $id, $option) {
     echo $data->$option;
 }
 
-//update the message on submit
-//check if the message has a message title and a value then update the message.
-//also check if a photo is uploaded if so update the row and save the image name.
 function updateMessage($dbcon){
+    //update the message on submit
+    //check if the message has a message title and a value then update the message.
+    //also check if a photo is uploaded if so update the row and save the image name.
     //Checks if the submit button is pressed and if the fields aren't empty
     if (isset($_POST["sendMessage_edited"]) && isset($_POST["messageTitle"]) && isset($_POST["wysiwyg-value"])) {
         $messageTitle = $_POST["messageTitle"];
@@ -358,32 +245,8 @@ function updateMessage($dbcon){
     }
 }
 
-//paginate the messages.
-function paginateMessage ($dbcon){
-    //Gets the all the message data from the database
-    $sql = 'SELECT COUNT(*) as numberofrows FROM message';
-    $stmt = $dbcon->prepare($sql);
-    $stmt->execute([]);
-    $data =  $stmt->fetch();
-    $numberofrows = $data->numberofrows;
-
-    //Set the amount of desired rows
-    $rows = 10;
-    //Calculates the amount of pages needed
-    $pages = ceil($numberofrows / $rows);
-
-
-    //Echos a button with according page number for each page
-    if($numberofrows > $rows) {
-        for($i = 1; $i <= $pages; $i++){
-            echo '<li class="page-item"><a class="page-link" href="?page='.$i.'">'.$i.'</a></li>';
-        }
-    }
-
-}
-
-//get the role id form logged in user
 function userRightsCheck ($dbcon) {
+    //get the role id form logged in user
     $sql = 'select id from role where id = ( select role_id from user where user = ? );';
     $stmt = $dbcon->prepare($sql);
     $stmt->execute([$_SESSION['user']]);
@@ -391,282 +254,33 @@ function userRightsCheck ($dbcon) {
     return $data->id;
 }
 
-//check if beheerder if not relocate to admin.php
 function userCheckBeheerder ($dbcon) {
+    //check if beheerder if not relocate to admin.php
     $roleId = userRightsCheck($dbcon);
     if (!($roleId == 1)){
         header('location: admin.php');
     }
 }
 
-//check if radacteur or beheerder if not relocate to admin.php
 function userCheckRedactuer ($dbcon) {
+    //check if radacteur or beheerder if not relocate to admin.php
     $roleId = userRightsCheck($dbcon);
     if (!($roleId == 2 || $roleId == 1)){
         header('location: admin.php');
     }
 }
 
-//check if kapper or beheerder if not relocate to admin.php
 function userCheckKapper ($dbcon) {
+    //check if kapper or beheerder if not relocate to admin.php
     $roleId = userRightsCheck($dbcon);
     if (!($roleId == 3 || $roleId == 1)){
         header('location: admin.php');
     }
 }
 
-//code jozef
-
-function maakAfspraak1() {
-
-// *************** $functionName ***************
-    $functionNaam = "";
-    if (isset($_POST["naam"])) {
-        if (empty($_POST["naam"])) {
-            $functionNaam = "";
-        } else {
-            $functionNaam = $_POST["naam"];
-        }
-    }
-
-// *************** $functionDate ***************
-    $functionDate = "";
-    if (isset($_POST["datum"])) {
-        if (empty($_POST["datum"])) {
-            $functionDate = "";
-        } else {
-            $functionDate = $_POST["datum"];
-        }
-    }
-
-// *************** $StartTime ***************
-    $StartTime = "";
-    if (isset($_POST["BeginTijd"])) {
-        if (empty($_POST["BeginTijd"])) {
-            $StartTime = "";
-        } else {
-            $StartTime = $_POST["BeginTijd"];
-        }
-    }
-
-// *************** $EndTime ***************
-    $EndTime = "";
-    if (isset($_POST["EindTijd"])) {
-        if (empty($_POST["EindTijd"])) {
-            $EndTime = "";
-        } else {
-            $EndTime = $_POST["EindTijd"];
-        }
-    }
-
-// *************** $functionMail ***************
-    $functionMail = "";
-    if (isset($_POST["mail"])) {
-        if (empty($_POST["mail"])) {
-            $functionMail = "";
-        } else {
-            $functionMail = $_POST["mail"];
-        }
-    }
-
-
-// *************** $functionTelephone ***************
-    $functionTelephone = "";
-    if (isset($_POST["telefoon"])) {
-        if (empty($_POST["telefoon"])) {
-            $functionTelephone = "";
-        } else {
-            $functionTelephone = $_POST["telefoon"];
-        }
-    }
-
-// *************** $functionBarber ***************
-    $functionBarber = "";
-    if (isset($_POST["kapper"])) {
-        $functionBarber = $_POST["kapper"];
-    }
-
-    print("Afspraak (bij klant thuis) gemaakt voor " . $functionNaam . " op " . $functionDate . " van " . $StartTime . " tot " . $EndTime . " uur, bij kapper/kapster: " . $functionBarber . ".");
-    if (isset($_POST["mail"])) {
-        if (!empty($_POST["mail"])) {
-            print(" Mail klant: ");
-            print($_POST["mail"]);
-        } else {
-            if (!empty($_POST["telefoon"]) || !empty($_POST["mail"])) {
-                print("Mail niet opgegeven.");
-            }
-        }
-    }
-    if (isset($_POST["telefoon"])) {
-        if (!empty($_POST["telefoon"])) {
-            print(" Telefoonnummer klant: ");
-            print($_POST["telefoon"]);
-        } else {
-            if (!empty($_POST["telefoon"]) || !empty($_POST["mail"])) {
-                print("Telefoonnummer niet opgegeven.");
-            }
-        }
-    }
-}
-
-function maakAfspraak2() {
-
-    // *************** $functionName ***************
-    $functionNaam = "";
-    if (isset($_POST["naam"])) {
-        if (empty($_POST["naam"])) {
-            $functionNaam = "";
-        } else {
-            $functionNaam = $_POST["naam"];
-        }
-    }
-
-    // *************** $functionDate ***************
-    $functionDate = "";
-    if (isset($_POST["datum"])) {
-        if (empty($_POST["datum"])) {
-            $functionDate = "";
-        } else {
-            $functionDate = $_POST["datum"];
-        }
-    }
-
-    // *************** $StartTime ***************
-    $StartTime = "";
-    if (isset($_POST["BeginTijd"])) {
-        if (empty($_POST["BeginTijd"])) {
-            $StartTime = "";
-        } else {
-            $StartTime = $_POST["BeginTijd"];
-        }
-    }
-
-    // *************** $EndTime ***************
-    $EndTime = "";
-    if (isset($_POST["EindTijd"])) {
-        if (empty($_POST["EindTijd"])) {
-            $EndTime = "";
-        } else {
-            $EndTime = $_POST["EindTijd"];
-        }
-    }
-
-    // *************** $functionMail ***************
-    $functionMail = "";
-    if (isset($_POST["mail"])) {
-        if (empty($_POST["mail"])) {
-            $functionMail = "";
-        } else {
-            $functionMail = $_POST["mail"];
-        }
-    }
-
-
-    // *************** $functionTelephone ***************
-    $functionTelephone = "";
-    if (isset($_POST["telefoon"])) {
-        if (empty($_POST["telefoon"])) {
-            $functionTelephone = "";
-        } else {
-            $functionTelephone = $_POST["telefoon"];
-        }
-    }
-
-    // *************** $functionPostcode ***************
-    $functionPostcode = "";
-    if (isset($_POST["postcode"])) {
-        if (empty($_POST["postcode"])) {
-            $functionPostcode = "";
-        } else {
-            $functionPostcode = $_POST["postcode"];
-        }
-    }
-
-    // *************** $functionAdres ***************
-    $functionAdres = "";
-    if (isset($_POST["adres"])) {
-        if (empty($_POST["adres"])) {
-            $functionAdres = "";
-        } else {
-            $functionAdres = $_POST["adres"];
-        }
-    }
-
-    // *************** $functionBarber ***************
-    $functionBarber = "";
-    if (isset($_POST["kapper"])) {
-        $functionBarber = $_POST["kapper"];
-    }
-
-    print("Afspraak (bij klant thuis) gemaakt voor " . $functionNaam . " op " . $functionDate . " van " . $StartTime . " tot " . $EndTime . " uur, bij kapper/kapster: " . $functionBarber . ".");
-    if (isset($_POST["mail"])) {
-        if (!empty($_POST["mail"])) {
-            print(" Mail klant: ");
-            print($_POST["mail"]);
-        } else {
-            if (!empty($_POST["telefoon"]) || !empty($_POST["mail"])) {
-                print("Mail niet opgegeven.");
-            }
-        }
-    }
-    if (isset($_POST["telefoon"])) {
-        if (!empty($_POST["telefoon"])) {
-            print(" Telefoonnummer klant: ");
-            print($_POST["telefoon"]);
-        } else {
-            if (!empty($_POST["telefoon"]) || !empty($_POST["mail"])) {
-                print("Telefoonnummer niet opgegeven.");
-            }
-        }
-    }
-}
-
-function addAppointment_normal($dbcon) {
-    if (isset($_POST['addAppointment_normal'])) {
-        if (isset($_POST['naam']) && isset($_POST['datum']) && isset($_POST["BeginTijd"]) && isset($_POST["EindTijd"]) && isset($_POST['kapper'])) {
-            if (isset($_POST["mail"]) || isset($_POST["telefoon"])) {
-                $name = $_POST["naam"];
-                $date = $_POST["datum"];
-                $begin = $_POST["BeginTijd"];
-                $eind = $_POST["EindTijd"];
-                $mail = $_POST["mail"];
-                $telefoonnummer = $_POST["telefoon"];
-                $kapper = $_POST['kapper'];
-
-                $sql = "INSERT INTO appointment (name, date, startTime, endTime, email, telnumber, kapper, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-                $stmt = $dbcon->prepare($sql);
-                $stmt->execute([$name, $date, $begin, $eind, $mail, $telefoonnummer, $kapper, 0]);
-
-                header('location: addAppointment.php');
-            }
-        }
-    }
-}
-
-function addAppointment_home($dbcon) {
-    if (isset($_POST['addAppointment_home'])) {
-        if (isset($_POST['naam']) && isset($_POST['datum']) && isset($_POST["BeginTijd"]) && isset($_POST["EindTijd"]) && isset($_POST['kapper']) && isset($_POST['postcode']) && isset($_POST['adres'])) {
-            if (isset($_POST["mail"]) || isset($_POST["telefoon"])) {
-                $name = $_POST["naam"];
-                $date = $_POST["datum"];
-                $begin = $_POST["BeginTijd"];
-                $eind = $_POST["EindTijd"];
-                $mail = $_POST["mail"];
-                $telefoonnummer = $_POST["telefoon"];
-                $kapper = $_POST['kapper'];
-                $postcode = $_POST['postcode'];
-                $adres = $_POST['adres'];
-
-                $sql = "INSERT INTO appointment (name, date, startTime, endTime, email, telnumber, kapper, postcode, adres, rede, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                $stmt = $dbcon->prepare($sql);
-                $stmt->execute([$name, $date, $begin, $eind, $mail, $telefoonnummer, $kapper, $postcode, $adres, "Opgegeven door admin/kapper", 0]);
-                header('location: addAppointment_home.php');
-            }
-        }
-    }
-}
-
-//these might be deleted
+/**
+ * these might be deleted
+ */
 function getMediaphotos($dbcon, $page){
     $rows = 20;
 
@@ -702,70 +316,9 @@ function getMediaphotos($dbcon, $page){
     echo '</div>';
 }
 
-function paginateMediaPhotos ($dbcon) {
-    //Gets the all the message data from the database
-    $sql = 'SELECT COUNT(*) as numberofrows FROM media';
-    $stmt = $dbcon->prepare($sql);
-    $stmt->execute([]);
-    $data =  $stmt->fetch();
-    $numberofrows = $data->numberofrows;
-
-    //Set the amount of desired rows
-    $rows = 20;
-    //Calculates the amount of pages needed
-    $pages = ceil($numberofrows / $rows);
-
-
-    //Echos a button with according page number for each page
-    if($numberofrows > $rows) {
-        for($i = 1; $i <= $pages; $i++){
-            echo '<li class="page-item"><a class="page-link" href="?page='.$i.'">'.$i.'</a></li>';
-        }
-    }
-}
-
-//wilco
-function paginateTreatment($dbcon) {
-    //Gets the all the treatment data from the database
-    //If the user has selected a category gets products from only that category
-    if (isset($_GET['treatmentCategory']) && $_GET['treatmentCategory'] > 0) {
-        $var = $_GET['treatmentCategory'];
-
-        $sql = 'SELECT COUNT(*) as numberofrows FROM treatment WHERE category_id = ?';
-        $stmt = $dbcon->prepare($sql);
-        $stmt->execute([$var]);
-        $data = $stmt->fetch();
-    } else {
-        $sql = 'SELECT COUNT(*) as numberofrows FROM treatment';
-        $stmt = $dbcon->prepare($sql);
-        $stmt->execute();
-        $data = $stmt->fetch();
-    }
-
-    $numberofrows = $data->numberofrows;
-
-    //Set the amount of desired rows
-    $rows = 10;
-    //Calculates the amount of pages needed
-    $pages = ceil($numberofrows / $rows);
-
-    if ($pages == 1) {
-        //This is left empty so if there is only on page needed the page button does't show
-    } else {
-        //Echos a button with according page number for each page
-        //If a product category is selected remembers the category through the pages.
-        if (isset($_GET['treatmentCategory']) && $_GET['treatmentCategory'] > 0) {
-            for ($i = 1; $i <= $pages; $i++) {
-                echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '&treatmentCategory=' . $_GET['treatmentCategory'] . '">' . $i . '</a></li>';
-            }
-        } else {
-            for ($i = 1; $i <= $pages; $i++) {
-                echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
-            }
-        }
-    }
-}
-
+/**
+ * Treatments
+ */
 function getTreatment($dbcon, $page) {
     //Set the amount of desired rows
     $rows = 10;
@@ -1001,31 +554,6 @@ function getTreatmentCategory($dbcon, $page){
     echo '</table>';
 }
 
-function paginateTreatmentCategory($dbcon) {
-    //Gets the all the treatment category data from the database
-    $sql = "SELECT COUNT(*) as numberofrows FROM treatment_category";
-    $stmt = $dbcon->prepare($sql);
-    $stmt->execute([]);
-    $data =  $stmt->fetch();
-    $numberofrows = $data->numberofrows;
-
-
-    //Set the amount of desired rows
-    $rows = 10;
-    //Calculates the amount of pages needed
-    $pages = ceil($numberofrows / $rows);
-
-
-    if ($pages == 1) {
-        //This is left empty so if there is only on page needed the page button does't show
-    } else {
-        //Echos a button with according page number for each page
-        for ($i = 1; $i <= $pages; $i++) {
-            echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
-        }
-    }
-}
-
 function deleteTreatmentCategory($dbcon, $id) {
     //Check if the selected still has treatments attached to it
     $sql = "SELECT COUNT(*) as numberofrows FROM treatment WHERE category_id = ?";
@@ -1081,47 +609,10 @@ function getTreatmentCategoryInfo ($dbcon, $id, $option) {
     echo $data->$option;
 }
 
-function paginateProducts($dbcon) {
-    //Gets the all the products data from the database
-    //If the user has selected a category gets products from only that category
-    if (isset($_GET['productsCategory']) && $_GET['productsCategory'] > 0) {
-        $var = $_GET['productsCategory'];
 
-        $sql = 'SELECT COUNT(*) as numberofrows FROM product WHERE product_category = ?';
-        $stmt = $dbcon->prepare($sql);
-        $stmt->execute([$var]);
-        $data = $stmt->fetch();
-    } else {
-        $sql = 'SELECT COUNT(*) as numberofrows FROM product';
-        $stmt = $dbcon->prepare($sql);
-        $stmt->execute();
-        $data = $stmt->fetch();
-    }
-
-    $numberofrows = $data->numberofrows;
-
-    //Set the amount of desired rows
-    $rows = 10;
-    //Calculates the amount of pages needed
-    $pages = ceil($numberofrows / $rows);
-
-    if ($pages == 1) {
-        //This is left empty so if there is only on page needed the page button does't show
-    } else {
-        //Echos a button with according page number for each page
-        //If a product category is selected remembers the category through the pages.
-        if (isset($_GET['productsCategory']) && $_GET['productsCategory'] > 0) {
-            for ($i = 1; $i <= $pages; $i++) {
-                echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '&productsCategory=' . $_GET['productsCategory'] . '">' . $i . '</a></li>';
-            }
-        } else {
-            for ($i = 1; $i <= $pages; $i++) {
-                echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
-            }
-        }
-    }
-}
-
+/**
+ * Products
+ */
 function getProducts($dbcon, $page) {
     //Set the amount of desired rows
     $rows = 10;
@@ -1388,31 +879,6 @@ function getProductCategory($dbcon, $page){
     echo '</table>';
 }
 
-function paginateProductCategory($dbcon) {
-    //Gets the all the product category data from the database
-    $sql = "SELECT COUNT(*) as numberofrows FROM product_category";
-    $stmt = $dbcon->prepare($sql);
-    $stmt->execute([]);
-    $data =  $stmt->fetch();
-    $numberofrows = $data->numberofrows;
-
-
-    //Set the amount of desired rows
-    $rows = 10;
-    //Calculates the amount of pages needed
-    $pages = ceil($numberofrows / $rows);
-
-
-    if ($pages == 1) {
-        //This is left empty so if there is only on page needed the page button does't show
-    } else {
-        //Echos a button with according page number for each page
-        for ($i = 1; $i <= $pages; $i++) {
-            echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
-        }
-    }
-}
-
 function deleteProductCategory($dbcon, $id) {
     //Check if the category still has items in it
     $sql = "SELECT COUNT(*) as numberofrows FROM product WHERE product_category = ?";
@@ -1523,31 +989,6 @@ function getEmployees($dbcon, $page){
     echo '</table>';
 }
 
-function paginateEmployees($dbcon) {
-    //Gets the all the employee data from the database
-    $sql = "SELECT COUNT(*) as numberofrows FROM employee";
-    $stmt = $dbcon->prepare($sql);
-    $stmt->execute([]);
-    $data =  $stmt->fetch();
-    $numberofrows = $data->numberofrows;
-
-
-    //Set the amount of desired rows
-    $rows = 10;
-    //Calculates the amount of pages needed
-    $pages = ceil($numberofrows / $rows);
-
-
-    if ($pages == 1) {
-        //This is left empty so if there is only on page needed the page button does't show
-    } else {
-        //Echos a button with according page number for each page
-        for ($i = 1; $i <= $pages; $i++) {
-            echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
-        }
-    }
-}
-
 function deleteEmployee($dbcon, $id) {
     //Check if the employee still has appointments scheduled
     $sql = "SELECT COUNT(*) as numberofrows FROM appointment WHERE kapper = ?";
@@ -1603,7 +1044,9 @@ function getEMPLOYEEInfo ($dbcon, $id, $option) {
     echo $data->$option;
 }
 
-//Jozef
+/**
+ * Reviews
+ */
 
 function getReview1($dbcon, $page, $approved){
     if(isset($page)){
@@ -1677,8 +1120,8 @@ function getReview1($dbcon, $page, $approved){
     echo '</table>';
 }
 
-/* function for confirmed reviews */
 function getReview2($dbcon, $page, $approved){
+    /* function for confirmed reviews */
     if(isset($page)){
 
         $rows = 10;
@@ -1749,9 +1192,426 @@ function getReview2($dbcon, $page, $approved){
     echo '</table>';
 }
 
-/* function to paginate the row */
-function paginateReview ($dbcon){
+function deleteReview ($dbcon, $review) {
+    /* function to delete a revew */
+    $sql = "DELETE FROM review WHERE id = ?";
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$review]);
+    header('location: ?approved='.$_GET['approved'].'');
+}
 
+function approveReview ($dbcon, $review) {
+    /* function to approve a review */
+    $sql = "UPDATE review SET approved = 1 WHERE id = ?"; // change approved = 0 to approved = 1
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$review]);
+    header('location: ?approved='.$_GET['approved'].'');
+}
+
+function insertReview($dbcon){
+    $reviewTitle = $_POST["reviewTitel"];
+    $reviewName = $_POST["reviewNaam"];
+    $reviewComment = $_POST["reviewComment"];
+    $reviewRating = $_POST["star"];
+    $sql = "INSERT INTO review (title, comment,rating, name) VALUES (?, ?, ?, ?)";
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([$reviewTitle, $reviewComment, $reviewRating, $reviewName]);
+}
+
+/**
+ * Appointments
+ */
+
+function maakAfspraak1() {
+
+// *************** $functionName ***************
+    $functionNaam = "";
+    if (isset($_POST["naam"])) {
+        if (empty($_POST["naam"])) {
+            $functionNaam = "";
+        } else {
+            $functionNaam = $_POST["naam"];
+        }
+    }
+
+// *************** $functionDate ***************
+    $functionDate = "";
+    if (isset($_POST["datum"])) {
+        if (empty($_POST["datum"])) {
+            $functionDate = "";
+        } else {
+            $functionDate = $_POST["datum"];
+        }
+    }
+
+// *************** $StartTime ***************
+    $StartTime = "";
+    if (isset($_POST["BeginTijd"])) {
+        if (empty($_POST["BeginTijd"])) {
+            $StartTime = "";
+        } else {
+            $StartTime = $_POST["BeginTijd"];
+        }
+    }
+
+// *************** $EndTime ***************
+    $EndTime = "";
+    if (isset($_POST["EindTijd"])) {
+        if (empty($_POST["EindTijd"])) {
+            $EndTime = "";
+        } else {
+            $EndTime = $_POST["EindTijd"];
+        }
+    }
+
+// *************** $functionMail ***************
+    $functionMail = "";
+    if (isset($_POST["mail"])) {
+        if (empty($_POST["mail"])) {
+            $functionMail = "";
+        } else {
+            $functionMail = $_POST["mail"];
+        }
+    }
+
+
+// *************** $functionTelephone ***************
+    $functionTelephone = "";
+    if (isset($_POST["telefoon"])) {
+        if (empty($_POST["telefoon"])) {
+            $functionTelephone = "";
+        } else {
+            $functionTelephone = $_POST["telefoon"];
+        }
+    }
+
+// *************** $functionBarber ***************
+    $functionBarber = "";
+    if (isset($_POST["kapper"])) {
+        $functionBarber = $_POST["kapper"];
+    }
+
+    print("Afspraak (bij klant thuis) gemaakt voor " . $functionNaam . " op " . $functionDate . " van " . $StartTime . " tot " . $EndTime . " uur, bij kapper/kapster: " . $functionBarber . ".");
+    if (isset($_POST["mail"])) {
+        if (!empty($_POST["mail"])) {
+            print(" Mail klant: ");
+            print($_POST["mail"]);
+        } else {
+            if (!empty($_POST["telefoon"]) || !empty($_POST["mail"])) {
+                print("Mail niet opgegeven.");
+            }
+        }
+    }
+    if (isset($_POST["telefoon"])) {
+        if (!empty($_POST["telefoon"])) {
+            print(" Telefoonnummer klant: ");
+            print($_POST["telefoon"]);
+        } else {
+            if (!empty($_POST["telefoon"]) || !empty($_POST["mail"])) {
+                print("Telefoonnummer niet opgegeven.");
+            }
+        }
+    }
+}
+
+function maakAfspraak2() {
+
+    // *************** $functionName ***************
+    $functionNaam = "";
+    if (isset($_POST["naam"])) {
+        if (empty($_POST["naam"])) {
+            $functionNaam = "";
+        } else {
+            $functionNaam = $_POST["naam"];
+        }
+    }
+
+    // *************** $functionDate ***************
+    $functionDate = "";
+    if (isset($_POST["datum"])) {
+        if (empty($_POST["datum"])) {
+            $functionDate = "";
+        } else {
+            $functionDate = $_POST["datum"];
+        }
+    }
+
+    // *************** $StartTime ***************
+    $StartTime = "";
+    if (isset($_POST["BeginTijd"])) {
+        if (empty($_POST["BeginTijd"])) {
+            $StartTime = "";
+        } else {
+            $StartTime = $_POST["BeginTijd"];
+        }
+    }
+
+    // *************** $EndTime ***************
+    $EndTime = "";
+    if (isset($_POST["EindTijd"])) {
+        if (empty($_POST["EindTijd"])) {
+            $EndTime = "";
+        } else {
+            $EndTime = $_POST["EindTijd"];
+        }
+    }
+
+    // *************** $functionMail ***************
+    $functionMail = "";
+    if (isset($_POST["mail"])) {
+        if (empty($_POST["mail"])) {
+            $functionMail = "";
+        } else {
+            $functionMail = $_POST["mail"];
+        }
+    }
+
+
+    // *************** $functionTelephone ***************
+    $functionTelephone = "";
+    if (isset($_POST["telefoon"])) {
+        if (empty($_POST["telefoon"])) {
+            $functionTelephone = "";
+        } else {
+            $functionTelephone = $_POST["telefoon"];
+        }
+    }
+
+    // *************** $functionPostcode ***************
+    $functionPostcode = "";
+    if (isset($_POST["postcode"])) {
+        if (empty($_POST["postcode"])) {
+            $functionPostcode = "";
+        } else {
+            $functionPostcode = $_POST["postcode"];
+        }
+    }
+
+    // *************** $functionAdres ***************
+    $functionAdres = "";
+    if (isset($_POST["adres"])) {
+        if (empty($_POST["adres"])) {
+            $functionAdres = "";
+        } else {
+            $functionAdres = $_POST["adres"];
+        }
+    }
+
+    // *************** $functionBarber ***************
+    $functionBarber = "";
+    if (isset($_POST["kapper"])) {
+        $functionBarber = $_POST["kapper"];
+    }
+
+    print("Afspraak (bij klant thuis) gemaakt voor " . $functionNaam . " op " . $functionDate . " van " . $StartTime . " tot " . $EndTime . " uur, bij kapper/kapster: " . $functionBarber . ".");
+    if (isset($_POST["mail"])) {
+        if (!empty($_POST["mail"])) {
+            print(" Mail klant: ");
+            print($_POST["mail"]);
+        } else {
+            if (!empty($_POST["telefoon"]) || !empty($_POST["mail"])) {
+                print("Mail niet opgegeven.");
+            }
+        }
+    }
+    if (isset($_POST["telefoon"])) {
+        if (!empty($_POST["telefoon"])) {
+            print(" Telefoonnummer klant: ");
+            print($_POST["telefoon"]);
+        } else {
+            if (!empty($_POST["telefoon"]) || !empty($_POST["mail"])) {
+                print("Telefoonnummer niet opgegeven.");
+            }
+        }
+    }
+}
+
+function addAppointment_normal($dbcon) {
+    if (isset($_POST['addAppointment_normal'])) {
+        if (isset($_POST['naam']) && isset($_POST['datum']) && isset($_POST["BeginTijd"]) && isset($_POST["EindTijd"]) && isset($_POST['kapper'])) {
+            if (isset($_POST["mail"]) || isset($_POST["telefoon"])) {
+                $name = $_POST["naam"];
+                $date = $_POST["datum"];
+                $begin = $_POST["BeginTijd"];
+                $eind = $_POST["EindTijd"];
+                $mail = $_POST["mail"];
+                $telefoonnummer = $_POST["telefoon"];
+                $kapper = $_POST['kapper'];
+
+                $sql = "INSERT INTO appointment (name, date, startTime, endTime, email, telnumber, kapper, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $dbcon->prepare($sql);
+                $stmt->execute([$name, $date, $begin, $eind, $mail, $telefoonnummer, $kapper, 0]);
+
+                header('location: addAppointment.php');
+            }
+        }
+    }
+}
+
+function addAppointment_home($dbcon) {
+    if (isset($_POST['addAppointment_home'])) {
+        if (isset($_POST['naam']) && isset($_POST['datum']) && isset($_POST["BeginTijd"]) && isset($_POST["EindTijd"]) && isset($_POST['kapper']) && isset($_POST['postcode']) && isset($_POST['adres'])) {
+            if (isset($_POST["mail"]) || isset($_POST["telefoon"])) {
+                $name = $_POST["naam"];
+                $date = $_POST["datum"];
+                $begin = $_POST["BeginTijd"];
+                $eind = $_POST["EindTijd"];
+                $mail = $_POST["mail"];
+                $telefoonnummer = $_POST["telefoon"];
+                $kapper = $_POST['kapper'];
+                $postcode = $_POST['postcode'];
+                $adres = $_POST['adres'];
+
+                $sql = "INSERT INTO appointment (name, date, startTime, endTime, email, telnumber, kapper, postcode, adres, rede, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $dbcon->prepare($sql);
+                $stmt->execute([$name, $date, $begin, $eind, $mail, $telefoonnummer, $kapper, $postcode, $adres, "Opgegeven door admin/kapper", 0]);
+                header('location: addAppointment_home.php');
+            }
+        }
+    }
+}
+
+function getAppointmentInfo ($dbcon, $page, $approved){
+    //the number of appointments shown per page
+    $rows = 10;
+    if(isset($page)){
+        // $rowstart is the amount we use in the LIMIT within the sql statements. This will output then rows on every page and $rowstart will go up in increments of 10.
+        $rowStart = $rows * ($page - 1);
+        if($approved == 1){
+            $sql = "SELECT * FROM appointment where approved = 1 order by date LIMIT $rowStart, $rows";
+        }else{
+            $sql = "SELECT * FROM appointment where approved = 0 order by creationdate LIMIT $rowStart, $rows";
+        }
+        $stmt = $dbcon->prepare($sql);
+        $stmt -> execute([]);
+        $data = $stmt -> fetchall();
+    }else{
+        //if no page is set in the url and user is on the first page.
+        if($approved == 1){
+            $sql = "SELECT * FROM appointment where approved = 1 order by date LIMIT $rows";
+        }else{
+            $sql = "SELECT * FROM appointment where approved = 0 order by creationdate LIMIT $rows";
+        }
+        $stmt = $dbcon->prepare($sql);
+        $stmt -> execute([]);
+        $data = $stmt -> fetchall();
+    }
+
+    echo '<table class="table">';
+    echo '<tr>';
+
+    echo '<th>';
+    echo '';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Naam';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'E-mail';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Telefoon';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Kapper';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Datum';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Gemaakt';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Aan huis';
+    echo '</th>';
+
+    echo '<th>';
+    echo 'Acties';
+    echo '</th>';
+
+    echo '</tr>';
+    foreach ($data as $afspraak){
+        echo '<tr>';
+        echo '<td style="text-align: center;">';
+        echo '<a href="appointment.php?id='.$afspraak->id.'"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->name;
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->email;
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->telnumber;
+        echo '</td>';
+        echo '<td>';
+        getEmployee($dbcon, $afspraak->kapper);
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->date;
+        echo '</td>';
+        echo '<td>';
+        echo $afspraak->creationdate;
+        echo '</td>';
+        //If the appointment is set for at home print a house icon
+        if (!empty($afspraak->rede)) {
+            echo '<td>';
+            echo '<i class="fa fa-home" aria-hidden="true"></i>';
+            echo '</td>';
+        } else {
+            echo '<td>';
+            echo '';
+            echo '</td>';
+        }
+        echo '<td>';
+        if($approved == 0){echo '<a class="table-action" onclick="return confirm(\'Afspraak bevestigen?\')" href="?approved='.$_GET['approved'].'&approveAppointment='.$afspraak->id.'"><i class="fa fa-check" aria-hidden="true"></i></a>';}
+        echo '<a class="table-action" onclick="return confirm(\'Afspraak verwijderen?\')" href="?approved='.$_GET['approved'].'&deleteAppointment='.$afspraak->id.'"><i class="fa fa-trash" aria-hidden="true"></i></a>';
+        echo '</td>';
+        echo '</tr>';
+    }
+    echo '</table>';
+}
+
+/**
+ * Paginate function these will paginate data.
+ * It will output links to switch between pages, based on amount of rows.
+ */
+
+function paginateAppointments ($dbcon){
+    //paginate the appointments on the appointment page.
+    //if of only approved appointments are shown select only appointments which are actually approved.
+    //else select non approved appointments.
+    if($_GET['approved'] == 1) {
+        $sql = 'SELECT COUNT(*) as numberofrows FROM appointment where approved = 1';
+    }else{
+        $sql = 'SELECT COUNT(*) as numberofrows FROM appointment where approved = 0';
+    }
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([]);
+    $data =  $stmt->fetch();
+    //the number that comes from the select statement above which will get us the total number of records.
+    $numberofrows = $data->numberofrows;
+    //the amount of appointments on a page
+    $rows = 10;
+    //round the number up
+    $pages = ceil($numberofrows / $rows);
+    //if the amount of records is higher then the wanted amount place buttons which contain the page numbers
+    if($numberofrows > $rows) {
+        for($i = 1; $i <= $pages; $i++){
+            echo '<li class="page-item"><a class="page-link" href="?approved='.$_GET['approved'].'&page='.$i.'">'.$i.'</a></li>';
+        }
+    }
+}
+
+function paginateReview ($dbcon){
+    /* function to paginate the row */
     //$_GET["approved"] ="";
 
     if($_GET['approved'] == 1) { // when approved = 1
@@ -1788,28 +1648,205 @@ function paginateReview ($dbcon){
     }
 }
 
-/* function to delete a revew */
-function deleteReview ($dbcon, $review) {
-    $sql = "DELETE FROM review WHERE id = ?";
-    $stmt = $dbcon->prepare($sql);
-    $stmt->execute([$review]);
-    header('location: ?approved='.$_GET['approved'].'');
+function paginateProducts($dbcon) {
+    //Gets the all the products data from the database
+    //If the user has selected a category gets products from only that category
+    if (isset($_GET['productsCategory']) && $_GET['productsCategory'] > 0) {
+        $var = $_GET['productsCategory'];
+
+        $sql = 'SELECT COUNT(*) as numberofrows FROM product WHERE product_category = ?';
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute([$var]);
+        $data = $stmt->fetch();
+    } else {
+        $sql = 'SELECT COUNT(*) as numberofrows FROM product';
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute();
+        $data = $stmt->fetch();
+    }
+
+    $numberofrows = $data->numberofrows;
+
+    //Set the amount of desired rows
+    $rows = 10;
+    //Calculates the amount of pages needed
+    $pages = ceil($numberofrows / $rows);
+
+    if ($pages == 1) {
+        //This is left empty so if there is only on page needed the page button does't show
+    } else {
+        //Echos a button with according page number for each page
+        //If a product category is selected remembers the category through the pages.
+        if (isset($_GET['productsCategory']) && $_GET['productsCategory'] > 0) {
+            for ($i = 1; $i <= $pages; $i++) {
+                echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '&productsCategory=' . $_GET['productsCategory'] . '">' . $i . '</a></li>';
+            }
+        } else {
+            for ($i = 1; $i <= $pages; $i++) {
+                echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+            }
+        }
+    }
 }
 
-/* function to approve a review */
-function approveReview ($dbcon, $review) {
-    $sql = "UPDATE review SET approved = 1 WHERE id = ?"; // change approved = 0 to approved = 1
+function paginateProductCategory($dbcon) {
+    //Gets the all the product category data from the database
+    $sql = "SELECT COUNT(*) as numberofrows FROM product_category";
     $stmt = $dbcon->prepare($sql);
-    $stmt->execute([$review]);
-    header('location: ?approved='.$_GET['approved'].'');
+    $stmt->execute([]);
+    $data =  $stmt->fetch();
+    $numberofrows = $data->numberofrows;
+
+
+    //Set the amount of desired rows
+    $rows = 10;
+    //Calculates the amount of pages needed
+    $pages = ceil($numberofrows / $rows);
+
+
+    if ($pages == 1) {
+        //This is left empty so if there is only on page needed the page button does't show
+    } else {
+        //Echos a button with according page number for each page
+        for ($i = 1; $i <= $pages; $i++) {
+            echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+        }
+    }
 }
 
-function insertReview($dbcon){
-    $reviewTitle = $_POST["reviewTitel"];
-    $reviewName = $_POST["reviewNaam"];
-    $reviewComment = $_POST["reviewComment"];
-    $reviewRating = $_POST["star"];
-    $sql = "INSERT INTO review (title, comment,rating, name) VALUES (?, ?, ?, ?)";
+function paginateEmployees($dbcon) {
+    //Gets the all the employee data from the database
+    $sql = "SELECT COUNT(*) as numberofrows FROM employee";
     $stmt = $dbcon->prepare($sql);
-    $stmt->execute([$reviewTitle, $reviewComment, $reviewRating, $reviewName]);
+    $stmt->execute([]);
+    $data =  $stmt->fetch();
+    $numberofrows = $data->numberofrows;
+
+
+    //Set the amount of desired rows
+    $rows = 10;
+    //Calculates the amount of pages needed
+    $pages = ceil($numberofrows / $rows);
+
+
+    if ($pages == 1) {
+        //This is left empty so if there is only on page needed the page button does't show
+    } else {
+        //Echos a button with according page number for each page
+        for ($i = 1; $i <= $pages; $i++) {
+            echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+        }
+    }
+}
+
+function paginateTreatmentCategory($dbcon) {
+    //Gets the all the treatment category data from the database
+    $sql = "SELECT COUNT(*) as numberofrows FROM treatment_category";
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([]);
+    $data =  $stmt->fetch();
+    $numberofrows = $data->numberofrows;
+
+
+    //Set the amount of desired rows
+    $rows = 10;
+    //Calculates the amount of pages needed
+    $pages = ceil($numberofrows / $rows);
+
+
+    if ($pages == 1) {
+        //This is left empty so if there is only on page needed the page button does't show
+    } else {
+        //Echos a button with according page number for each page
+        for ($i = 1; $i <= $pages; $i++) {
+            echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+        }
+    }
+}
+
+function paginateMessage ($dbcon){
+    //paginate the messages.
+    //Gets the all the message data from the database
+    $sql = 'SELECT COUNT(*) as numberofrows FROM message';
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([]);
+    $data =  $stmt->fetch();
+    $numberofrows = $data->numberofrows;
+
+    //Set the amount of desired rows
+    $rows = 10;
+    //Calculates the amount of pages needed
+    $pages = ceil($numberofrows / $rows);
+
+
+    //Echos a button with according page number for each page
+    if($numberofrows > $rows) {
+        for($i = 1; $i <= $pages; $i++){
+            echo '<li class="page-item"><a class="page-link" href="?page='.$i.'">'.$i.'</a></li>';
+        }
+    }
+
+}
+
+function paginateMediaPhotos ($dbcon) {
+    //Gets the all the message data from the database
+    $sql = 'SELECT COUNT(*) as numberofrows FROM media';
+    $stmt = $dbcon->prepare($sql);
+    $stmt->execute([]);
+    $data =  $stmt->fetch();
+    $numberofrows = $data->numberofrows;
+
+    //Set the amount of desired rows
+    $rows = 20;
+    //Calculates the amount of pages needed
+    $pages = ceil($numberofrows / $rows);
+
+
+    //Echos a button with according page number for each page
+    if($numberofrows > $rows) {
+        for($i = 1; $i <= $pages; $i++){
+            echo '<li class="page-item"><a class="page-link" href="?page='.$i.'">'.$i.'</a></li>';
+        }
+    }
+}
+
+function paginateTreatment($dbcon) {
+    //Gets the all the treatment data from the database
+    //If the user has selected a category gets products from only that category
+    if (isset($_GET['treatmentCategory']) && $_GET['treatmentCategory'] > 0) {
+        $var = $_GET['treatmentCategory'];
+
+        $sql = 'SELECT COUNT(*) as numberofrows FROM treatment WHERE category_id = ?';
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute([$var]);
+        $data = $stmt->fetch();
+    } else {
+        $sql = 'SELECT COUNT(*) as numberofrows FROM treatment';
+        $stmt = $dbcon->prepare($sql);
+        $stmt->execute();
+        $data = $stmt->fetch();
+    }
+
+    $numberofrows = $data->numberofrows;
+
+    //Set the amount of desired rows
+    $rows = 10;
+    //Calculates the amount of pages needed
+    $pages = ceil($numberofrows / $rows);
+
+    if ($pages == 1) {
+        //This is left empty so if there is only on page needed the page button does't show
+    } else {
+        //Echos a button with according page number for each page
+        //If a product category is selected remembers the category through the pages.
+        if (isset($_GET['treatmentCategory']) && $_GET['treatmentCategory'] > 0) {
+            for ($i = 1; $i <= $pages; $i++) {
+                echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '&treatmentCategory=' . $_GET['treatmentCategory'] . '">' . $i . '</a></li>';
+            }
+        } else {
+            for ($i = 1; $i <= $pages; $i++) {
+                echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+            }
+        }
+    }
 }
